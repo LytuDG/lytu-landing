@@ -557,7 +557,7 @@ export default function App() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Project 1 - TuViaja (CORRECTED) */}
+            {/* Project 1 - TuViaje (CORRECTED) */}
             <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500 transition-all duration-500">
               <div className="h-64 bg-slate-800 relative overflow-hidden">
                 {/* Mockup visual */}
@@ -570,7 +570,7 @@ export default function App() {
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-white mb-2">TuViaja</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">TuViaje</h3>
                 <p className="text-slate-400 mb-6">
                   Aplicación móvil para viajeros. Gestión de itinerarios,
                   reservas y recomendaciones locales en una sola app.
