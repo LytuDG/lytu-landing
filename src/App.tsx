@@ -172,6 +172,7 @@ const ParticleNetwork = () => {
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -223,6 +224,12 @@ export default function App() {
               </button>
             ))}
             <button
+              onClick={() => setIsLoginOpen(true)}
+              className="px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-white hover:border-cyan-400 transition-colors"
+            >
+              Acceder
+            </button>
+            <button
               onClick={() => scrollToSection("contacto")}
               className="bg-white text-slate-950 px-5 py-2 rounded-full font-bold text-sm hover:bg-cyan-400 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.3)]"
             >
@@ -251,6 +258,12 @@ export default function App() {
                 {item}
               </button>
             ))}
+            <button
+              onClick={() => setIsLoginOpen(true)}
+              className="text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full"
+            >
+              Acceder
+            </button>
           </div>
         )}
       </nav>
@@ -344,6 +357,47 @@ export default function App() {
         </div>
       </section>
 
+      {/* LOGIN MODAL */}
+      {isLoginOpen && (
+        <div className="fixed inset-0 z-60 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/60" onClick={() => setIsLoginOpen(false)} />
+          <div className="relative w-full max-w-md mx-4">
+            <div className="bg-gradient-to-br from-indigo-900/90 to-cyan-800/80 p-8 rounded-2xl shadow-2xl text-white">
+              <button
+                onClick={() => setIsLoginOpen(false)}
+                className="absolute top-4 right-4 text-slate-300 hover:text-white"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="mb-4">
+                <h3 className="text-2xl font-bold">Bienvenido de vuelta</h3>
+                <p className="text-slate-300 text-sm">Accede a tu panel y gestiona tus proyectos.</p>
+              </div>
+
+              <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+                <input
+                  type="email"
+                  placeholder="correo@empresa.com"
+                  className="w-full px-4 py-3 rounded-lg bg-white/8 border border-white/10 placeholder-slate-300 text-white focus:outline-none"
+                />
+                <input
+                  type="password"
+                  placeholder="Contraseña"
+                  className="w-full px-4 py-3 rounded-lg bg-white/8 border border-white/10 placeholder-slate-300 text-white focus:outline-none"
+                />
+
+                <button className="w-full py-3 rounded-full bg-white text-indigo-700 font-bold">Entrar</button>
+              </form>
+
+              <div className="mt-4 text-center text-sm text-slate-300">
+                ¿No tienes cuenta? <a href="#" className="text-white font-semibold">Contáctanos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* PHILOSOPHY / ABOUT SECTION */}
       <section
         id="filosofía"
@@ -360,20 +414,20 @@ export default function App() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="text-left md:text-left">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-snug max-w-xl">
+            <div className="flex flex-col md:flex-row items-start md:justify-between gap-12 md:gap-20">
+              <div className="text-center md:text-left md:max-w-2xl">
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-snug">
                   Soluciones pensadas para crecer <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">con enfoque práctico</span>
                 </h2>
-                <p className="text-slate-300 text-lg max-w-xl">
+                <p className="text-slate-300 text-lg">
                   Un equipo joven y profesional que aplica procesos modernos y foco en métricas reales. Entregamos productos
                   claros, mantenibles y orientados a resultados para que tu negocio avance con confianza.
                 </p>
               </div>
 
-              <div className="hidden md:flex justify-end">
-                <div className="w-full max-w-sm rounded-2xl bg-slate-900/40 border border-slate-800 p-6 shadow-md">
+              <div className="hidden md:flex items-start justify-end w-96">
+                <div className="rounded-2xl bg-slate-900/40 border border-slate-800 p-6 shadow-md w-80">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">L</div>
                     <div>
