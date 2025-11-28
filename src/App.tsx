@@ -298,20 +298,20 @@ export default function App() {
               digitales que impulsan negocios.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col w-full sm:flex-row gap-4 justify-center sm:gap-6 px-4 sm:px-0">
               <button
                 onClick={() => scrollToSection("proyectos")}
-                className="group relative px-8 py-4 bg-indigo-600 rounded-full font-bold text-white overflow-hidden transition-all hover:bg-indigo-700 hover:scale-105 shadow-[0_0_20px_rgba(79,70,229,0.4)]"
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-indigo-600 rounded-full font-bold text-white overflow-hidden transition-all hover:bg-indigo-700 hover:scale-105 shadow-[0_0_20px_rgba(79,70,229,0.4)] text-sm sm:text-base"
               >
-                <span className="relative z-10 flex items-center">
+                <span className="relative z-10 flex items-center justify-center">
                   Ver nuestro trabajo{" "}
-                  <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                 </span>
               </button>
 
               <button
                 onClick={() => scrollToSection("servicios")}
-                className="px-8 py-4 rounded-full font-bold text-white border border-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-colors backdrop-blur-sm"
+                className="px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-white border border-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-colors backdrop-blur-sm text-sm sm:text-base"
               >
                 Nuestros Servicios
               </button>
@@ -414,16 +414,29 @@ export default function App() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-start md:justify-between gap-12 md:gap-20">
-              <div className="text-center md:text-left md:max-w-2xl">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-4 leading-snug">
+            <div className="flex flex-col md:flex-row items-start md:justify-between gap-8 md:gap-20">
+              <div className="text-center md:text-left md:max-w-2xl w-full md:w-auto">
+                <h2 className="text-2xl md:text-4xl font-extrabold mb-4 leading-snug">
                   Soluciones pensadas para crecer <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">con enfoque práctico</span>
                 </h2>
-                <p className="text-slate-300 text-lg">
+                <p className="text-slate-300 text-base md:text-lg">
                   Un equipo joven y profesional que aplica procesos modernos y foco en métricas reales. Entregamos productos
                   claros, mantenibles y orientados a resultados para que tu negocio avance con confianza.
                 </p>
+              </div>
+
+              <div className="w-full md:hidden flex items-center justify-center mt-6">
+                <div className="rounded-2xl bg-slate-900/40 border border-slate-800 p-6 shadow-md w-full max-w-sm">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">L</div>
+                    <div>
+                      <div className="text-sm text-slate-300 font-semibold">Lytu — Equipo</div>
+                      <div className="text-xs text-slate-500">Partner tecnológico</div>
+                    </div>
+                  </div>
+                  <p className="text-slate-300 text-sm">"Aceleramos entregas con prácticas modernas y comunicación directa. Trabajamos contigo para priorizar lo que realmente aporta valor."</p>
+                </div>
               </div>
 
               <div className="hidden md:flex items-start justify-end w-96">
@@ -492,30 +505,30 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="md:hidden mt-6">
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center mb-2">
-                      <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white mr-3">1</div>
-                      <div className="font-semibold">Descubrir</div>
+              <div className="md:hidden mt-8 w-full">
+                <div className="space-y-6">
+                  <div className="pb-4 border-b border-slate-700">
+                    <div className="flex items-center mb-3">
+                      <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">1</div>
+                      <div className="font-semibold text-base">Descubrir</div>
                     </div>
-                    <div className="text-slate-400 text-sm">Entender prioridades y métricas clave.</div>
+                    <div className="text-slate-400 text-sm ml-14">Entender prioridades y métricas clave.</div>
+                  </div>
+
+                  <div className="pb-4 border-b border-slate-700">
+                    <div className="flex items-center mb-3">
+                      <div className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">2</div>
+                      <div className="font-semibold text-base">Construir</div>
+                    </div>
+                    <div className="text-slate-400 text-sm ml-14">MVPs iterativos para validar hipótesis rápido.</div>
                   </div>
 
                   <div>
-                    <div className="flex items-center mb-2">
-                      <div className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white mr-3">2</div>
-                      <div className="font-semibold">Construir</div>
+                    <div className="flex items-center mb-3">
+                      <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">3</div>
+                      <div className="font-semibold text-base">Escalar</div>
                     </div>
-                    <div className="text-slate-400 text-sm">MVPs iterativos para validar hipótesis rápido.</div>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center mb-2">
-                      <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white mr-3">3</div>
-                      <div className="font-semibold">Escalar</div>
-                    </div>
-                    <div className="text-slate-400 text-sm">Evolución basada en datos y feedback real.</div>
+                    <div className="text-slate-400 text-sm ml-14">Evolución basada en datos y feedback real.</div>
                   </div>
                 </div>
               </div>
