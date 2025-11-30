@@ -1,0 +1,171 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "philosophy": "Filosofía",
+    "solutions": "Soluciones",
+    "portfolio": "Portafolio",
+    "contact": "Contacto",
+    "login": "Iniciar Sesión"
+  },
+  "hero": {
+    "badge": "Software Development Studio",
+    "title1": "Creamos el futuro",
+    "title2": "línea por línea.",
+    "description": "En <strong>Lytu</strong>, fusionamos ingeniería de software de alto nivel con diseño intuitivo. No solo escribimos código; forjamos experiencias digitales que impulsan negocios.",
+    "cta1": "Ver nuestro trabajo",
+    "cta2": "Nuestros Servicios"
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "description": "Somos un equipo de desarrolladores apasionados dedicados a crear experiencias digitales excepcionales.",
+    "mission": "Nuestra Misión",
+    "missionText": "Transformar negocios a través de soluciones tecnológicas innovadoras.",
+    "vision": "Nuestra Visión",
+    "visionText": "Ser líderes en innovación digital en América Latina."
+  },
+  "services": {
+    "title": "Ingeniería Digital Integral",
+    "subtitle": "Desde la idea conceptual hasta el despliegue final. Cubrimos todo el ciclo de vida del desarrollo de software moderno.",
+    "webDev": {
+      "title": "Desarrollo Web",
+      "description": "Sitios web y aplicaciones web progresivas (PWA) ultrarrápidas, escalables y optimizadas para SEO. Usamos tecnologías modernas como React, Next.js y Node."
+    },
+    "mobileDev": {
+      "title": "Apps Móviles",
+      "description": "Desarrollo nativo e híbrido para iOS y Android. Creamos experiencias fluidas que tus usuarios amarán llevar en su bolsillo."
+    },
+    "customSoftware": {
+      "title": "Software a Medida",
+      "description": "Sistemas de gestión, dashboards analíticos y herramientas internas diseñadas específicamente para resolver los problemas únicos de tu empresa."
+    }
+  },
+  "philosophy": {
+    "badge": "¿Por qué Lytu?",
+    "title1": "Soluciones pensadas para crecer",
+    "title2": "con enfoque práctico",
+    "subtitle": "Un equipo joven y profesional que aplica procesos modernos y foco en métricas reales. Entregamos productos claros, mantenibles y orientados a resultados para que tu negocio avance con confianza.",
+    "teamCard": {
+      "name": "Lytu — Equipo",
+      "role": "Partner tecnológico",
+      "quote": "Aceleramos entregas con prácticas modernas y comunicación directa. Trabajamos contigo para priorizar lo que realmente aporta valor."
+    },
+    "process": {
+      "title": "Cómo trabajamos",
+      "subtitle": "Proceso claro y colaborativo para reducir fricción y acelerar resultados.",
+      "step1": {
+        "title": "Descubrir",
+        "description": "Entender prioridades y métricas clave."
+      },
+      "step2": {
+        "title": "Construir",
+        "description": "MVPs iterativos para validar hipótesis rápido."
+      },
+      "step3": {
+        "title": "Escalar",
+        "description": "Evolución basada en datos y feedback real."
+      }
+    },
+    "mvpCard": {
+      "title": "Rápido, claro y orientado a negocio",
+      "mvp": "MVP",
+      "subtitle": "Validación en semanas, no meses"
+    }
+  },
+  "readySolutions": {
+    "badge": "Aceleradores de Desarrollo",
+    "title": "Tecnología lista para",
+    "titleHighlight": "integrar",
+    "subtitle": "Aprovecha nuestros módulos pre-construidos para reducir tiempos y costos. Los adaptamos al 100% a tu flujo de trabajo y marca.",
+    "viewDemo": "Ver demo",
+    "booking": {
+      "title": "Sistema de Reservas",
+      "description": "Motor de agendamiento completo con gestión de disponibilidad, notificaciones automáticas y sincronización de calendarios."
+    },
+    "quotes": {
+      "title": "Sistema de Cotizaciones",
+      "description": "Generación de presupuestos dinámicos en PDF, cálculo de impuestos y seguimiento de estados para cerrar más ventas."
+    },
+    "ecommerce": {
+      "title": "E-commerce",
+      "description": "Tiendas online de alto rendimiento. Carrito de compras, pasarelas de pago integradas, gestión de pedidos y panel administrativo."
+    },
+    "crm": {
+      "title": "CRM",
+      "description": "Gestión centralizada de clientes. Seguimiento de leads, historial de interacciones y pipeline de ventas visual."
+    },
+    "inventory": {
+      "title": "Sistema de Inventario",
+      "description": "Control de stock en tiempo real. Gestión de almacenes, alertas de bajo stock, movimientos y reportes de valoración."
+    },
+    "blog": {
+      "title": "Blogs y Contenidos",
+      "description": "CMS optimizado para SEO. Publica artículos, noticias y novedades con un editor intuitivo y estructura amigable."
+    }
+  },
+  "portfolio": {
+    "title": "Nuestro Trabajo",
+    "subtitle": "Proyectos que estamos desarrollando y casos que ya hemos lanzado.",
+    "viewGithub": "Ver Github",
+    "viewCaseStudy": "Ver caso de estudio",
+    "learnMore": "Conoce más",
+    "viewProject": "Ver proyecto",
+    "status": {
+      "launched": "Lanzado",
+      "upcomingLaunch": "Próximo Lanzamiento",
+      "inDevelopment": "En Desarrollo"
+    },
+    "projects": {
+      "tuviaje": {
+        "title": "TuViaje",
+        "description": "Aplicación móvil para viajeros. Gestión de itinerarios, reservas y recomendaciones locales en una sola app."
+      },
+      "novacorp": {
+        "title": "Nova Corp",
+        "description": "Plataforma de gestión financiera para empresas. Dashboard intuitivo con análisis de datos y reportes automatizados."
+      },
+      "imago": {
+        "title": "Imago Creations",
+        "description": "Plataforma para solicitar y personalizar ropa corporativa. Diseño intuitivo, gestión de pedidos y seguimiento en tiempo real."
+      },
+      "baila": {
+        "title": "Baila Conmigo",
+        "description": "Sitio web moderno para academia de baile. Calendario de clases, galería de eventos y sistema de inscripción online."
+      }
+    }
+  },
+  "contact": {
+    "title": "¿Tienes una idea ambiciosa?",
+    "subtitle": "Somos el equipo técnico que necesitas para hacerla realidad. Sin intermediarios, sin burocracia, solo código excelente.",
+    "emailPlaceholder": "tu@email.com",
+    "cta": "Iniciar Proyecto",
+    "or": "O escríbenos a"
+  },
+  "footer": {
+    "description": "Soluciones digitales para negocios modernos",
+    "quickLinks": "Enlaces Rápidos",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "followUs": "Síguenos",
+    "rights": "Todos los derechos reservados"
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "submit": "Entrar",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes cuenta?",
+    "signUp": "Regístrate"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar"
+  }
+}

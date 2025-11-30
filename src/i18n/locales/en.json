@@ -1,0 +1,171 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "philosophy": "Philosophy",
+    "solutions": "Solutions",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "login": "Login"
+  },
+  "hero": {
+    "badge": "Software Development Studio",
+    "title1": "We create the future",
+    "title2": "line by line.",
+    "description": "At <strong>Lytu</strong>, we merge high-level software engineering with intuitive design. We don't just write code; we forge digital experiences that drive businesses.",
+    "cta1": "View our work",
+    "cta2": "Our Services"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "We are a team of passionate developers dedicated to creating exceptional digital experiences.",
+    "mission": "Our Mission",
+    "missionText": "Transform businesses through innovative technology solutions.",
+    "vision": "Our Vision",
+    "visionText": "Be leaders in digital innovation in Latin America."
+  },
+  "services": {
+    "title": "Comprehensive Digital Engineering",
+    "subtitle": "From conceptual idea to final deployment. We cover the entire lifecycle of modern software development.",
+    "webDev": {
+      "title": "Web Development",
+      "description": "Ultra-fast, scalable, and SEO-optimized websites and progressive web apps (PWA). We use modern technologies like React, Next.js, and Node."
+    },
+    "mobileDev": {
+      "title": "Mobile Apps",
+      "description": "Native and hybrid development for iOS and Android. We create smooth experiences that your users will love to carry in their pocket."
+    },
+    "customSoftware": {
+      "title": "Custom Software",
+      "description": "Management systems, analytical dashboards, and internal tools designed specifically to solve your company's unique problems."
+    }
+  },
+  "philosophy": {
+    "badge": "Why Lytu?",
+    "title1": "Solutions designed to grow",
+    "title2": "with a practical approach",
+    "subtitle": "A young and professional team that applies modern processes and focuses on real metrics. We deliver clear, maintainable, and results-oriented products so your business moves forward with confidence.",
+    "teamCard": {
+      "name": "Lytu — Team",
+      "role": "Technology Partner",
+      "quote": "We accelerate deliveries with modern practices and direct communication. We work with you to prioritize what really adds value."
+    },
+    "process": {
+      "title": "How we work",
+      "subtitle": "Clear and collaborative process to reduce friction and accelerate results.",
+      "step1": {
+        "title": "Discover",
+        "description": "Understand priorities and key metrics."
+      },
+      "step2": {
+        "title": "Build",
+        "description": "Iterative MVPs to validate hypotheses quickly."
+      },
+      "step3": {
+        "title": "Scale",
+        "description": "Evolution based on data and real feedback."
+      }
+    },
+    "mvpCard": {
+      "title": "Fast, clear, and business-oriented",
+      "mvp": "MVP",
+      "subtitle": "Validation in weeks, not months"
+    }
+  },
+  "readySolutions": {
+    "badge": "Development Accelerators",
+    "title": "Technology ready to",
+    "titleHighlight": "integrate",
+    "subtitle": "Leverage our pre-built modules to reduce time and costs. We adapt them 100% to your workflow and brand.",
+    "viewDemo": "View demo",
+    "booking": {
+      "title": "Booking System",
+      "description": "Complete scheduling engine with availability management, automatic notifications and calendar synchronization."
+    },
+    "quotes": {
+      "title": "Quote System",
+      "description": "Dynamic PDF budget generation, tax calculation and status tracking to close more sales."
+    },
+    "ecommerce": {
+      "title": "E-commerce",
+      "description": "High-performance online stores. Shopping cart, integrated payment gateways, order management and admin panel."
+    },
+    "crm": {
+      "title": "CRM",
+      "description": "Centralized customer management. Lead tracking, interaction history and visual sales pipeline."
+    },
+    "inventory": {
+      "title": "Inventory System",
+      "description": "Real-time stock control. Warehouse management, low stock alerts, movements and valuation reports."
+    },
+    "blog": {
+      "title": "Blogs & Content",
+      "description": "SEO-optimized CMS. Publish articles, news and updates with an intuitive editor and friendly structure."
+    }
+  },
+  "portfolio": {
+    "title": "Our Work",
+    "subtitle": "Projects we are developing and cases we have already launched.",
+    "viewGithub": "View Github",
+    "viewCaseStudy": "View case study",
+    "learnMore": "Learn more",
+    "viewProject": "View project",
+    "status": {
+      "launched": "Launched",
+      "upcomingLaunch": "Upcoming Launch",
+      "inDevelopment": "In Development"
+    },
+    "projects": {
+      "tuviaje": {
+        "title": "TuViaje",
+        "description": "Mobile application for travelers. Itinerary management, reservations and local recommendations in one app."
+      },
+      "novacorp": {
+        "title": "Nova Corp",
+        "description": "Financial management platform for companies. Intuitive dashboard with data analysis and automated reports."
+      },
+      "imago": {
+        "title": "Imago Creations",
+        "description": "Platform to request and customize corporate clothing. Intuitive design, order management and real-time tracking."
+      },
+      "baila": {
+        "title": "Baila Conmigo",
+        "description": "Modern website for dance academy. Class calendar, event gallery and online registration system."
+      }
+    }
+  },
+  "contact": {
+    "title": "Do you have an ambitious idea?",
+    "subtitle": "We are the technical team you need to make it a reality. No intermediaries, no bureaucracy, just excellent code.",
+    "emailPlaceholder": "your@email.com",
+    "cta": "Start Project",
+    "or": "Or write to us at"
+  },
+  "footer": {
+    "description": "Digital solutions for modern businesses",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign In",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  }
+}

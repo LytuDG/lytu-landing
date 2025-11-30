@@ -1,6 +1,9 @@
 import { Code } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function PhilosophySection() {
+  const { t } = useTranslation();
+
   return (
     <section
       id="filosofía"
@@ -13,23 +16,20 @@ export default function PhilosophySection() {
         <div className="mb-16">
           <div className="flex items-center justify-center mb-6">
             <div className="inline-block px-3 py-1 rounded-full bg-slate-800/40 border border-slate-700 text-cyan-300 text-xs font-semibold uppercase tracking-wide">
-              ¿Por qué Lytu?
+              {t("philosophy.badge")}
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row items-start md:justify-between gap-8 md:gap-20">
             <div className="text-center md:text-left md:max-w-2xl w-full md:w-auto">
               <h2 className="text-2xl md:text-4xl font-extrabold mb-4 leading-snug">
-                Soluciones pensadas para crecer <br />
+                {t("philosophy.title1")} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-                  con enfoque práctico
+                  {t("philosophy.title2")}
                 </span>
               </h2>
               <p className="text-slate-300 text-base md:text-lg">
-                Un equipo joven y profesional que aplica procesos modernos y
-                foco en métricas reales. Entregamos productos claros,
-                mantenibles y orientados a resultados para que tu negocio avance
-                con confianza.
+                {t("philosophy.subtitle")}
               </p>
             </div>
 
@@ -41,17 +41,15 @@ export default function PhilosophySection() {
                   </div>
                   <div>
                     <div className="text-sm text-slate-300 font-semibold">
-                      Lytu — Equipo
+                      {t("philosophy.teamCard.name")}
                     </div>
                     <div className="text-xs text-slate-500">
-                      Partner tecnológico
+                      {t("philosophy.teamCard.role")}
                     </div>
                   </div>
                 </div>
                 <p className="text-slate-300 text-sm">
-                  "Aceleramos entregas con prácticas modernas y comunicación
-                  directa. Trabajamos contigo para priorizar lo que realmente
-                  aporta valor."
+                  "{t("philosophy.teamCard.quote")}"
                 </p>
               </div>
             </div>
@@ -64,17 +62,15 @@ export default function PhilosophySection() {
                   </div>
                   <div>
                     <div className="text-sm text-slate-300 font-semibold">
-                      Lytu — Equipo
+                      {t("philosophy.teamCard.name")}
                     </div>
                     <div className="text-xs text-slate-500">
-                      Partner tecnológico
+                      {t("philosophy.teamCard.role")}
                     </div>
                   </div>
                 </div>
                 <p className="text-slate-300 text-sm">
-                  "Aceleramos entregas con prácticas modernas y comunicación
-                  directa. Trabajamos contigo para priorizar lo que realmente
-                  aporta valor."
+                  "{t("philosophy.teamCard.quote")}"
                 </p>
               </div>
             </div>
@@ -90,10 +86,11 @@ export default function PhilosophySection() {
                     <Code size={18} />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold">Cómo trabajamos</h4>
+                    <h4 className="text-white font-bold">
+                      {t("philosophy.process.title")}
+                    </h4>
                     <p className="text-slate-400 text-sm">
-                      Proceso claro y colaborativo para reducir fricción y
-                      acelerar resultados.
+                      {t("philosophy.process.subtitle")}
                     </p>
                   </div>
                 </div>
@@ -106,9 +103,11 @@ export default function PhilosophySection() {
                         <div className="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-white mb-3">
                           1
                         </div>
-                        <div className="font-semibold">Descubrir</div>
+                        <div className="font-semibold">
+                          {t("philosophy.process.step1.title")}
+                        </div>
                         <div className="text-slate-400 text-sm">
-                          Entender prioridades y métricas clave.
+                          {t("philosophy.process.step1.description")}
                         </div>
                       </div>
 
@@ -116,9 +115,11 @@ export default function PhilosophySection() {
                         <div className="w-12 h-12 rounded-full bg-cyan-500 flex items-center justify-center text-white mb-3">
                           2
                         </div>
-                        <div className="font-semibold">Construir</div>
+                        <div className="font-semibold">
+                          {t("philosophy.process.step2.title")}
+                        </div>
                         <div className="text-slate-400 text-sm">
-                          MVPs iterativos para validar hipótesis rápido.
+                          {t("philosophy.process.step2.description")}
                         </div>
                       </div>
 
@@ -126,9 +127,11 @@ export default function PhilosophySection() {
                         <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white mb-3">
                           3
                         </div>
-                        <div className="font-semibold">Escalar</div>
+                        <div className="font-semibold">
+                          {t("philosophy.process.step3.title")}
+                        </div>
                         <div className="text-slate-400 text-sm">
-                          Evolución basada en datos y feedback real.
+                          {t("philosophy.process.step3.description")}
                         </div>
                       </div>
                     </div>
@@ -139,14 +142,14 @@ export default function PhilosophySection() {
               <div className="hidden md:block w-80">
                 <div className="rounded-2xl bg-gradient-to-br from-indigo-900/20 to-cyan-900/10 border border-slate-800 p-6">
                   <div className="text-slate-300 text-sm">
-                    Rápido, claro y orientado a negocio
+                    {t("philosophy.mvpCard.title")}
                   </div>
                   <div className="mt-6">
                     <div className="text-4xl font-extrabold text-white">
-                      MVP
+                      {t("philosophy.mvpCard.mvp")}
                     </div>
                     <div className="text-slate-400 text-sm">
-                      Validación en semanas, no meses
+                      {t("philosophy.mvpCard.subtitle")}
                     </div>
                   </div>
                 </div>
@@ -160,10 +163,12 @@ export default function PhilosophySection() {
                     <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">
                       1
                     </div>
-                    <div className="font-semibold text-base">Descubrir</div>
+                    <div className="font-semibold text-base">
+                      {t("philosophy.process.step1.title")}
+                    </div>
                   </div>
                   <div className="text-slate-400 text-sm ml-14">
-                    Entender prioridades y métricas clave.
+                    {t("philosophy.process.step1.description")}
                   </div>
                 </div>
 
@@ -172,10 +177,12 @@ export default function PhilosophySection() {
                     <div className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">
                       2
                     </div>
-                    <div className="font-semibold text-base">Construir</div>
+                    <div className="font-semibold text-base">
+                      {t("philosophy.process.step2.title")}
+                    </div>
                   </div>
                   <div className="text-slate-400 text-sm ml-14">
-                    MVPs iterativos para validar hipótesis rápido.
+                    {t("philosophy.process.step2.description")}
                   </div>
                 </div>
 
@@ -184,10 +191,12 @@ export default function PhilosophySection() {
                     <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mr-4 flex-shrink-0">
                       3
                     </div>
-                    <div className="font-semibold text-base">Escalar</div>
+                    <div className="font-semibold text-base">
+                      {t("philosophy.process.step3.title")}
+                    </div>
                   </div>
                   <div className="text-slate-400 text-sm ml-14">
-                    Evolución basada en datos y feedback real.
+                    {t("philosophy.process.step3.description")}
                   </div>
                 </div>
               </div>

@@ -1,8 +1,11 @@
 import { ChevronRight, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import ParticleNetwork from "../../../components/ui/ParticleNetwork";
 import { scrollToSection } from "../../../utils/scroll";
 
 export default function HeroSection() {
+  const { t } = useTranslation();
+
   return (
     <header className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-slate-950">
@@ -15,23 +18,21 @@ export default function HeroSection() {
           <div className="inline-flex items-center px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 mb-6 backdrop-blur-sm animate-fade-in-up">
             <span className="w-2 h-2 rounded-full bg-cyan-400 mr-2 animate-pulse"></span>
             <span className="text-cyan-300 text-xs font-bold uppercase tracking-widest">
-              Software Development Studio
+              {t("hero.badge")}
             </span>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight mb-8">
-            Creamos el futuro <br />
+            {t("hero.title1")} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400">
-              línea por línea.
+              {t("hero.title2")}
             </span>
           </h1>
 
-          <p className="text-lg md:text-2xl text-slate-400 mb-10 max-w-3xl leading-relaxed mx-auto">
-            En <span className="text-white font-semibold">Lytu</span>,
-            fusionamos ingeniería de software de alto nivel con diseño
-            intuitivo. No solo escribimos código; forjamos experiencias
-            digitales que impulsan negocios.
-          </p>
+          <p
+            className="text-lg md:text-2xl text-slate-400 mb-10 max-w-3xl leading-relaxed mx-auto"
+            dangerouslySetInnerHTML={{ __html: t("hero.description") }}
+          />
 
           <div className="flex flex-col w-full sm:flex-row gap-4 justify-center sm:gap-6 px-4 sm:px-0">
             <button
@@ -39,7 +40,7 @@ export default function HeroSection() {
               className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-indigo-600 rounded-full font-bold text-white overflow-hidden transition-all hover:bg-indigo-700 hover:scale-105 shadow-[0_0_20px_rgba(79,70,229,0.4)] text-sm sm:text-base"
             >
               <span className="relative z-10 flex items-center justify-center">
-                Ver nuestro trabajo{" "}
+                {t("hero.cta1")}{" "}
                 <ChevronRight
                   className="ml-2 group-hover:translate-x-1 transition-transform"
                   size={18}
@@ -51,7 +52,7 @@ export default function HeroSection() {
               onClick={() => scrollToSection("servicios")}
               className="px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-white border border-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-colors backdrop-blur-sm text-sm sm:text-base"
             >
-              Nuestros Servicios
+              {t("hero.cta2")}
             </button>
           </div>
         </div>

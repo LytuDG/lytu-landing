@@ -8,7 +8,7 @@ export default function Footer() {
               <div className="w-6 h-6 bg-gradient-to-tr from-indigo-500 to-cyan-400 rounded flex items-center justify-center">
                 <span className="font-bold text-white text-xs">L</span>
               </div>
-              <span className="text-xl font-bold text-white">lytu.</span>
+              <span className="text-xl font-bold text-white">ytu</span>
             </div>
             <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
               Desarrollo de software con pasión y precisión. Ayudamos a startups

@@ -8,10 +8,15 @@ import {
   ShoppingBag,
   PenTool,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function ReadySolutionsSection() {
+  const { t } = useTranslation();
   return (
-    <section className="py-24 bg-slate-950 relative overflow-hidden">
+    <section
+      id="soluciones"
+      className="py-24 bg-slate-950 relative overflow-hidden"
+    >
       {/* Background Elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay pointer-events-none"></div>
@@ -21,51 +26,56 @@ export default function ReadySolutionsSection() {
           <div className="inline-flex items-center px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 mb-6 backdrop-blur-sm animate-fade-in-up">
             <Zap size={14} className="text-cyan-400 mr-2" />
             <span className="text-cyan-300 text-xs font-bold uppercase tracking-widest">
-              Aceleradores de Desarrollo
+              {t("readySolutions.badge")}
             </span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Tecnología lista para{" "}
+            {t("readySolutions.title")}{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-indigo-500">
-              integrar
+              {t("readySolutions.titleHighlight")}
             </span>
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-            Aprovecha nuestros módulos pre-construidos para reducir tiempos y
-            costos. Los adaptamos al 100% a tu flujo de trabajo y marca.
+            {t("readySolutions.subtitle")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <SolutionCard
             icon={<CalendarCheck className="text-cyan-400" size={32} />}
-            title="Sistema de Reservas"
-            description="Motor de agendamiento completo con gestión de disponibilidad, notificaciones automáticas y sincronización de calendarios."
+            title={t("readySolutions.booking.title")}
+            description={t("readySolutions.booking.description")}
+            viewDemo={t("readySolutions.viewDemo")}
           />
           <SolutionCard
             icon={<FileText className="text-violet-400" size={32} />}
-            title="Sistema de Cotizaciones"
-            description="Generación de presupuestos dinámicos en PDF, cálculo de impuestos y seguimiento de estados para cerrar más ventas."
+            title={t("readySolutions.quotes.title")}
+            description={t("readySolutions.quotes.description")}
+            viewDemo={t("readySolutions.viewDemo")}
           />
           <SolutionCard
             icon={<Users className="text-pink-400" size={32} />}
-            title="CRM"
-            description="Gestión centralizada de clientes. Seguimiento de leads, historial de interacciones y pipeline de ventas visual."
+            title={t("readySolutions.crm.title")}
+            description={t("readySolutions.crm.description")}
+            viewDemo={t("readySolutions.viewDemo")}
           />
           <SolutionCard
             icon={<Package className="text-orange-400" size={32} />}
-            title="Sistema de Inventario"
-            description="Control de stock en tiempo real. Gestión de almacenes, alertas de bajo stock, movimientos y reportes de valoración."
+            title={t("readySolutions.inventory.title")}
+            description={t("readySolutions.inventory.description")}
+            viewDemo={t("readySolutions.viewDemo")}
           />
           <SolutionCard
             icon={<ShoppingBag className="text-blue-400" size={32} />}
-            title="E-commerce"
-            description="Tiendas online de alto rendimiento. Carrito de compras, pasarelas de pago integradas, gestión de pedidos y panel administrativo."
+            title={t("readySolutions.ecommerce.title")}
+            description={t("readySolutions.ecommerce.description")}
+            viewDemo={t("readySolutions.viewDemo")}
           />
           <SolutionCard
             icon={<PenTool className="text-emerald-400" size={32} />}
-            title="Blogs y Contenidos"
-            description="CMS optimizado para SEO. Publica artículos, noticias y novedades con un editor intuitivo y estructura amigable."
+            title={t("readySolutions.blog.title")}
+            description={t("readySolutions.blog.description")}
+            viewDemo={t("readySolutions.viewDemo")}
           />
         </div>
       </div>
@@ -77,10 +87,12 @@ function SolutionCard({
   icon,
   title,
   description,
+  viewDemo,
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
+  viewDemo: string;
 }) {
   return (
     <div className="group relative p-[1px] rounded-2xl bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]">
@@ -100,7 +112,7 @@ function SolutionCard({
         </p>
 
         <div className="flex items-center text-indigo-400 text-sm font-bold group-hover:text-cyan-300 transition-colors cursor-pointer mt-auto">
-          Ver demo{" "}
+          {viewDemo}{" "}
           <ArrowRight
             size={16}
             className="ml-2 group-hover:translate-x-1 transition-transform"

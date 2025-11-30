@@ -4,23 +4,24 @@ import {
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function PortfolioSection() {
+  const { t } = useTranslation();
   return (
     <section id="proyectos" className="py-24 relative">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
             <h2 className="text-4xl md:text-6xl font-bold mb-4">
-              Nuestro Trabajo
+              {t("portfolio.title")}
             </h2>
-            <p className="text-slate-400 max-w-xl">
-              Proyectos que estamos desarrollando y casos que ya hemos lanzado.
-            </p>
+            <p className="text-slate-400 max-w-xl">{t("portfolio.subtitle")}</p>
           </div>
           <div className="hidden md:block">
             <button className="text-indigo-400 font-bold hover:text-white transition-colors flex items-center">
-              Ver Github <ChevronRight size={16} className="ml-1" />
+              {t("portfolio.viewGithub")}{" "}
+              <ChevronRight size={16} className="ml-1" />
             </button>
           </div>
         </div>
@@ -36,16 +37,15 @@ export default function PortfolioSection() {
             <div className="h-64 bg-slate-800 relative overflow-hidden">
               <WebsitePreview url="https://tuviaje.app" color="cyan" />
               <div className="absolute top-4 left-4 bg-cyan-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-full z-10">
-                Lanzado
+                {t("portfolio.status.launched")}
               </div>
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                TuViaje
+                {t("portfolio.projects.tuviaje.title")}
               </h3>
               <p className="text-slate-400 mb-6">
-                Aplicación móvil para viajeros. Gestión de itinerarios, reservas
-                y recomendaciones locales en una sola app.
+                {t("portfolio.projects.tuviaje.description")}
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {["Ionic", "Angular", "Capacitor", "Node.js"].map((tag) => (
@@ -58,7 +58,8 @@ export default function PortfolioSection() {
                 ))}
               </div>
               <div className="inline-flex items-center text-white font-bold group-hover:text-cyan-400 transition-colors">
-                Ver caso de estudio <ArrowRight size={16} className="ml-2" />
+                {t("portfolio.viewCaseStudy")}{" "}
+                <ArrowRight size={16} className="ml-2" />
               </div>
             </div>
           </a>
@@ -76,16 +77,15 @@ export default function PortfolioSection() {
                 color="emerald"
               />
               <div className="absolute top-4 left-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
-                Próximo Lanzamiento
+                {t("portfolio.status.upcomingLaunch")}
               </div>
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
-                Nova Corp
+                {t("portfolio.projects.novacorp.title")}
               </h3>
               <p className="text-slate-400 mb-6">
-                Plataforma de gestión financiera para empresas. Dashboard
-                intuitivo con análisis de datos y reportes automatizados.
+                {t("portfolio.projects.novacorp.description")}
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {["React", "TypeScript", "Node.js", "PostgreSQL", "AWS"].map(
@@ -100,7 +100,8 @@ export default function PortfolioSection() {
                 )}
               </div>
               <div className="inline-flex items-center text-white font-bold group-hover:text-emerald-400 transition-colors">
-                Ver caso de estudio <ArrowRight size={16} className="ml-2" />
+                {t("portfolio.viewCaseStudy")}{" "}
+                <ArrowRight size={16} className="ml-2" />
               </div>
             </div>
           </a>
@@ -118,17 +119,15 @@ export default function PortfolioSection() {
                 color="orange"
               />
               <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
-                En Desarrollo
+                {t("portfolio.status.inDevelopment")}
               </div>
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">
-                Imago Creations
+                {t("portfolio.projects.imago.title")}
               </h3>
               <p className="text-slate-400 mb-6">
-                Plataforma para solicitar y personalizar ropa corporativa.
-                Diseño intuitivo, gestión de pedidos y seguimiento en tiempo
-                real.
+                {t("portfolio.projects.imago.description")}
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {["Vue.js", "Express", "MongoDB", "Stripe", "Tailwind"].map(
@@ -143,7 +142,8 @@ export default function PortfolioSection() {
                 )}
               </div>
               <div className="inline-flex items-center text-white font-bold group-hover:text-orange-400 transition-colors">
-                Conoce más <ArrowRight size={16} className="ml-2" />
+                {t("portfolio.learnMore")}{" "}
+                <ArrowRight size={16} className="ml-2" />
               </div>
             </div>
           </a>
@@ -161,16 +161,15 @@ export default function PortfolioSection() {
                 color="rose"
               />
               <div className="absolute top-4 left-4 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
-                En Desarrollo
+                {t("portfolio.status.inDevelopment")}
               </div>
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-rose-400 transition-colors">
-                Baila Conmigo
+                {t("portfolio.projects.baila.title")}
               </h3>
               <p className="text-slate-400 mb-6">
-                Sitio web moderno para academia de baile. Calendario de clases,
-                galería de eventos y sistema de inscripción online.
+                {t("portfolio.projects.baila.description")}
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {["React", "Tailwind", "Framer Motion", "Vite"].map((tag) => (
@@ -183,7 +182,8 @@ export default function PortfolioSection() {
                 ))}
               </div>
               <div className="inline-flex items-center text-white font-bold group-hover:text-rose-400 transition-colors">
-                Ver proyecto <ArrowRight size={16} className="ml-2" />
+                {t("portfolio.viewProject")}{" "}
+                <ArrowRight size={16} className="ml-2" />
               </div>
             </div>
           </a>
