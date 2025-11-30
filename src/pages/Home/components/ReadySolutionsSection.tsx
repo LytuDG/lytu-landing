@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   CalendarCheck,
   FileText,
@@ -48,6 +49,7 @@ export default function ReadySolutionsSection() {
             title={t("readySolutions.booking.title")}
             description={t("readySolutions.booking.description")}
             viewDemo={t("readySolutions.viewDemo")}
+            link="/demos/booking"
           />
           <SolutionCard
             icon={<FileText className="text-violet-400" size={32} />}
@@ -124,12 +126,24 @@ function SolutionCard({
   title,
   description,
   viewDemo,
+  link,
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
   viewDemo: string;
+  link?: string;
 }) {
+  const Content = () => (
+    <div className="flex items-center text-indigo-400 text-sm font-bold group-hover:text-cyan-300 transition-colors cursor-pointer mt-auto">
+      {viewDemo}{" "}
+      <ArrowRight
+        size={16}
+        className="ml-2 group-hover:translate-x-1 transition-transform"
+      />
+    </div>
+  );
+
   return (
     <div className="group relative p-px rounded-2xl bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]">
       <div className="bg-slate-950 rounded-2xl p-8 h-full relative overflow-hidden flex flex-col">
@@ -147,13 +161,13 @@ function SolutionCard({
           {description}
         </p>
 
-        <div className="flex items-center text-indigo-400 text-sm font-bold group-hover:text-cyan-300 transition-colors cursor-pointer mt-auto">
-          {viewDemo}{" "}
-          <ArrowRight
-            size={16}
-            className="ml-2 group-hover:translate-x-1 transition-transform"
-          />
-        </div>
+        {link ? (
+          <Link to={link}>
+            <Content />
+          </Link>
+        ) : (
+          <Content />
+        )}
       </div>
     </div>
   );
