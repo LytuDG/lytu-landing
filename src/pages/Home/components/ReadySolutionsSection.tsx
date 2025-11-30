@@ -4,6 +4,9 @@ import {
   Package,
   ArrowRight,
   Zap,
+  Users,
+  ShoppingBag,
+  PenTool,
 } from "lucide-react";
 
 export default function ReadySolutionsSection() {
@@ -33,21 +36,36 @@ export default function ReadySolutionsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <SolutionCard
             icon={<CalendarCheck className="text-cyan-400" size={32} />}
             title="Sistema de Reservas"
-            description="Motor de agendamiento completo con gestión de disponibilidad, notificaciones automáticas y sincronización de calendarios. Ideal para clínicas, consultorías y servicios."
+            description="Motor de agendamiento completo con gestión de disponibilidad, notificaciones automáticas y sincronización de calendarios."
           />
           <SolutionCard
             icon={<FileText className="text-violet-400" size={32} />}
             title="Sistema de Cotizaciones"
-            description="Generación de presupuestos dinámicos en PDF, cálculo de impuestos y seguimiento de estados. Convierte leads en clientes con propuestas profesionales en segundos."
+            description="Generación de presupuestos dinámicos en PDF, cálculo de impuestos y seguimiento de estados para cerrar más ventas."
           />
           <SolutionCard
-            icon={<Package className="text-pink-400" size={32} />}
-            title="Mini CRM e Inventario"
-            description="Control total de tu stock y relaciones con clientes. Dashboard intuitivo para seguimiento de ventas, alertas de stock bajo e historial de interacciones."
+            icon={<Users className="text-pink-400" size={32} />}
+            title="CRM"
+            description="Gestión centralizada de clientes. Seguimiento de leads, historial de interacciones y pipeline de ventas visual."
+          />
+          <SolutionCard
+            icon={<Package className="text-orange-400" size={32} />}
+            title="Sistema de Inventario"
+            description="Control de stock en tiempo real. Gestión de almacenes, alertas de bajo stock, movimientos y reportes de valoración."
+          />
+          <SolutionCard
+            icon={<ShoppingBag className="text-blue-400" size={32} />}
+            title="E-commerce"
+            description="Tiendas online de alto rendimiento. Carrito de compras, pasarelas de pago integradas, gestión de pedidos y panel administrativo."
+          />
+          <SolutionCard
+            icon={<PenTool className="text-emerald-400" size={32} />}
+            title="Blogs y Contenidos"
+            description="CMS optimizado para SEO. Publica artículos, noticias y novedades con un editor intuitivo y estructura amigable."
           />
         </div>
       </div>

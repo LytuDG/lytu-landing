@@ -1,4 +1,9 @@
-import { ChevronRight, Smartphone, ArrowRight } from "lucide-react";
+import {
+  ChevronRight,
+  Smartphone,
+  ArrowRight,
+  ExternalLink,
+} from "lucide-react";
 
 export default function PortfolioSection() {
   return (
@@ -21,20 +26,23 @@ export default function PortfolioSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Project 1 - TuViaje (CORRECTED) */}
-          <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500 transition-all duration-500">
+          {/* Project 1 - TuViaje */}
+          <a
+            href="https://tuviaje.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500 transition-all duration-500 block"
+          >
             <div className="h-64 bg-slate-800 relative overflow-hidden">
-              {/* Mockup visual */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-cyan-900 to-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-                <Smartphone size={80} className="text-cyan-400/50" />
-                <div className="absolute inset-0 bg-black/20" />
-              </div>
-              <div className="absolute top-4 left-4 bg-cyan-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-full">
+              <WebsitePreview url="https://tuviaje.app" color="cyan" />
+              <div className="absolute top-4 left-4 bg-cyan-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-full z-10">
                 Lanzado
               </div>
             </div>
             <div className="p-8">
-              <h3 className="text-2xl font-bold text-white mb-2">TuViaje</h3>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                TuViaje
+              </h3>
               <p className="text-slate-400 mb-6">
                 Aplicación móvil para viajeros. Gestión de itinerarios, reservas
                 y recomendaciones locales en una sola app.
@@ -49,36 +57,32 @@ export default function PortfolioSection() {
                   </span>
                 ))}
               </div>
-              <a
-                href="#"
-                className="inline-flex items-center text-white font-bold hover:text-cyan-400 transition-colors"
-              >
+              <div className="inline-flex items-center text-white font-bold group-hover:text-cyan-400 transition-colors">
                 Ver caso de estudio <ArrowRight size={16} className="ml-2" />
-              </a>
-            </div>
-          </div>
-
-          {/* Project 2 - Nova Corp */}
-          <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-purple-500 transition-all duration-500">
-            <div className="h-64 bg-gradient-to-br from-purple-900 via-slate-800 to-slate-900 relative overflow-hidden">
-              {/* Mockup visual */}
-              <div className="absolute inset-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-                <div className="text-center">
-                  <div className="text-6xl font-bold text-purple-400 mb-2">
-                    N
-                  </div>
-                  <p className="text-purple-300 font-semibold text-lg">
-                    Nova Corp
-                  </p>
-                </div>
-                <div className="absolute inset-0 bg-black/10" />
               </div>
-              <div className="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            </div>
+          </a>
+
+          {/* Project 2 - Nova Corp (UPDATED: Green) */}
+          <a
+            href="https://novafinancialcorp.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-emerald-500 transition-all duration-500 block"
+          >
+            <div className="h-64 bg-slate-800 relative overflow-hidden">
+              <WebsitePreview
+                url="https://novafinancialcorp.netlify.app/"
+                color="emerald"
+              />
+              <div className="absolute top-4 left-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                 Próximo Lanzamiento
               </div>
             </div>
             <div className="p-8">
-              <h3 className="text-2xl font-bold text-white mb-2">Nova Corp</h3>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                Nova Corp
+              </h3>
               <p className="text-slate-400 mb-6">
                 Plataforma de gestión financiera para empresas. Dashboard
                 intuitivo con análisis de datos y reportes automatizados.
@@ -88,41 +92,37 @@ export default function PortfolioSection() {
                   (tag) => (
                     <span
                       key={tag}
-                      className="text-xs font-mono text-purple-400 bg-purple-900/20 px-2 py-1 rounded border border-purple-500/20"
+                      className="text-xs font-mono text-emerald-400 bg-emerald-900/20 px-2 py-1 rounded border border-emerald-500/20"
                     >
                       {tag}
                     </span>
                   )
                 )}
               </div>
-              <a
-                href="#"
-                className="inline-flex items-center text-white font-bold hover:text-purple-400 transition-colors"
-              >
+              <div className="inline-flex items-center text-white font-bold group-hover:text-emerald-400 transition-colors">
                 Ver caso de estudio <ArrowRight size={16} className="ml-2" />
-              </a>
+              </div>
             </div>
-          </div>
+          </a>
 
           {/* Project 3 - Imago Creations */}
-          <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-orange-500 transition-all duration-500">
-            <div className="h-64 bg-gradient-to-br from-orange-900 via-slate-800 to-slate-900 relative overflow-hidden">
-              {/* Mockup visual */}
-              <div className="absolute inset-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-orange-400 mb-2">
-                    I
-                  </div>
-                  <p className="text-orange-300 font-semibold text-lg">Imago</p>
-                </div>
-                <div className="absolute inset-0 bg-black/10" />
-              </div>
-              <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+          <a
+            href="https://imagocreations.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-orange-500 transition-all duration-500 block"
+          >
+            <div className="h-64 bg-slate-800 relative overflow-hidden">
+              <WebsitePreview
+                url="https://imagocreations.netlify.app/"
+                color="orange"
+              />
+              <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                 En Desarrollo
               </div>
             </div>
             <div className="p-8">
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">
                 Imago Creations
               </h3>
               <p className="text-slate-400 mb-6">
@@ -142,16 +142,106 @@ export default function PortfolioSection() {
                   )
                 )}
               </div>
-              <a
-                href="#"
-                className="inline-flex items-center text-white font-bold hover:text-orange-400 transition-colors"
-              >
+              <div className="inline-flex items-center text-white font-bold group-hover:text-orange-400 transition-colors">
                 Conoce más <ArrowRight size={16} className="ml-2" />
-              </a>
+              </div>
             </div>
-          </div>
+          </a>
+
+          {/* Project 4 - Baila Conmigo (UPDATED: En Desarrollo) */}
+          <a
+            href="https://bailaconmigo.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-rose-500 transition-all duration-500 block"
+          >
+            <div className="h-64 bg-slate-800 relative overflow-hidden">
+              <WebsitePreview
+                url="https://bailaconmigo.netlify.app/"
+                color="rose"
+              />
+              <div className="absolute top-4 left-4 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
+                En Desarrollo
+              </div>
+            </div>
+            <div className="p-8">
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-rose-400 transition-colors">
+                Baila Conmigo
+              </h3>
+              <p className="text-slate-400 mb-6">
+                Sitio web moderno para academia de baile. Calendario de clases,
+                galería de eventos y sistema de inscripción online.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {["React", "Tailwind", "Framer Motion", "Vite"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs font-mono text-rose-400 bg-rose-900/20 px-2 py-1 rounded border border-rose-500/20"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="inline-flex items-center text-white font-bold group-hover:text-rose-400 transition-colors">
+                Ver proyecto <ArrowRight size={16} className="ml-2" />
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </section>
+  );
+}
+
+function WebsitePreview({ url, color }: { url: string; color: string }) {
+  // Map color names to Tailwind classes for the fallback background
+  const bgColors: Record<string, string> = {
+    cyan: "bg-linear-to-tr from-cyan-900 to-slate-800",
+    emerald: "bg-linear-to-br from-emerald-900 via-slate-800 to-slate-900",
+    orange: "bg-linear-to-br from-orange-900 via-slate-800 to-slate-900",
+    rose: "bg-linear-to-br from-rose-900 via-slate-800 to-slate-900",
+  };
+
+  const iconColors: Record<string, string> = {
+    cyan: "text-cyan-400/50",
+    emerald: "text-emerald-400/50",
+    orange: "text-orange-400/50",
+    rose: "text-rose-400/50",
+  };
+
+  return (
+    <div className="w-full h-full relative group-hover:scale-105 transition-transform duration-700">
+      {/* Fallback / Background */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center ${
+          bgColors[color] || "bg-slate-800"
+        }`}
+      >
+        <Smartphone
+          size={80}
+          className={iconColors[color] || "text-slate-500"}
+        />
+      </div>
+
+      {/* Iframe Preview */}
+      <div className="absolute inset-0 opacity-90 transition-opacity duration-500">
+        <iframe
+          src={url}
+          title={`Preview of ${url}`}
+          className="w-[400%] h-[400%] transform scale-25 origin-top-left pointer-events-none border-0"
+          loading="lazy"
+          scrolling="no"
+          tabIndex={-1}
+        />
+      </div>
+
+      {/* Overlay for hover effect and click protection */}
+      <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors duration-300" />
+
+      {/* External Link Icon */}
+      <div className="absolute top-4 right-4 z-20">
+        <ExternalLink className="text-white drop-shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0" />
+      </div>
+    </div>
   );
 }
