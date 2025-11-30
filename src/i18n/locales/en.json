@@ -10,7 +10,7 @@
   },
   "hero": {
     "badge": "Software Development Studio",
-    "title1": "We create the future",
+    "title1": "Building the future",
     "title2": "line by line.",
     "description": "At <strong>Lytu</strong>, we merge high-level software engineering with intuitive design. We don't just write code; we forge digital experiences that drive businesses.",
     "cta1": "View our work",
@@ -38,6 +38,10 @@
     "customSoftware": {
       "title": "Custom Software",
       "description": "Management systems, analytical dashboards, and internal tools designed specifically to solve your company's unique problems."
+    },
+    "design": {
+      "title": "Design & Branding",
+      "description": "Complete visual identity: logos, color palettes, typography and graphic assets. We create your brand image from scratch to make it stand out."
     }
   },
   "philosophy": {
@@ -78,6 +82,11 @@
     "titleHighlight": "integrate",
     "subtitle": "Leverage our pre-built modules to reduce time and costs. We adapt them 100% to your workflow and brand.",
     "viewDemo": "View demo",
+    "customCTA": {
+      "title": "Didn't find what you're looking for?",
+      "description": "We create custom solutions for your business. Tell us what you need and we'll build it for you.",
+      "button": "Contact us"
+    },
     "booking": {
       "title": "Booking System",
       "description": "Complete scheduling engine with availability management, automatic notifications and calendar synchronization."

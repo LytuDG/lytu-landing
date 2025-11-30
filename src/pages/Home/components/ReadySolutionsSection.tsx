@@ -7,8 +7,10 @@ import {
   Users,
   ShoppingBag,
   PenTool,
+  MessageCircle,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { scrollToSection } from "../../../utils/scroll";
 
 export default function ReadySolutionsSection() {
   const { t } = useTranslation();
@@ -77,6 +79,40 @@ export default function ReadySolutionsSection() {
             description={t("readySolutions.blog.description")}
             viewDemo={t("readySolutions.viewDemo")}
           />
+
+          {/* Custom Solution CTA - Destacado */}
+          <div
+            onClick={() => scrollToSection("contacto")}
+            className="md:col-span-2 lg:col-span-1 group relative p-[2px] rounded-2xl bg-linear-to-br from-cyan-400 via-indigo-500 to-purple-600 hover:from-cyan-300 hover:via-indigo-400 hover:to-purple-500 transition-all duration-500 cursor-pointer"
+          >
+            {/* Pulsing glow effect */}
+            <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-indigo-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 animate-pulse transition-opacity"></div>
+
+            <div className="relative bg-slate-950 rounded-2xl p-10 h-full flex flex-col">
+              <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-transparent to-indigo-500/10 rounded-2xl"></div>
+
+              <div className="relative z-10">
+                <div className="w-20 h-20 rounded-2xl bg-linear-to-br from-cyan-400 via-indigo-500 to-purple-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-2xl shadow-cyan-500/50">
+                  <MessageCircle className="text-white" size={40} />
+                </div>
+
+                <h3 className="text-2xl font-bold bg-linear-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-4">
+                  {t("readySolutions.customCTA.title")}
+                </h3>
+                <p className="text-slate-300 text-base leading-relaxed mb-8 flex-grow">
+                  {t("readySolutions.customCTA.description")}
+                </p>
+
+                <div className="inline-flex items-center px-6 py-3 rounded-full bg-linear-to-r from-cyan-500 to-indigo-600 text-white text-sm font-bold group-hover:from-cyan-400 group-hover:to-indigo-500 transition-all shadow-lg shadow-cyan-500/30 group-hover:shadow-cyan-500/50 group-hover:scale-105">
+                  {t("readySolutions.customCTA.button")}{" "}
+                  <ArrowRight
+                    size={18}
+                    className="ml-2 group-hover:translate-x-1 transition-transform"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -95,7 +131,7 @@ function SolutionCard({
   viewDemo: string;
 }) {
   return (
-    <div className="group relative p-[1px] rounded-2xl bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]">
+    <div className="group relative p-px rounded-2xl bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]">
       <div className="bg-slate-950 rounded-2xl p-8 h-full relative overflow-hidden flex flex-col">
         {/* Hover Glow */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all duration-500 -mr-10 -mt-10 pointer-events-none" />
@@ -107,7 +143,7 @@ function SolutionCard({
         <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
           {title}
         </h3>
-        <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+        <p className="text-slate-400 text-sm leading-relaxed mb-8 grow">
           {description}
         </p>
 

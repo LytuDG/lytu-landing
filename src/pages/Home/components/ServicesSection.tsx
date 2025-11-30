@@ -1,4 +1,4 @@
-import { Globe, Smartphone, Cpu } from "lucide-react";
+import { Globe, Smartphone, Cpu, Palette } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ServiceCard from "../../../components/ui/ServiceCard";
 
@@ -17,7 +17,7 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <ServiceCard
             icon={<Globe className="text-cyan-400" size={40} />}
             title={t("services.webDev.title")}
@@ -32,6 +32,11 @@ export default function ServicesSection() {
             icon={<Cpu className="text-pink-400" size={40} />}
             title={t("services.customSoftware.title")}
             desc={t("services.customSoftware.description")}
+          />
+          <ServiceCard
+            icon={<Palette className="text-orange-400" size={40} />}
+            title={t("services.design.title")}
+            desc={t("services.design.description")}
           />
         </div>
       </div>

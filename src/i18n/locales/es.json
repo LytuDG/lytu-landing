@@ -38,6 +38,10 @@
     "customSoftware": {
       "title": "Software a Medida",
       "description": "Sistemas de gestión, dashboards analíticos y herramientas internas diseñadas específicamente para resolver los problemas únicos de tu empresa."
+    },
+    "design": {
+      "title": "Diseño & Branding",
+      "description": "Identidad visual completa: logos, paletas de colores, tipografías y assets gráficos. Creamos la imagen de tu marca desde cero para que destaque."
     }
   },
   "philosophy": {
@@ -78,6 +82,11 @@
     "titleHighlight": "integrar",
     "subtitle": "Aprovecha nuestros módulos pre-construidos para reducir tiempos y costos. Los adaptamos al 100% a tu flujo de trabajo y marca.",
     "viewDemo": "Ver demo",
+    "customCTA": {
+      "title": "¿No encontraste lo que buscas?",
+      "description": "Creamos soluciones a medida para tu negocio. Cuéntanos qué necesitas y lo construimos para ti.",
+      "button": "Contáctanos"
+    },
     "booking": {
       "title": "Sistema de Reservas",
       "description": "Motor de agendamiento completo con gestión de disponibilidad, notificaciones automáticas y sincronización de calendarios."
