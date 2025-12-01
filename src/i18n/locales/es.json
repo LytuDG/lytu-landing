@@ -147,6 +147,7 @@
     "title": "¿Tienes una idea ambiciosa?",
     "subtitle": "Somos el equipo técnico que necesitas para hacerla realidad. Sin intermediarios, sin burocracia, solo código excelente.",
     "emailPlaceholder": "tu@email.com",
+    "projectPlaceholder": "Cuéntanos brevemente qué quieres construir...",
     "cta": "Iniciar Proyecto",
     "or": "O escríbenos a"
   },

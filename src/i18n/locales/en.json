@@ -147,6 +147,7 @@
     "title": "Do you have an ambitious idea?",
     "subtitle": "We are the technical team you need to make it a reality. No intermediaries, no bureaucracy, just excellent code.",
     "emailPlaceholder": "your@email.com",
+    "projectPlaceholder": "Tell us briefly what you want to build...",
     "cta": "Start Project",
     "or": "Or write to us at"
   },

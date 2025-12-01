@@ -14,13 +14,18 @@ export default function ContactSection() {
           <p className="text-indigo-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
             {t("contact.subtitle")}
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col gap-4 max-w-lg mx-auto">
             <input
               type="email"
               placeholder={t("contact.emailPlaceholder")}
-              className="px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-indigo-200 focus:outline-none focus:bg-white/20 w-full sm:w-auto min-w-[300px]"
+              className="px-6 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-indigo-200 focus:outline-none focus:bg-white/20 w-full backdrop-blur-sm transition-all focus:border-white/40"
             />
-            <button className="px-8 py-4 bg-white text-indigo-600 font-bold rounded-full hover:bg-cyan-50 transition-colors shadow-lg">
+            <textarea
+              placeholder={t("contact.projectPlaceholder")}
+              rows={3}
+              className="px-6 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-indigo-200 focus:outline-none focus:bg-white/20 w-full backdrop-blur-sm transition-all focus:border-white/40 resize-none"
+            />
+            <button className="px-8 py-4 bg-white text-indigo-600 font-bold rounded-2xl hover:bg-cyan-50 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]">
               {t("contact.cta")}
             </button>
           </div>
