@@ -22,6 +22,7 @@ import {
   Clock,
   MessageSquare,
   Package,
+  ShoppingBag,
 } from "lucide-react";
 import ScrollToTop from "../common/ScrollToTop";
 
@@ -42,6 +43,8 @@ export default function DashboardLayout() {
     currentDemo = "crm";
   } else if (location.pathname.includes("/inventory")) {
     currentDemo = "inventory";
+  } else if (location.pathname.includes("/ecommerce")) {
+    currentDemo = "ecommerce";
   }
 
   // Available demo modules
@@ -73,6 +76,13 @@ export default function DashboardLayout() {
       icon: Package,
       path: "/demos/inventory",
       color: "orange",
+    },
+    {
+      id: "ecommerce",
+      name: "E-commerce System",
+      icon: ShoppingBag,
+      path: "/demos/ecommerce",
+      color: "pink",
     },
   ];
 
@@ -123,6 +133,14 @@ export default function DashboardLayout() {
         path: "/demos/inventory/warehouses",
       },
       { icon: Settings, label: "Settings", path: "/demos/inventory/settings" },
+    ],
+    ecommerce: [
+      { icon: LayoutDashboard, label: "Dashboard", path: "/demos/ecommerce" },
+      { icon: Package, label: "Products", path: "/demos/ecommerce/products" },
+      { icon: ShoppingBag, label: "Orders", path: "/demos/ecommerce/orders" },
+      { icon: Users, label: "Customers", path: "/demos/ecommerce/customers" },
+      { icon: BarChart2, label: "Analytics", path: "/demos/ecommerce/analytics" },
+      { icon: Settings, label: "Settings", path: "/demos/ecommerce/settings" },
     ],
   };
 

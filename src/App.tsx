@@ -36,6 +36,13 @@ import InventorySuppliers from "./pages/Demos/Inventory/InventorySuppliers";
 import InventoryWarehouses from "./pages/Demos/Inventory/InventoryWarehouses";
 import InventorySettings from "./pages/Demos/Inventory/InventorySettings";
 
+import EcommerceDashboard from "./pages/Demos/Ecommerce/EcommerceDashboard";
+import EcommerceProducts from "./pages/Demos/Ecommerce/EcommerceProducts";
+import EcommerceOrders from "./pages/Demos/Ecommerce/EcommerceOrders";
+import EcommerceCustomers from "./pages/Demos/Ecommerce/EcommerceCustomers";
+import EcommerceAnalytics from "./pages/Demos/Ecommerce/EcommerceAnalytics";
+import EcommerceSettings from "./pages/Demos/Ecommerce/EcommerceSettings";
+
 // IMPORTANTE: Este componente usa clases de Tailwind CSS.
 // Para que los estilos funcionen, debes tener Tailwind CSS instalado y configurado
 // en tu proyecto React (por ejemplo, en tu archivo index.css o global.css).
@@ -93,6 +100,14 @@ export default function App() {
             element={<InventoryWarehouses />}
           />
           <Route path="inventory/settings" element={<InventorySettings />} />
+
+          {/* Ecommerce System */}
+          <Route path="ecommerce" element={<EcommerceDashboard />} />
+          <Route path="ecommerce/products" element={<EcommerceProducts />} />
+          <Route path="ecommerce/orders" element={<EcommerceOrders />} />
+          <Route path="ecommerce/customers" element={<EcommerceCustomers />} />
+          <Route path="ecommerce/analytics" element={<EcommerceAnalytics />} />
+          <Route path="ecommerce/settings" element={<EcommerceSettings />} />
         </Route>
       </Routes>
     </BrowserRouter>

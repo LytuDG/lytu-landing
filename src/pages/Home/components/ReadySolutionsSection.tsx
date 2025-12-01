@@ -77,6 +77,7 @@ export default function ReadySolutionsSection() {
             title={t("readySolutions.ecommerce.title")}
             description={t("readySolutions.ecommerce.description")}
             viewDemo={t("readySolutions.viewDemo")}
+            link="/demos/ecommerce"
           />
           <SolutionCard
             icon={<PenTool className="text-emerald-400" size={32} />}
