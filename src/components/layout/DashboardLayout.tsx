@@ -23,6 +23,8 @@ import {
   MessageSquare,
   Package,
   ShoppingBag,
+  FileText as BlogIcon,
+  PenTool,
 } from "lucide-react";
 import ScrollToTop from "../common/ScrollToTop";
 
@@ -45,6 +47,8 @@ export default function DashboardLayout() {
     currentDemo = "inventory";
   } else if (location.pathname.includes("/ecommerce")) {
     currentDemo = "ecommerce";
+  } else if (location.pathname.includes("/blog")) {
+    currentDemo = "blog";
   }
 
   // Available demo modules
@@ -83,6 +87,13 @@ export default function DashboardLayout() {
       icon: ShoppingBag,
       path: "/demos/ecommerce",
       color: "pink",
+    },
+    {
+      id: "blog",
+      name: "Blog & Content",
+      icon: BlogIcon,
+      path: "/demos/blog",
+      color: "teal",
     },
   ];
 
@@ -141,6 +152,13 @@ export default function DashboardLayout() {
       { icon: Users, label: "Customers", path: "/demos/ecommerce/customers" },
       { icon: BarChart2, label: "Analytics", path: "/demos/ecommerce/analytics" },
       { icon: Settings, label: "Settings", path: "/demos/ecommerce/settings" },
+    ],
+    blog: [
+      { icon: LayoutDashboard, label: "Overview", path: "/demos/blog" },
+      { icon: BlogIcon, label: "Posts", path: "/demos/blog/posts" },
+      { icon: PenTool, label: "Editor", path: "/demos/blog/editor" },
+      { icon: MessageSquare, label: "Comments", path: "/demos/blog/comments" },
+      { icon: Settings, label: "Settings", path: "/demos/blog/settings" },
     ],
   };
 

@@ -43,6 +43,14 @@ import EcommerceCustomers from "./pages/Demos/Ecommerce/EcommerceCustomers";
 import EcommerceAnalytics from "./pages/Demos/Ecommerce/EcommerceAnalytics";
 import EcommerceSettings from "./pages/Demos/Ecommerce/EcommerceSettings";
 
+import BlogDashboard from "./pages/Demos/Blog/BlogDashboard";
+import BlogPosts from "./pages/Demos/Blog/BlogPosts";
+import BlogEditor from "./pages/Demos/Blog/BlogEditor";
+import BlogComments from "./pages/Demos/Blog/BlogComments";
+import BlogSettings from "./pages/Demos/Blog/BlogSettings";
+
+import { BlogProvider } from "./contexts/BlogContext";
+
 // IMPORTANTE: Este componente usa clases de Tailwind CSS.
 // Para que los estilos funcionen, debes tener Tailwind CSS instalado y configurado
 // en tu proyecto React (por ejemplo, en tu archivo index.css o global.css).
@@ -108,6 +116,22 @@ export default function App() {
           <Route path="ecommerce/customers" element={<EcommerceCustomers />} />
           <Route path="ecommerce/analytics" element={<EcommerceAnalytics />} />
           <Route path="ecommerce/settings" element={<EcommerceSettings />} />
+
+          {/* Blog System */}
+          <Route
+            path="blog/*"
+            element={
+              <BlogProvider>
+                <Routes>
+                  <Route index element={<BlogDashboard />} />
+                  <Route path="posts" element={<BlogPosts />} />
+                  <Route path="editor" element={<BlogEditor />} />
+                  <Route path="comments" element={<BlogComments />} />
+                  <Route path="settings" element={<BlogSettings />} />
+                </Routes>
+              </BlogProvider>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

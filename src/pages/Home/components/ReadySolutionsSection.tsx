@@ -84,6 +84,7 @@ export default function ReadySolutionsSection() {
             title={t("readySolutions.blog.title")}
             description={t("readySolutions.blog.description")}
             viewDemo={t("readySolutions.viewDemo")}
+            link="demos/blog"
           />
         </div>
 
