@@ -70,6 +70,7 @@ export default function ReadySolutionsSection() {
             title={t("readySolutions.inventory.title")}
             description={t("readySolutions.inventory.description")}
             viewDemo={t("readySolutions.viewDemo")}
+            link="/demos/inventory"
           />
           <SolutionCard
             icon={<ShoppingBag className="text-blue-400" size={32} />}

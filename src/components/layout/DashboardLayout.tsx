@@ -40,6 +40,8 @@ export default function DashboardLayout() {
     currentDemo = "quote";
   } else if (location.pathname.includes("/crm")) {
     currentDemo = "crm";
+  } else if (location.pathname.includes("/inventory")) {
+    currentDemo = "inventory";
   }
 
   // Available demo modules
@@ -64,6 +66,13 @@ export default function DashboardLayout() {
       icon: Briefcase,
       path: "/demos/crm",
       color: "emerald",
+    },
+    {
+      id: "inventory",
+      name: "Inventory System",
+      icon: Package,
+      path: "/demos/inventory",
+      color: "orange",
     },
   ];
 
@@ -97,6 +106,23 @@ export default function DashboardLayout() {
       { icon: BarChart2, label: "Reports", path: "/demos/crm/reports" },
       { icon: Clock, label: "Activity", path: "/demos/crm/activity" },
       { icon: Settings, label: "Settings", path: "/demos/crm/settings" },
+    ],
+    inventory: [
+      { icon: LayoutDashboard, label: "Dashboard", path: "/demos/inventory" },
+      { icon: Package, label: "Products", path: "/demos/inventory/products" },
+      {
+        icon: Briefcase,
+        label: "Movements",
+        path: "/demos/inventory/movements",
+      },
+      { icon: Package, label: "Orders", path: "/demos/inventory/orders" },
+      { icon: Users, label: "Suppliers", path: "/demos/inventory/suppliers" },
+      {
+        icon: Package,
+        label: "Warehouses",
+        path: "/demos/inventory/warehouses",
+      },
+      { icon: Settings, label: "Settings", path: "/demos/inventory/settings" },
     ],
   };
 

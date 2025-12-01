@@ -28,6 +28,14 @@ import BookingReviews from "./pages/Demos/Booking/BookingReviews";
 import QuoteCatalog from "./pages/Demos/Quote/QuoteCatalog";
 import QuoteInvoices from "./pages/Demos/Quote/QuoteInvoices";
 
+import InventoryDashboard from "./pages/Demos/Inventory/InventoryDashboard";
+import InventoryProducts from "./pages/Demos/Inventory/InventoryProducts";
+import InventoryMovements from "./pages/Demos/Inventory/InventoryMovements";
+import InventoryOrders from "./pages/Demos/Inventory/InventoryOrders";
+import InventorySuppliers from "./pages/Demos/Inventory/InventorySuppliers";
+import InventoryWarehouses from "./pages/Demos/Inventory/InventoryWarehouses";
+import InventorySettings from "./pages/Demos/Inventory/InventorySettings";
+
 // IMPORTANTE: Este componente usa clases de Tailwind CSS.
 // Para que los estilos funcionen, debes tener Tailwind CSS instalado y configurado
 // en tu proyecto React (por ejemplo, en tu archivo index.css o global.css).
@@ -73,6 +81,18 @@ export default function App() {
           <Route path="crm/reports" element={<CRMReports />} />
           <Route path="crm/activity" element={<CRMActivityLog />} />
           <Route path="crm/settings" element={<CRMSettings />} />
+
+          {/* Inventory System */}
+          <Route path="inventory" element={<InventoryDashboard />} />
+          <Route path="inventory/products" element={<InventoryProducts />} />
+          <Route path="inventory/movements" element={<InventoryMovements />} />
+          <Route path="inventory/orders" element={<InventoryOrders />} />
+          <Route path="inventory/suppliers" element={<InventorySuppliers />} />
+          <Route
+            path="inventory/warehouses"
+            element={<InventoryWarehouses />}
+          />
+          <Route path="inventory/settings" element={<InventorySettings />} />
         </Route>
       </Routes>
     </BrowserRouter>
