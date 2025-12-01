@@ -56,6 +56,7 @@ export default function ReadySolutionsSection() {
             title={t("readySolutions.quotes.title")}
             description={t("readySolutions.quotes.description")}
             viewDemo={t("readySolutions.viewDemo")}
+            link="/demos/quote"
           />
           <SolutionCard
             icon={<Users className="text-pink-400" size={32} />}

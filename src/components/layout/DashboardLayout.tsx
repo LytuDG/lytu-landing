@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Calendar,
@@ -10,22 +10,70 @@ import {
   User,
   LogOut,
   BarChart2,
+  FileText,
+  Users,
+  Grid3x3,
+  ChevronDown,
+  Search,
+  HelpCircle,
+  CheckCircle,
 } from "lucide-react";
 import ScrollToTop from "../common/ScrollToTop";
 
 export default function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isModuleSwitcherOpen, setIsModuleSwitcherOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // Mock navigation items for the Booking Demo
-  const navItems = [
-    { icon: LayoutDashboard, label: "Overview", path: "/demos/booking" },
-    { icon: Calendar, label: "Bookings", path: "/demos/booking/calendar" },
-    { icon: User, label: "Customers", path: "/demos/booking/customers" },
-    { icon: BarChart2, label: "Statistics", path: "/demos/booking/stats" },
-    { icon: Settings, label: "Settings", path: "/demos/booking/settings" },
+  // Determine current demo system
+  const currentDemo = location.pathname.includes("/quote")
+    ? "quote"
+    : "booking";
+
+  // Available demo modules
+  const modules = [
+    {
+      id: "booking",
+      name: "Booking System",
+      icon: Calendar,
+      path: "/demos/booking",
+      color: "indigo",
+    },
+    {
+      id: "quote",
+      name: "Quote System",
+      icon: FileText,
+      path: "/demos/quote",
+      color: "cyan",
+    },
   ];
+
+  const currentModule = modules.find((m) => m.id === currentDemo) || modules[0];
+
+  // Navigation items based on current demo
+  const navigationConfig = {
+    booking: [
+      { icon: LayoutDashboard, label: "Overview", path: "/demos/booking" },
+      { icon: Calendar, label: "Bookings", path: "/demos/booking/calendar" },
+      { icon: User, label: "Customers", path: "/demos/booking/customers" },
+      { icon: BarChart2, label: "Statistics", path: "/demos/booking/stats" },
+      { icon: Settings, label: "Settings", path: "/demos/booking/settings" },
+    ],
+    quote: [
+      { icon: LayoutDashboard, label: "Overview", path: "/demos/quote" },
+      { icon: FileText, label: "Quotes", path: "/demos/quote/list" },
+      { icon: Users, label: "Clients", path: "/demos/quote/clients" },
+      { icon: BarChart2, label: "Analytics", path: "/demos/quote/analytics" },
+      { icon: Settings, label: "Settings", path: "/demos/quote/settings" },
+    ],
+  };
+
+  const navItems =
+    navigationConfig[currentDemo as keyof typeof navigationConfig];
 
   return (
     <div className="min-h-screen bg-slate-950 text-white font-sans selection:bg-indigo-500 selection:text-white flex">
@@ -56,7 +104,7 @@ export default function DashboardLayout() {
 
           <nav className="flex-1 py-6 px-3 space-y-1">
             <div className="px-3 mb-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-              Booking System
+              {currentModule.name}
             </div>
             {navItems.map((item) => {
               const isActive =
@@ -127,7 +175,138 @@ export default function DashboardLayout() {
             <Menu size={24} />
           </button>
 
-          <div className="flex items-center gap-4 ml-auto">
+          <div className="flex items-center gap-3 ml-auto">
+            {/* Search */}
+            <div className="relative">
+              <button
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className="p-2 text-slate-400 hover:text-white transition-colors"
+              >
+                <Search size={20} />
+              </button>
+
+              {isSearchOpen && (
+                <div className="absolute right-0 mt-2 w-96 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 animate-fade-in-up">
+                  <div className="p-4">
+                    <div className="relative">
+                      <Search
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500"
+                        size={18}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Search quotes, clients, analytics..."
+                        className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                        autoFocus
+                      />
+                    </div>
+                    <div className="mt-3 text-xs text-slate-500">
+                      <kbd className="px-2 py-1 bg-slate-800 rounded">Ctrl</kbd>{" "}
+                      + <kbd className="px-2 py-1 bg-slate-800 rounded">K</kbd>{" "}
+                      for quick search
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Help */}
+            <button
+              className="p-2 text-slate-400 hover:text-white transition-colors"
+              title="Help & Documentation"
+            >
+              <HelpCircle size={20} />
+            </button>
+
+            {/* Module Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setIsModuleSwitcherOpen(!isModuleSwitcherOpen)}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-all group"
+              >
+                <div
+                  className={`p-1.5 rounded-md ${
+                    currentDemo === "quote"
+                      ? "bg-cyan-500/20 text-cyan-400"
+                      : "bg-indigo-500/20 text-indigo-400"
+                  }`}
+                >
+                  <currentModule.icon size={16} />
+                </div>
+                <div className="hidden lg:block text-left">
+                  <div className="text-xs text-slate-500">Module</div>
+                  <div className="text-sm text-white font-semibold">
+                    {currentModule.name.replace(" System", "")}
+                  </div>
+                </div>
+                <ChevronDown
+                  size={16}
+                  className="text-slate-400 group-hover:text-white transition-colors"
+                />
+              </button>
+
+              {isModuleSwitcherOpen && (
+                <div className="absolute right-0 mt-2 w-72 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 animate-fade-in-up">
+                  <div className="p-3 border-b border-slate-800">
+                    <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                      Switch Module
+                    </h3>
+                  </div>
+                  <div className="p-2">
+                    {modules.map((module) => {
+                      const Icon = module.icon;
+                      const isActive = module.id === currentDemo;
+                      return (
+                        <button
+                          key={module.id}
+                          onClick={() => {
+                            navigate(module.path);
+                            setIsModuleSwitcherOpen(false);
+                          }}
+                          className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all relative ${
+                            isActive
+                              ? "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+                              : "text-slate-400 hover:text-white hover:bg-slate-800"
+                          }`}
+                        >
+                          {isActive && (
+                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-indigo-500 rounded-r"></div>
+                          )}
+                          <div
+                            className={`p-2 rounded-lg ${
+                              isActive ? "bg-indigo-500/20" : "bg-slate-800"
+                            }`}
+                          >
+                            <Icon
+                              size={18}
+                              className={
+                                isActive ? "text-indigo-400" : "text-slate-400"
+                              }
+                            />
+                          </div>
+                          <div className="text-left flex-1">
+                            <div className="font-medium text-sm flex items-center justify-between">
+                              {module.name}
+                              {isActive && (
+                                <CheckCircle
+                                  size={16}
+                                  className="text-indigo-400"
+                                />
+                              )}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              View demo
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Notifications */}
             <div className="relative">
               <button
                 onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
@@ -168,6 +347,54 @@ export default function DashboardLayout() {
                     <button className="text-xs text-slate-400 hover:text-white font-medium">
                       View all notifications
                     </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* User Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center gap-2 p-1 hover:bg-slate-800 rounded-lg transition-all"
+              >
+                <div className="w-9 h-9 rounded-full bg-linear-to-r from-indigo-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  AD
+                </div>
+              </button>
+
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 animate-fade-in-up">
+                  <div className="p-4 border-b border-slate-800">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-linear-to-r from-indigo-500 to-cyan-500 flex items-center justify-center text-white font-bold shadow-lg">
+                        AD
+                      </div>
+                      <div>
+                        <div className="text-white font-semibold">
+                          Admin Demo
+                        </div>
+                        <div className="text-slate-400 text-sm">
+                          admin@lytu.com
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-2">
+                    <Link
+                      to="/demos/quote/settings"
+                      className="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
+                    >
+                      <Settings size={18} />
+                      <span>Settings</span>
+                    </Link>
+                    <Link
+                      to="/"
+                      className="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                    >
+                      <LogOut size={18} />
+                      <span>Exit Demo</span>
+                    </Link>
                   </div>
                 </div>
               )}
