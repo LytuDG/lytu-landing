@@ -17,6 +17,9 @@ import {
   Search,
   HelpCircle,
   CheckCircle,
+  Briefcase,
+  CheckSquare,
+  Clock,
 } from "lucide-react";
 import ScrollToTop from "../common/ScrollToTop";
 
@@ -30,9 +33,12 @@ export default function DashboardLayout() {
   const navigate = useNavigate();
 
   // Determine current demo system
-  const currentDemo = location.pathname.includes("/quote")
-    ? "quote"
-    : "booking";
+  let currentDemo = "booking";
+  if (location.pathname.includes("/quote")) {
+    currentDemo = "quote";
+  } else if (location.pathname.includes("/crm")) {
+    currentDemo = "crm";
+  }
 
   // Available demo modules
   const modules = [
@@ -49,6 +55,13 @@ export default function DashboardLayout() {
       icon: FileText,
       path: "/demos/quote",
       color: "cyan",
+    },
+    {
+      id: "crm",
+      name: "CRM System",
+      icon: Briefcase,
+      path: "/demos/crm",
+      color: "emerald",
     },
   ];
 
@@ -69,6 +82,15 @@ export default function DashboardLayout() {
       { icon: Users, label: "Clients", path: "/demos/quote/clients" },
       { icon: BarChart2, label: "Analytics", path: "/demos/quote/analytics" },
       { icon: Settings, label: "Settings", path: "/demos/quote/settings" },
+    ],
+    crm: [
+      { icon: LayoutDashboard, label: "Dashboard", path: "/demos/crm" },
+      { icon: Users, label: "Contacts", path: "/demos/crm/contacts" },
+      { icon: Briefcase, label: "Deals", path: "/demos/crm/deals" },
+      { icon: CheckSquare, label: "Tasks", path: "/demos/crm/tasks" },
+      { icon: BarChart2, label: "Reports", path: "/demos/crm/reports" },
+      { icon: Clock, label: "Activity", path: "/demos/crm/activity" },
+      { icon: Settings, label: "Settings", path: "/demos/crm/settings" },
     ],
   };
 
@@ -110,6 +132,8 @@ export default function DashboardLayout() {
               const isActive =
                 location.pathname === item.path ||
                 (item.path !== "/demos/booking" &&
+                  item.path !== "/demos/quote" &&
+                  item.path !== "/demos/crm" &&
                   location.pathname.startsWith(item.path));
               return (
                 <Link
@@ -228,6 +252,8 @@ export default function DashboardLayout() {
                   className={`p-1.5 rounded-md ${
                     currentDemo === "quote"
                       ? "bg-cyan-500/20 text-cyan-400"
+                      : currentDemo === "crm"
+                      ? "bg-emerald-500/20 text-emerald-400"
                       : "bg-indigo-500/20 text-indigo-400"
                   }`}
                 >

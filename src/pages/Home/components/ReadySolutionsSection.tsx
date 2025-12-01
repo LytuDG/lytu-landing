@@ -63,6 +63,7 @@ export default function ReadySolutionsSection() {
             title={t("readySolutions.crm.title")}
             description={t("readySolutions.crm.description")}
             viewDemo={t("readySolutions.viewDemo")}
+            link="/demos/crm"
           />
           <SolutionCard
             icon={<Package className="text-orange-400" size={32} />}

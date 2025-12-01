@@ -15,6 +15,13 @@ import QuoteView from "./pages/Demos/Quote/QuoteView";
 import QuoteClients from "./pages/Demos/Quote/QuoteClients";
 import QuoteAnalytics from "./pages/Demos/Quote/QuoteAnalytics";
 import QuoteSettings from "./pages/Demos/Quote/QuoteSettings";
+import CRMDashboard from "./pages/Demos/CRM/CRMDashboard";
+import CRMContacts from "./pages/Demos/CRM/CRMContacts";
+import CRMDeals from "./pages/Demos/CRM/CRMDeals";
+import CRMTasks from "./pages/Demos/CRM/CRMTasks";
+import CRMSettings from "./pages/Demos/CRM/CRMSettings";
+import CRMReports from "./pages/Demos/CRM/CRMReports";
+import CRMActivityLog from "./pages/Demos/CRM/CRMActivityLog";
 
 // IMPORTANTE: Este componente usa clases de Tailwind CSS.
 // Para que los estilos funcionen, debes tener Tailwind CSS instalado y configurado
@@ -48,6 +55,15 @@ export default function App() {
           <Route path="quote/clients" element={<QuoteClients />} />
           <Route path="quote/analytics" element={<QuoteAnalytics />} />
           <Route path="quote/settings" element={<QuoteSettings />} />
+
+          {/* CRM System */}
+          <Route path="crm" element={<CRMDashboard />} />
+          <Route path="crm/contacts" element={<CRMContacts />} />
+          <Route path="crm/deals" element={<CRMDeals />} />
+          <Route path="crm/tasks" element={<CRMTasks />} />
+          <Route path="crm/reports" element={<CRMReports />} />
+          <Route path="crm/activity" element={<CRMActivityLog />} />
+          <Route path="crm/settings" element={<CRMSettings />} />
         </Route>
       </Routes>
     </BrowserRouter>
