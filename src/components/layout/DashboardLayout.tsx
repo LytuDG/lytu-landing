@@ -20,6 +20,8 @@ import {
   Briefcase,
   CheckSquare,
   Clock,
+  MessageSquare,
+  Package,
 } from "lucide-react";
 import ScrollToTop from "../common/ScrollToTop";
 
@@ -72,13 +74,17 @@ export default function DashboardLayout() {
     booking: [
       { icon: LayoutDashboard, label: "Overview", path: "/demos/booking" },
       { icon: Calendar, label: "Bookings", path: "/demos/booking/calendar" },
+      { icon: Briefcase, label: "Services", path: "/demos/booking/services" },
       { icon: User, label: "Customers", path: "/demos/booking/customers" },
+      { icon: MessageSquare, label: "Reviews", path: "/demos/booking/reviews" },
       { icon: BarChart2, label: "Statistics", path: "/demos/booking/stats" },
       { icon: Settings, label: "Settings", path: "/demos/booking/settings" },
     ],
     quote: [
       { icon: LayoutDashboard, label: "Overview", path: "/demos/quote" },
       { icon: FileText, label: "Quotes", path: "/demos/quote/list" },
+      { icon: Package, label: "Catalog", path: "/demos/quote/catalog" },
+      { icon: FileText, label: "Invoices", path: "/demos/quote/invoices" },
       { icon: Users, label: "Clients", path: "/demos/quote/clients" },
       { icon: BarChart2, label: "Analytics", path: "/demos/quote/analytics" },
       { icon: Settings, label: "Settings", path: "/demos/quote/settings" },

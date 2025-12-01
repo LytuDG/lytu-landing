@@ -23,6 +23,11 @@ import CRMSettings from "./pages/Demos/CRM/CRMSettings";
 import CRMReports from "./pages/Demos/CRM/CRMReports";
 import CRMActivityLog from "./pages/Demos/CRM/CRMActivityLog";
 
+import BookingServices from "./pages/Demos/Booking/BookingServices";
+import BookingReviews from "./pages/Demos/Booking/BookingReviews";
+import QuoteCatalog from "./pages/Demos/Quote/QuoteCatalog";
+import QuoteInvoices from "./pages/Demos/Quote/QuoteInvoices";
+
 // IMPORTANTE: Este componente usa clases de Tailwind CSS.
 // Para que los estilos funcionen, debes tener Tailwind CSS instalado y configurado
 // en tu proyecto React (por ejemplo, en tu archivo index.css o global.css).
@@ -42,7 +47,9 @@ export default function App() {
           {/* Booking System */}
           <Route path="booking" element={<BookingDashboard />} />
           <Route path="booking/calendar" element={<BookingCalendar />} />
+          <Route path="booking/services" element={<BookingServices />} />
           <Route path="booking/customers" element={<BookingCustomers />} />
+          <Route path="booking/reviews" element={<BookingReviews />} />
           <Route path="booking/stats" element={<BookingStats />} />
           <Route path="booking/settings" element={<BookingSettings />} />
 
@@ -52,6 +59,8 @@ export default function App() {
           <Route path="quote/create" element={<QuoteCreate />} />
           <Route path="quote/view/:id" element={<QuoteView />} />
           <Route path="quote/edit/:id" element={<QuoteCreate />} />
+          <Route path="quote/catalog" element={<QuoteCatalog />} />
+          <Route path="quote/invoices" element={<QuoteInvoices />} />
           <Route path="quote/clients" element={<QuoteClients />} />
           <Route path="quote/analytics" element={<QuoteAnalytics />} />
           <Route path="quote/settings" element={<QuoteSettings />} />
