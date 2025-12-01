@@ -82,34 +82,38 @@ export default function ReadySolutionsSection() {
             description={t("readySolutions.blog.description")}
             viewDemo={t("readySolutions.viewDemo")}
           />
+        </div>
 
-          {/* Custom Solution CTA - Destacado */}
-          <div
-            onClick={() => scrollToSection("contacto")}
-            className="md:col-span-2 lg:col-span-1 group relative p-[2px] rounded-2xl bg-linear-to-br from-cyan-400 via-indigo-500 to-purple-600 hover:from-cyan-300 hover:via-indigo-400 hover:to-purple-500 transition-all duration-500 cursor-pointer"
-          >
-            {/* Pulsing glow effect */}
-            <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-indigo-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 animate-pulse transition-opacity"></div>
+        {/* Custom Solution CTA - Destacado y Centrado */}
+        <div
+          onClick={() => scrollToSection("contacto")}
+          className="mt-16 max-w-5xl mx-auto group relative p-[2px] rounded-3xl bg-linear-to-br from-cyan-400 via-indigo-500 to-purple-600 hover:from-cyan-300 hover:via-indigo-400 hover:to-purple-500 transition-all duration-500 cursor-pointer"
+        >
+          {/* Pulsing glow effect */}
+          <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-indigo-600 rounded-3xl blur-xl opacity-40 group-hover:opacity-60 animate-pulse transition-opacity"></div>
 
-            <div className="relative bg-slate-950 rounded-2xl p-10 h-full flex flex-col">
-              <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-transparent to-indigo-500/10 rounded-2xl"></div>
+          <div className="relative bg-slate-950 rounded-3xl p-8 md:p-12 overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 via-transparent to-indigo-500/5"></div>
 
-              <div className="relative z-10">
-                <div className="w-20 h-20 rounded-2xl bg-linear-to-br from-cyan-400 via-indigo-500 to-purple-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-2xl shadow-cyan-500/50">
-                  <MessageCircle className="text-white" size={40} />
-                </div>
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+              <div className="shrink-0 w-24 h-24 rounded-2xl bg-linear-to-br from-cyan-400 via-indigo-500 to-purple-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-2xl shadow-cyan-500/50">
+                <MessageCircle className="text-white" size={48} />
+              </div>
 
-                <h3 className="text-2xl font-bold bg-linear-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-4">
+              <div className="grow">
+                <h3 className="text-2xl md:text-3xl font-bold bg-linear-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-4">
                   {t("readySolutions.customCTA.title")}
                 </h3>
-                <p className="text-slate-300 text-base leading-relaxed mb-8 flex-grow">
+                <p className="text-slate-300 text-lg leading-relaxed max-w-2xl mx-auto md:mx-0">
                   {t("readySolutions.customCTA.description")}
                 </p>
+              </div>
 
-                <div className="inline-flex items-center px-6 py-3 rounded-full bg-linear-to-r from-cyan-500 to-indigo-600 text-white text-sm font-bold group-hover:from-cyan-400 group-hover:to-indigo-500 transition-all shadow-lg shadow-cyan-500/30 group-hover:shadow-cyan-500/50 group-hover:scale-105">
+              <div className="shrink-0">
+                <div className="inline-flex items-center px-8 py-4 rounded-full bg-linear-to-r from-cyan-500 to-indigo-600 text-white font-bold text-lg group-hover:from-cyan-400 group-hover:to-indigo-500 transition-all shadow-lg shadow-cyan-500/30 group-hover:shadow-cyan-500/50 group-hover:scale-105">
                   {t("readySolutions.customCTA.button")}{" "}
                   <ArrowRight
-                    size={18}
+                    size={20}
                     className="ml-2 group-hover:translate-x-1 transition-transform"
                   />
                 </div>
