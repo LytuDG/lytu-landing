@@ -608,12 +608,22 @@ export default function QuoteRequest() {
             <div className="pt-8 border-t border-white/10 flex justify-end">
               <button
                 type="submit"
-                className="group relative px-10 py-5 bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right text-white font-bold rounded-2xl shadow-lg hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3"
+                disabled={isSubmitting}
+                className="group relative px-10 py-5 bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right text-white font-bold rounded-2xl shadow-lg hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <span className="relative z-10">
-                  {t("quoteRequest.submit")}
-                </span>
-                <Send className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span className="relative z-10">{t("common.loading")}</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="relative z-10">
+                      {t("quoteRequest.submit")}
+                    </span>
+                    <Send className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </button>
             </div>
           </form>
