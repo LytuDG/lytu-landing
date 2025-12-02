@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import Home from "./pages/Home/Home";
+import QuoteRequest from "./pages/QuoteRequest/QuoteRequest";
 import NotFound from "./pages/NotFound/NotFound";
 import BookingDashboard from "./pages/Demos/Booking/BookingDashboard";
 import BookingCalendar from "./pages/Demos/Booking/BookingCalendar";
@@ -62,6 +63,7 @@ export default function App() {
         {/* Main Landing Page Routes */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/quote-request" element={<QuoteRequest />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

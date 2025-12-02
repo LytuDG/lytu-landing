@@ -149,7 +149,57 @@
     "emailPlaceholder": "tu@email.com",
     "projectPlaceholder": "Cuéntanos brevemente qué quieres construir...",
     "cta": "Iniciar Proyecto",
-    "or": "O escríbenos a"
+    "or": "O escríbenos a",
+    "back": "Volver a opciones",
+    "simpleOption": {
+      "title": "Contacto Rápido",
+      "description": "Para consultas generales, dudas o saludos. Te responderemos a la brevedad."
+    },
+    "quoteOption": {
+      "title": "Sé lo que quiero",
+      "description": "Solicita una cotización detallada para tu proyecto. Cuéntanos tus requerimientos específicos.",
+      "cta": "Comenzar Cotización"
+    }
+  },
+  "quoteRequest": {
+    "title": "Solicitud de Cotización",
+    "subtitle": "Ayúdanos a entender mejor tu proyecto para darte una propuesta precisa.",
+    "backToHome": "Volver al inicio",
+    "sections": {
+      "company": "Información de la Empresa",
+      "project": "Detalles del Proyecto",
+      "details": "Detalles Adicionales"
+    },
+    "fields": {
+      "email": "Correo Electrónico",
+      "companyName": "Nombre de la Empresa",
+      "logo": "Logo de la Empresa",
+      "dropLogo": "Arrastra tu logo aquí o haz clic para subir",
+      "needLogo": "Necesito un diseño de logo",
+      "needLogoDesc": "Incluiremos el diseño de marca en la cotización",
+      "description": "Descripción del Proyecto",
+      "descriptionPlaceholder": "Describe el objetivo principal, funcionalidades clave y el problema que buscas resolver...",
+      "integrations": "Módulos Principales",
+      "otherIntegrations": "Integraciones Extra",
+      "otherIntegrationsPlaceholder": "¿Otra integración específica? (ej. Zapier, Slack...)",
+      "support": "Nivel de Soporte",
+      "budget": "Presupuesto Estimado",
+      "extraInfo": "Información Adicional",
+      "extraInfoPlaceholder": "Cualquier otro detalle relevante, plazos esperados, competidores, etc..."
+    },
+    "extras": {
+      "whatsapp": "WhatsApp",
+      "maps": "Google Maps",
+      "social_login": "Login Social",
+      "analytics": "Analítica Avanzada",
+      "multilang": "Multi-idioma"
+    },
+    "options": {
+      "supportStandard": "Estándar (Horario Oficina)",
+      "supportExtended": "Extendido (Incluye Fines de Semana)",
+      "supportPriority": "Prioritario (Respuesta Rápida)"
+    },
+    "submit": "Enviar Solicitud"
   },
   "footer": {
     "description": "Soluciones digitales para negocios modernos",
@@ -176,6 +226,8 @@
     "save": "Guardar",
     "delete": "Eliminar",
     "edit": "Editar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "select": "Seleccionar...",
+    "or": "o"
   }
 }

@@ -149,7 +149,57 @@
     "emailPlaceholder": "your@email.com",
     "projectPlaceholder": "Tell us briefly what you want to build...",
     "cta": "Start Project",
-    "or": "Or write to us at"
+    "or": "Or write to us at",
+    "back": "Back to options",
+    "simpleOption": {
+      "title": "Quick Contact",
+      "description": "For general inquiries, questions, or greetings. We will respond shortly."
+    },
+    "quoteOption": {
+      "title": "I know what I want",
+      "description": "Request a detailed quote for your project. Tell us your specific requirements.",
+      "cta": "Start Quote"
+    }
+  },
+  "quoteRequest": {
+    "title": "Quote Request",
+    "subtitle": "Help us understand your project better to give you an accurate proposal.",
+    "backToHome": "Back to home",
+    "sections": {
+      "company": "Company Information",
+      "project": "Project Details",
+      "details": "Additional Details"
+    },
+    "fields": {
+      "email": "Email Address",
+      "companyName": "Company Name",
+      "logo": "Company Logo",
+      "dropLogo": "Drag your logo here or click to upload",
+      "needLogo": "I need a logo design",
+      "needLogoDesc": "We will include brand design in the quote",
+      "description": "Project Description",
+      "descriptionPlaceholder": "Describe the main objective, key features, and the problem you are looking to solve...",
+      "integrations": "Core Modules",
+      "otherIntegrations": "Extra Integrations",
+      "otherIntegrationsPlaceholder": "Any other specific integration? (e.g. Zapier, Slack...)",
+      "support": "Support Level",
+      "budget": "Estimated Budget",
+      "extraInfo": "Additional Information",
+      "extraInfoPlaceholder": "Any other relevant details, expected deadlines, competitors, etc..."
+    },
+    "extras": {
+      "whatsapp": "WhatsApp",
+      "maps": "Google Maps",
+      "social_login": "Social Login",
+      "analytics": "Advanced Analytics",
+      "multilang": "Multi-language"
+    },
+    "options": {
+      "supportStandard": "Standard (Business Hours)",
+      "supportExtended": "Extended (Includes Weekends)",
+      "supportPriority": "Priority (Fast Response)"
+    },
+    "submit": "Submit Request"
   },
   "footer": {
     "description": "Digital solutions for modern businesses",
@@ -176,6 +226,8 @@
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
-    "close": "Close"
+    "close": "Close",
+    "select": "Select...",
+    "or": "or"
   }
 }
