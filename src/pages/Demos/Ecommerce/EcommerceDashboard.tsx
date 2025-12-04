@@ -10,6 +10,7 @@ import {
   Activity,
   Download,
   CheckCircle2,
+  ShoppingCart,
 } from "lucide-react";
 import {
   AreaChart,
@@ -23,6 +24,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import { useEcommerce } from "../../../contexts/EcommerceContext";
 
 const revenueData = [
   { name: "Mon", value: 4000 },
@@ -98,6 +100,7 @@ const recentOrders = [
 
 export default function EcommerceDashboard() {
   const navigate = useNavigate();
+  const { cart } = useEcommerce();
   const [downloadStatus, setDownloadStatus] = useState<
     "idle" | "downloading" | "success"
   >("idle");
@@ -120,7 +123,18 @@ export default function EcommerceDashboard() {
             Monitor your sales, orders, and customer activity.
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-center">
+          <button
+            onClick={() => navigate("/demos/ecommerce/cart")}
+            className="relative p-2 text-slate-400 hover:text-white transition-colors mr-2"
+          >
+            <ShoppingCart size={24} />
+            {cart.length > 0 && (
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-indigo-600 rounded-full text-xs flex items-center justify-center text-white font-bold animate-scale-in">
+                {cart.reduce((acc, item) => acc + item.quantity, 0)}
+              </span>
+            )}
+          </button>
           <button
             onClick={handleDownloadReport}
             disabled={downloadStatus !== "idle"}

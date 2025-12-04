@@ -43,6 +43,10 @@ import EcommerceOrders from "./pages/Demos/Ecommerce/EcommerceOrders";
 import EcommerceCustomers from "./pages/Demos/Ecommerce/EcommerceCustomers";
 import EcommerceAnalytics from "./pages/Demos/Ecommerce/EcommerceAnalytics";
 import EcommerceSettings from "./pages/Demos/Ecommerce/EcommerceSettings";
+import EcommerceCart from "./pages/Demos/Ecommerce/EcommerceCart";
+import EcommerceCheckout from "./pages/Demos/Ecommerce/EcommerceCheckout";
+import EcommerceOrderConfirmation from "./pages/Demos/Ecommerce/EcommerceOrderConfirmation";
+import { EcommerceProvider } from "./contexts/EcommerceContext";
 
 import BlogDashboard from "./pages/Demos/Blog/BlogDashboard";
 import BlogPosts from "./pages/Demos/Blog/BlogPosts";
@@ -112,12 +116,24 @@ export default function App() {
           <Route path="inventory/settings" element={<InventorySettings />} />
 
           {/* Ecommerce System */}
-          <Route path="ecommerce" element={<EcommerceDashboard />} />
-          <Route path="ecommerce/products" element={<EcommerceProducts />} />
-          <Route path="ecommerce/orders" element={<EcommerceOrders />} />
-          <Route path="ecommerce/customers" element={<EcommerceCustomers />} />
-          <Route path="ecommerce/analytics" element={<EcommerceAnalytics />} />
-          <Route path="ecommerce/settings" element={<EcommerceSettings />} />
+          <Route
+            path="ecommerce/*"
+            element={
+              <EcommerceProvider>
+                <Routes>
+                  <Route index element={<EcommerceDashboard />} />
+                  <Route path="products" element={<EcommerceProducts />} />
+                  <Route path="orders" element={<EcommerceOrders />} />
+                  <Route path="customers" element={<EcommerceCustomers />} />
+                  <Route path="analytics" element={<EcommerceAnalytics />} />
+                  <Route path="settings" element={<EcommerceSettings />} />
+                  <Route path="cart" element={<EcommerceCart />} />
+                  <Route path="checkout" element={<EcommerceCheckout />} />
+                  <Route path="confirmation" element={<EcommerceOrderConfirmation />} />
+                </Routes>
+              </EcommerceProvider>
+            }
+          />
 
           {/* Blog System */}
           <Route

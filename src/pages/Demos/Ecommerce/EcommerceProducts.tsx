@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Package,
   Search,
@@ -8,55 +9,17 @@ import {
   X,
   CheckCircle,
   AlertTriangle,
+  ShoppingCart,
+  Check,
 } from "lucide-react";
-
-const initialProducts = [
-  {
-    id: 1,
-    name: "Premium Wireless Headphones",
-    category: "Electronics",
-    price: 299.0,
-    stock: 45,
-    status: "In Stock",
-  },
-  {
-    id: 2,
-    name: "Ergonomic Office Chair",
-    category: "Furniture",
-    price: 450.0,
-    stock: 12,
-    status: "Low Stock",
-  },
-  {
-    id: 3,
-    name: "Mechanical Keyboard",
-    category: "Electronics",
-    price: 129.0,
-    stock: 120,
-    status: "In Stock",
-  },
-  {
-    id: 4,
-    name: "4K Monitor 27inch",
-    category: "Electronics",
-    price: 399.0,
-    stock: 8,
-    status: "Low Stock",
-  },
-  {
-    id: 5,
-    name: "USB-C Docking Station",
-    category: "Electronics",
-    price: 89.0,
-    stock: 0,
-    status: "Out of Stock",
-  },
-];
+import { useEcommerce } from "../../../contexts/EcommerceContext";
 
 export default function EcommerceProducts() {
-  const [products, setProducts] = useState(initialProducts);
+  const navigate = useNavigate();
+  const { products, addProduct, addToCart, cart } = useEcommerce();
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [addedItems, setAddedItems] = useState<{ [key: number]: boolean }>({});
   const [newProduct, setNewProduct] = useState({
     name: "",
     category: "Electronics",
@@ -71,21 +34,13 @@ export default function EcommerceProducts() {
   const handleAddProduct = () => {
     if (!newProduct.name) return;
 
-    const stock = parseInt(newProduct.stock) || 0;
-    let status = "In Stock";
-    if (stock === 0) status = "Out of Stock";
-    else if (stock < 10) status = "Low Stock";
-
-    const product = {
-      id: products.length + 1,
+    addProduct({
       name: newProduct.name,
       category: newProduct.category,
       price: parseFloat(newProduct.price) || 0,
-      stock: stock,
-      status: status,
-    };
+      stock: parseInt(newProduct.stock) || 0,
+    });
 
-    setProducts([product, ...products]);
     setIsAddModalOpen(false);
     setNewProduct({
       name: "",
@@ -95,6 +50,14 @@ export default function EcommerceProducts() {
     });
   };
 
+  const handleAddToCart = (product: any) => {
+    addToCart(product);
+    setAddedItems((prev) => ({ ...prev, [product.id]: true }));
+    setTimeout(() => {
+      setAddedItems((prev) => ({ ...prev, [product.id]: false }));
+    }, 1500);
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -102,13 +65,26 @@ export default function EcommerceProducts() {
           <h1 className="text-2xl font-bold text-white">Products</h1>
           <p className="text-slate-400">Manage your product catalog.</p>
         </div>
-        <button
-          onClick={() => setIsAddModalOpen(true)}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors font-medium flex items-center gap-2"
-        >
-          <Plus size={18} />
-          Add Product
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => navigate("/demos/ecommerce/cart")}
+            className="relative p-2 text-slate-400 hover:text-white transition-colors mr-2"
+          >
+            <ShoppingCart size={24} />
+            {cart.length > 0 && (
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-indigo-600 rounded-full text-xs flex items-center justify-center text-white font-bold animate-scale-in">
+                {cart.reduce((acc, item) => acc + item.quantity, 0)}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setIsAddModalOpen(true)}
+            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors font-medium flex items-center gap-2"
+          >
+            <Plus size={18} />
+            Add Product
+          </button>
+        </div>
       </div>
 
       <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
@@ -192,9 +168,26 @@ export default function EcommerceProducts() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="p-2 text-slate-400 hover:text-white transition-colors">
-                      <MoreHorizontal size={18} />
-                    </button>
+                    <div className="flex items-center justify-end gap-2">
+                      <button
+                        onClick={() => handleAddToCart(product)}
+                        className={`p-2 transition-all duration-300 ${
+                          addedItems[product.id]
+                            ? "text-emerald-400 bg-emerald-500/10 rounded-full scale-110"
+                            : "text-indigo-400 hover:text-indigo-300"
+                        }`}
+                        title="Add to Cart"
+                      >
+                        {addedItems[product.id] ? (
+                          <Check size={18} className="animate-scale-in" />
+                        ) : (
+                          <ShoppingCart size={18} />
+                        )}
+                      </button>
+                      <button className="p-2 text-slate-400 hover:text-white transition-colors">
+                        <MoreHorizontal size={18} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -313,3 +306,4 @@ export default function EcommerceProducts() {
     </div>
   );
 }
+

@@ -1,66 +1,15 @@
 import { useState } from "react";
 import {
-  ShoppingBag,
   Search,
-  Filter,
   Eye,
   MoreHorizontal,
   Download,
   CheckCircle2,
 } from "lucide-react";
-
-const orders = [
-  {
-    id: "#ORD-7352",
-    customer: "Alex Thompson",
-    date: "Oct 24, 2023",
-    total: "$299.00",
-    status: "Completed",
-    items: 2,
-  },
-  {
-    id: "#ORD-7351",
-    customer: "Sarah Miller",
-    date: "Oct 24, 2023",
-    total: "$450.00",
-    status: "Processing",
-    items: 1,
-  },
-  {
-    id: "#ORD-7350",
-    customer: "James Wilson",
-    date: "Oct 23, 2023",
-    total: "$129.00",
-    status: "Shipped",
-    items: 3,
-  },
-  {
-    id: "#ORD-7349",
-    customer: "Emily Davis",
-    date: "Oct 23, 2023",
-    total: "$399.00",
-    status: "Completed",
-    items: 1,
-  },
-  {
-    id: "#ORD-7348",
-    customer: "Michael Brown",
-    date: "Oct 22, 2023",
-    total: "$89.00",
-    status: "Pending",
-    items: 4,
-  },
-  {
-    id: "#ORD-7347",
-    customer: "Lisa Anderson",
-    date: "Oct 22, 2023",
-    total: "$599.00",
-    status: "Cancelled",
-    items: 1,
-  },
-];
+import { useEcommerce } from "../../../contexts/EcommerceContext";
 
 export default function EcommerceOrders() {
+  const { orders } = useEcommerce();
   const [exportStatus, setExportStatus] = useState<
     "idle" | "exporting" | "success"
   >("idle");
@@ -87,7 +36,7 @@ export default function EcommerceOrders() {
             exportStatus === "success"
               ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50"
               : "bg-slate-800 hover:bg-slate-700 text-white"
-          }`}
+            }`}
         >
           {exportStatus === "exporting" ? (
             <>Exporting...</>
