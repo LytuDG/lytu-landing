@@ -1,4 +1,4 @@
-import { Json } from "./common";
+import type { Json } from "./common";
 
 export interface SystemConfig {
   id: string; // UUID
