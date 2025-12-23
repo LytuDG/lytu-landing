@@ -1,6 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import DashboardLayout from "./components/layout/DashboardLayout";
+import { AuthProvider } from "./contexts/AuthContext";
+import LoginPage from "./pages/Admin/LoginPage";
+import AdminLayout from "./components/layout/AdminLayout";
+import DashboardPage from "./pages/Admin/DashboardPage";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home/Home";
 import QuoteRequest from "./pages/QuoteRequest/QuoteRequest";
 import NotFound from "./pages/NotFound/NotFound";
@@ -63,95 +68,121 @@ import { BlogProvider } from "./contexts/BlogContext";
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Main Landing Page Routes */}
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/quote-request" element={<QuoteRequest />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-
-        {/* Demo Dashboard Routes */}
-        <Route path="/demos" element={<DashboardLayout />}>
-          {/* Booking System */}
-          <Route path="booking" element={<BookingDashboard />} />
-          <Route path="booking/calendar" element={<BookingCalendar />} />
-          <Route path="booking/services" element={<BookingServices />} />
-          <Route path="booking/customers" element={<BookingCustomers />} />
-          <Route path="booking/reviews" element={<BookingReviews />} />
-          <Route path="booking/stats" element={<BookingStats />} />
-          <Route path="booking/settings" element={<BookingSettings />} />
-
-          {/* Quote System */}
-          <Route path="quote" element={<QuoteDashboard />} />
-          <Route path="quote/list" element={<QuoteList />} />
-          <Route path="quote/create" element={<QuoteCreate />} />
-          <Route path="quote/view/:id" element={<QuoteView />} />
-          <Route path="quote/edit/:id" element={<QuoteCreate />} />
-          <Route path="quote/catalog" element={<QuoteCatalog />} />
-          <Route path="quote/invoices" element={<QuoteInvoices />} />
-          <Route path="quote/clients" element={<QuoteClients />} />
-          <Route path="quote/analytics" element={<QuoteAnalytics />} />
-          <Route path="quote/settings" element={<QuoteSettings />} />
-
-          {/* CRM System */}
-          <Route path="crm" element={<CRMDashboard />} />
-          <Route path="crm/contacts" element={<CRMContacts />} />
-          <Route path="crm/deals" element={<CRMDeals />} />
-          <Route path="crm/tasks" element={<CRMTasks />} />
-          <Route path="crm/reports" element={<CRMReports />} />
-          <Route path="crm/activity" element={<CRMActivityLog />} />
-          <Route path="crm/settings" element={<CRMSettings />} />
-
-          {/* Inventory System */}
-          <Route path="inventory" element={<InventoryDashboard />} />
-          <Route path="inventory/products" element={<InventoryProducts />} />
-          <Route path="inventory/movements" element={<InventoryMovements />} />
-          <Route path="inventory/orders" element={<InventoryOrders />} />
-          <Route path="inventory/suppliers" element={<InventorySuppliers />} />
+      <AuthProvider>
+        <Routes>
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<LoginPage />} />
           <Route
-            path="inventory/warehouses"
-            element={<InventoryWarehouses />}
-          />
-          <Route path="inventory/settings" element={<InventorySettings />} />
-
-          {/* Ecommerce System */}
-          <Route
-            path="ecommerce/*"
+            path="/admin"
             element={
-              <EcommerceProvider>
-                <Routes>
-                  <Route index element={<EcommerceDashboard />} />
-                  <Route path="products" element={<EcommerceProducts />} />
-                  <Route path="orders" element={<EcommerceOrders />} />
-                  <Route path="customers" element={<EcommerceCustomers />} />
-                  <Route path="analytics" element={<EcommerceAnalytics />} />
-                  <Route path="settings" element={<EcommerceSettings />} />
-                  <Route path="cart" element={<EcommerceCart />} />
-                  <Route path="checkout" element={<EcommerceCheckout />} />
-                  <Route path="confirmation" element={<EcommerceOrderConfirmation />} />
-                </Routes>
-              </EcommerceProvider>
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            {/* Add more admin routes here */}
+          </Route>
 
-          {/* Blog System */}
-          <Route
-            path="blog/*"
-            element={
-              <BlogProvider>
-                <Routes>
-                  <Route index element={<BlogDashboard />} />
-                  <Route path="posts" element={<BlogPosts />} />
-                  <Route path="editor" element={<BlogEditor />} />
-                  <Route path="comments" element={<BlogComments />} />
-                  <Route path="settings" element={<BlogSettings />} />
-                </Routes>
-              </BlogProvider>
-            }
-          />
-        </Route>
-      </Routes>
+          {/* Main Landing Page Routes */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/quote-request" element={<QuoteRequest />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+
+          {/* Demo Dashboard Routes */}
+          <Route path="/demos" element={<DashboardLayout />}>
+            {/* Booking System */}
+            <Route path="booking" element={<BookingDashboard />} />
+            <Route path="booking/calendar" element={<BookingCalendar />} />
+            <Route path="booking/services" element={<BookingServices />} />
+            <Route path="booking/customers" element={<BookingCustomers />} />
+            <Route path="booking/reviews" element={<BookingReviews />} />
+            <Route path="booking/stats" element={<BookingStats />} />
+            <Route path="booking/settings" element={<BookingSettings />} />
+
+            {/* Quote System */}
+            <Route path="quote" element={<QuoteDashboard />} />
+            <Route path="quote/list" element={<QuoteList />} />
+            <Route path="quote/create" element={<QuoteCreate />} />
+            <Route path="quote/view/:id" element={<QuoteView />} />
+            <Route path="quote/edit/:id" element={<QuoteCreate />} />
+            <Route path="quote/catalog" element={<QuoteCatalog />} />
+            <Route path="quote/invoices" element={<QuoteInvoices />} />
+            <Route path="quote/clients" element={<QuoteClients />} />
+            <Route path="quote/analytics" element={<QuoteAnalytics />} />
+            <Route path="quote/settings" element={<QuoteSettings />} />
+
+            {/* CRM System */}
+            <Route path="crm" element={<CRMDashboard />} />
+            <Route path="crm/contacts" element={<CRMContacts />} />
+            <Route path="crm/deals" element={<CRMDeals />} />
+            <Route path="crm/tasks" element={<CRMTasks />} />
+            <Route path="crm/reports" element={<CRMReports />} />
+            <Route path="crm/activity" element={<CRMActivityLog />} />
+            <Route path="crm/settings" element={<CRMSettings />} />
+
+            {/* Inventory System */}
+            <Route path="inventory" element={<InventoryDashboard />} />
+            <Route path="inventory/products" element={<InventoryProducts />} />
+            <Route
+              path="inventory/movements"
+              element={<InventoryMovements />}
+            />
+            <Route path="inventory/orders" element={<InventoryOrders />} />
+            <Route
+              path="inventory/suppliers"
+              element={<InventorySuppliers />}
+            />
+            <Route
+              path="inventory/warehouses"
+              element={<InventoryWarehouses />}
+            />
+            <Route path="inventory/settings" element={<InventorySettings />} />
+
+            {/* Ecommerce System */}
+            <Route
+              path="ecommerce/*"
+              element={
+                <EcommerceProvider>
+                  <Routes>
+                    <Route index element={<EcommerceDashboard />} />
+                    <Route path="products" element={<EcommerceProducts />} />
+                    <Route path="orders" element={<EcommerceOrders />} />
+                    <Route path="customers" element={<EcommerceCustomers />} />
+                    <Route path="analytics" element={<EcommerceAnalytics />} />
+                    <Route path="settings" element={<EcommerceSettings />} />
+                    <Route path="cart" element={<EcommerceCart />} />
+                    <Route path="checkout" element={<EcommerceCheckout />} />
+                    <Route
+                      path="confirmation"
+                      element={<EcommerceOrderConfirmation />}
+                    />
+                  </Routes>
+                </EcommerceProvider>
+              }
+            />
+
+            {/* Blog System */}
+            <Route
+              path="blog/*"
+              element={
+                <BlogProvider>
+                  <Routes>
+                    <Route index element={<BlogDashboard />} />
+                    <Route path="posts" element={<BlogPosts />} />
+                    <Route path="editor" element={<BlogEditor />} />
+                    <Route path="comments" element={<BlogComments />} />
+                    <Route path="settings" element={<BlogSettings />} />
+                  </Routes>
+                </BlogProvider>
+              }
+            />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

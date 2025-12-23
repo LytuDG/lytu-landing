@@ -5,11 +5,9 @@ import { useTranslation } from "react-i18next";
 import { scrollToSection } from "../../utils/scroll";
 import LanguageSelector from "../features/LanguageSelector";
 
-interface NavbarProps {
-  onLoginClick: () => void;
-}
+interface NavbarProps {}
 
-export default function Navbar({ onLoginClick }: NavbarProps) {
+export default function Navbar({}: NavbarProps) {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -93,7 +91,7 @@ export default function Navbar({ onLoginClick }: NavbarProps) {
           </button>
           <LanguageSelector />
           <button
-            onClick={onLoginClick}
+            onClick={() => navigate("/admin/login")}
             className="px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-white hover:border-cyan-400 transition-colors"
           >
             {t("nav.login")}
@@ -137,7 +135,7 @@ export default function Navbar({ onLoginClick }: NavbarProps) {
             <LanguageSelector />
           </div>
           <button
-            onClick={onLoginClick}
+            onClick={() => navigate("/admin/login")}
             className="text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full"
           >
             {t("nav.login")}
