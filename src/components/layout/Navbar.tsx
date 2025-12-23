@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { scrollToSection } from "../../utils/scroll";
 import LanguageSelector from "../features/LanguageSelector";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface NavbarProps {}
 
 export default function Navbar({}: NavbarProps) {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -90,12 +92,22 @@ export default function Navbar({}: NavbarProps) {
             {t("nav.portfolio")}
           </button>
           <LanguageSelector />
-          <button
-            onClick={() => navigate("/admin/login")}
-            className="px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-white hover:border-cyan-400 transition-colors"
-          >
-            {t("nav.login")}
-          </button>
+          {user ? (
+            <button
+              onClick={() => navigate("/admin/dashboard")}
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-500 transition-colors"
+            >
+              <LayoutDashboard size={16} />
+              Admin
+            </button>
+          ) : (
+            <button
+              onClick={() => navigate("/admin/login")}
+              className="px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-white hover:border-cyan-400 transition-colors"
+            >
+              {t("nav.login")}
+            </button>
+          )}
           <button
             onClick={() => handleNavClick("contacto")}
             className="bg-white text-slate-950 px-5 py-2 rounded-full font-bold text-sm hover:bg-cyan-400 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.3)]"
@@ -134,12 +146,25 @@ export default function Navbar({}: NavbarProps) {
           <div className="pt-2">
             <LanguageSelector />
           </div>
-          <button
-            onClick={() => navigate("/admin/login")}
-            className="text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full"
-          >
-            {t("nav.login")}
-          </button>
+          {user ? (
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                navigate("/admin/dashboard");
+              }}
+              className="flex items-center gap-2 text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full"
+            >
+              <LayoutDashboard size={18} />
+              Admin Dashboard
+            </button>
+          ) : (
+            <button
+              onClick={() => navigate("/admin/login")}
+              className="text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full"
+            >
+              {t("nav.login")}
+            </button>
+          )}
         </div>
       )}
     </nav>
