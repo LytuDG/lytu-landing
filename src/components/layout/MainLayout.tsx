@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import FloatingChat from "../common/FloatingChat";
+import AICommandCenter from "../common/AICommandCenter";
 
 export default function MainLayout() {
   return (
@@ -11,7 +11,7 @@ export default function MainLayout() {
       <Outlet />
 
       <Footer />
-      <FloatingChat />
+      <AICommandCenter />
     </div>
   );
 }

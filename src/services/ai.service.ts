@@ -52,4 +52,18 @@ Lytus:`;
 
     throw new Error("Max retries reached");
   }
+
+  static async getIntent(input: string): Promise<string> {
+    const { NAVIGATOR_PROMPT } = await import("../lib/lytu-specifications");
+    try {
+      const response = await this.ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: NAVIGATOR_PROMPT + input,
+      });
+      return response?.text?.trim().toUpperCase() || "HOME";
+    } catch (error) {
+      console.error("Navigator Error:", error);
+      return "HOME";
+    }
+  }
 }

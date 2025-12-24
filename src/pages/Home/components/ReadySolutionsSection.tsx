@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   CalendarCheck,
   FileText,
@@ -16,6 +17,25 @@ import { scrollToSection } from "../../../utils/scroll";
 
 export default function ReadySolutionsSection() {
   const { t } = useTranslation();
+  const [highlighted, setHighlighted] = useState<{
+    target: string;
+    message: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const handleIntent = (e: any) => {
+      const { intent, target, message } = e.detail;
+      if (intent === "solutions") {
+        setHighlighted({ target, message });
+        // Clear highlight after 10 seconds
+        setTimeout(() => setHighlighted(null), 10000);
+      }
+    };
+
+    window.addEventListener("lytu-ai-intent", handleIntent);
+    return () => window.removeEventListener("lytu-ai-intent", handleIntent);
+  }, []);
+
   return (
     <section
       id="soluciones"
@@ -46,63 +66,83 @@ export default function ReadySolutionsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <SolutionCard
+            id="ai-target-chatbot"
             icon={<Bot className="text-emerald-400" size={32} />}
             title={t("readySolutions.aiChatbot.title")}
             description={t("readySolutions.aiChatbot.description")}
             viewDemo={t("readySolutions.viewDemo")}
             isNew={true}
             link="/demos/ai-chatbot"
+            isHighlighted={highlighted?.target === "chatbot"}
+            aiMessage={highlighted?.message}
           />
           <SolutionCard
+            id="ai-target-booking"
             icon={<CalendarCheck className="text-cyan-400" size={32} />}
             title={t("readySolutions.booking.title")}
             description={t("readySolutions.booking.description")}
             viewDemo={t("readySolutions.viewDemo")}
             link="/demos/booking"
+            isHighlighted={highlighted?.target === "booking"}
+            aiMessage={highlighted?.message}
           />
           <SolutionCard
+            id="ai-target-quote"
             icon={<FileText className="text-violet-400" size={32} />}
             title={t("readySolutions.quotes.title")}
             description={t("readySolutions.quotes.description")}
             viewDemo={t("readySolutions.viewDemo")}
             link="/demos/quote"
+            isHighlighted={highlighted?.target === "quote"}
+            aiMessage={highlighted?.message}
           />
           <SolutionCard
+            id="ai-target-crm"
             icon={<Users className="text-pink-400" size={32} />}
             title={t("readySolutions.crm.title")}
             description={t("readySolutions.crm.description")}
             viewDemo={t("readySolutions.viewDemo")}
             link="/demos/crm"
+            isHighlighted={highlighted?.target === "crm"}
+            aiMessage={highlighted?.message}
           />
           <SolutionCard
+            id="ai-target-inventory"
             icon={<Package className="text-orange-400" size={32} />}
             title={t("readySolutions.inventory.title")}
             description={t("readySolutions.inventory.description")}
             viewDemo={t("readySolutions.viewDemo")}
             link="/demos/inventory"
+            isHighlighted={highlighted?.target === "inventory"}
+            aiMessage={highlighted?.message}
           />
           <SolutionCard
+            id="ai-target-ecommerce"
             icon={<ShoppingBag className="text-blue-400" size={32} />}
             title={t("readySolutions.ecommerce.title")}
             description={t("readySolutions.ecommerce.description")}
             viewDemo={t("readySolutions.viewDemo")}
             link="/demos/ecommerce"
+            isHighlighted={highlighted?.target === "ecommerce"}
+            aiMessage={highlighted?.message}
           />
           <SolutionCard
+            id="ai-target-blog"
             icon={<PenTool className="text-emerald-400" size={32} />}
             title={t("readySolutions.blog.title")}
             description={t("readySolutions.blog.description")}
             viewDemo={t("readySolutions.viewDemo")}
-            link="demos/blog"
+            link="/demos/blog"
+            isHighlighted={highlighted?.target === "blog"}
+            aiMessage={highlighted?.message}
           />
         </div>
 
-        {/* Custom Solution CTA - Destacado y Centrado */}
+        {/* Custom Solution CTA */}
         <div
           onClick={() => scrollToSection("contacto")}
           className="mt-16 max-w-5xl mx-auto group relative p-[2px] rounded-3xl bg-linear-to-br from-cyan-400 via-indigo-500 to-purple-600 hover:from-cyan-300 hover:via-indigo-400 hover:to-purple-500 transition-all duration-500 cursor-pointer"
         >
-          {/* Pulsing glow effect */}
           <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-indigo-600 rounded-3xl blur-xl opacity-40 group-hover:opacity-60 animate-pulse transition-opacity"></div>
 
           <div className="relative bg-slate-950 rounded-3xl p-8 md:p-12 overflow-hidden">
@@ -146,6 +186,9 @@ function SolutionCard({
   viewDemo,
   link,
   isNew,
+  isHighlighted,
+  aiMessage,
+  id,
 }: {
   icon: React.ReactNode;
   title: string;
@@ -153,6 +196,9 @@ function SolutionCard({
   viewDemo: string;
   link?: string;
   isNew?: boolean;
+  isHighlighted?: boolean;
+  aiMessage?: string;
+  id?: string;
 }) {
   const { t } = useTranslation();
   const Content = () => (
@@ -166,21 +212,64 @@ function SolutionCard({
   );
 
   return (
-    <div className="group relative p-px rounded-2xl bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)] overflow-hidden">
-      <div className="bg-slate-950 rounded-2xl p-8 h-full relative overflow-hidden flex flex-col">
-        {isNew && (
+    <div
+      id={id}
+      className={`group relative p-px rounded-2xl transition-all duration-500 ${
+        isHighlighted
+          ? "bg-linear-to-r from-cyan-400 to-indigo-500 scale-105 shadow-[0_0_50px_rgba(34,211,238,0.3)] z-30 ring-2 ring-cyan-400"
+          : "bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 z-10"
+      }`}
+    >
+      {/* Floating AI Message Bubble */}
+      {isHighlighted && aiMessage && (
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-max max-w-[250px] z-50 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="relative bg-cyan-500 text-white p-3 rounded-2xl shadow-2xl shadow-cyan-500/50 border border-white/20">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                <Bot size={12} className="text-white" />
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-tighter opacity-80">
+                Lytus AI
+              </span>
+            </div>
+            <p
+              className="text-xs font-bold leading-tight"
+              dangerouslySetInnerHTML={{ __html: aiMessage }}
+            />
+            {/* Bubble Tail */}
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-cyan-500 rotate-45 border-r border-b border-white/10" />
+          </div>
+        </div>
+      )}
+
+      {isHighlighted && (
+        <div className="absolute -inset-4 bg-cyan-400/20 blur-3xl opacity-50 animate-pulse rounded-full" />
+      )}
+
+      <div className="bg-slate-950 rounded-2xl p-8 h-full relative overflow-hidden flex flex-col z-20">
+        {isNew && !isHighlighted && (
           <div className="absolute top-4 right-[-35px] bg-linear-to-r from-cyan-500 to-indigo-600 text-white text-[10px] font-bold py-1 px-10 rotate-45 shadow-lg z-10 uppercase tracking-widest">
             {t("common.new")}
           </div>
         )}
-        {/* Hover Glow */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all duration-500 -mr-10 -mt-10 pointer-events-none" />
 
-        <div className="w-16 h-16 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-cyan-500/30 transition-all duration-300 shadow-lg">
+        <div
+          className={`w-16 h-16 rounded-xl bg-slate-900 border flex items-center justify-center mb-6 transition-all duration-300 shadow-lg ${
+            isHighlighted
+              ? "border-cyan-500 scale-110 shadow-cyan-500/20"
+              : "border-slate-800 group-hover:scale-110 group-hover:border-cyan-500/30"
+          }`}
+        >
           {icon}
         </div>
 
-        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+        <h3
+          className={`text-xl font-bold mb-3 transition-colors ${
+            isHighlighted
+              ? "text-cyan-400"
+              : "text-white group-hover:text-cyan-400"
+          }`}
+        >
           {title}
         </h3>
         <p className="text-slate-400 text-sm leading-relaxed mb-8 grow">

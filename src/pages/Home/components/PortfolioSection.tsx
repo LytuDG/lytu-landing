@@ -35,7 +35,7 @@ export default function PortfolioSection() {
             className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500 transition-all duration-500 block"
           >
             <div className="h-64 bg-slate-800 relative overflow-hidden">
-              <WebsitePreview url="https://tuviaje.app" color="cyan" />
+              <ProjectVisual color="cyan" />
               <div className="absolute top-4 left-4 bg-cyan-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-full z-10">
                 {t("portfolio.status.launched")}
               </div>
@@ -72,10 +72,7 @@ export default function PortfolioSection() {
             className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-emerald-500 transition-all duration-500 block"
           >
             <div className="h-64 bg-slate-800 relative overflow-hidden">
-              <WebsitePreview
-                url="https://novafinancialcorp.netlify.app/"
-                color="emerald"
-              />
+              <ProjectVisual color="emerald" />
               <div className="absolute top-4 left-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                 {t("portfolio.status.upcomingLaunch")}
               </div>
@@ -114,10 +111,7 @@ export default function PortfolioSection() {
             className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-orange-500 transition-all duration-500 block"
           >
             <div className="h-64 bg-slate-800 relative overflow-hidden">
-              <WebsitePreview
-                url="https://imagocreations.netlify.app/"
-                color="orange"
-              />
+              <ProjectVisual color="orange" />
               <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                 {t("portfolio.status.inDevelopment")}
               </div>
@@ -156,10 +150,7 @@ export default function PortfolioSection() {
             className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-rose-500 transition-all duration-500 block"
           >
             <div className="h-64 bg-slate-800 relative overflow-hidden">
-              <WebsitePreview
-                url="https://bailaconmigo.netlify.app/"
-                color="rose"
-              />
+              <ProjectVisual color="rose" />
               <div className="absolute top-4 left-4 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
                 {t("portfolio.status.inDevelopment")}
               </div>
@@ -193,55 +184,117 @@ export default function PortfolioSection() {
   );
 }
 
-function WebsitePreview({ url, color }: { url: string; color: string }) {
-  // Map color names to Tailwind classes for the fallback background
-  const bgColors: Record<string, string> = {
-    cyan: "bg-linear-to-tr from-cyan-900 to-slate-800",
-    emerald: "bg-linear-to-br from-emerald-900 via-slate-800 to-slate-900",
-    orange: "bg-linear-to-br from-orange-900 via-slate-800 to-slate-900",
-    rose: "bg-linear-to-br from-rose-900 via-slate-800 to-slate-900",
+function ProjectVisual({ color }: { color: string }) {
+  const colorMap: Record<
+    string,
+    {
+      primary: string;
+      secondary: string;
+      glow: string;
+      grid: string;
+      text: string;
+    }
+  > = {
+    cyan: {
+      primary: "from-cyan-600/20 to-transparent",
+      secondary: "bg-cyan-500/10",
+      glow: "shadow-[0_0_50px_-12px_rgba(6,182,212,0.5)]",
+      grid: "bg-size-[32px_32px] bg-[linear-gradient(to_right,#0891b21a_1px,transparent_1px),linear-gradient(to_bottom,#0891b21a_1px,transparent_1px)]",
+      text: "text-cyan-400",
+    },
+    emerald: {
+      primary: "from-emerald-600/20 to-transparent",
+      secondary: "bg-emerald-500/10",
+      glow: "shadow-[0_0_50px_-12px_rgba(16,185,129,0.5)]",
+      grid: "bg-size-[32px_32px] bg-[linear-gradient(to_right,#0596691a_1px,transparent_1px),linear-gradient(to_bottom,#0596691a_1px,transparent_1px)]",
+      text: "text-emerald-400",
+    },
+    orange: {
+      primary: "from-orange-600/20 to-transparent",
+      secondary: "bg-orange-500/10",
+      glow: "shadow-[0_0_50px_-12px_rgba(249,115,22,0.5)]",
+      grid: "bg-size-[32px_32px] bg-[linear-gradient(to_right,#ea580c1a_1px,transparent_1px),linear-gradient(to_bottom,#ea580c1a_1px,transparent_1px)]",
+      text: "text-orange-400",
+    },
+    rose: {
+      primary: "from-rose-600/20 to-transparent",
+      secondary: "bg-rose-500/10",
+      glow: "shadow-[0_0_50px_-12px_rgba(244,63,94,0.5)]",
+      grid: "bg-size-[32px_32px] bg-[linear-gradient(to_right,#e11d481a_1px,transparent_1px),linear-gradient(to_bottom,#e11d481a_1px,transparent_1px)]",
+      text: "text-rose-400",
+    },
   };
 
-  const iconColors: Record<string, string> = {
-    cyan: "text-cyan-400/50",
-    emerald: "text-emerald-400/50",
-    orange: "text-orange-400/50",
-    rose: "text-rose-400/50",
-  };
+  const theme = colorMap[color] || colorMap.cyan;
 
   return (
-    <div className="w-full h-full relative group-hover:scale-105 transition-transform duration-700">
-      {/* Fallback / Background */}
+    <div className="w-full h-full relative overflow-hidden bg-slate-950 group-hover:scale-105 transition-transform duration-700">
+      {/* Grid Pattern Background */}
+      <div className={`absolute inset-0 bg-size-[32px_32px] ${theme.grid}`} />
+
+      {/* Radial Gradient Glow */}
       <div
-        className={`absolute inset-0 flex items-center justify-center ${
-          bgColors[color] || "bg-slate-800"
-        }`}
-      >
-        <Smartphone
-          size={80}
-          className={iconColors[color] || "text-slate-500"}
+        className={`absolute inset-0 bg-gradient-radial from-transparent to-slate-950`}
+      />
+
+      {/* Animated Glow Orb */}
+      <div
+        className={`absolute -top-1/4 -right-1/4 w-3/4 h-3/4 rounded-full bg-linear-to-br ${theme.primary} blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-500`}
+      />
+      <div
+        className={`absolute -bottom-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-linear-to-tr ${theme.primary} blur-3xl opacity-40 group-hover:opacity-80 transition-opacity duration-500`}
+      />
+
+      {/* Abstract UI Elements */}
+      <div className="absolute inset-0 flex items-center justify-center p-12">
+        <div
+          className={`w-full h-full rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm relative overflow-hidden p-4 ${theme.glow}`}
+        >
+          {/* Mock UI Header */}
+          <div className="flex gap-2 mb-4">
+            <div className={`w-2 h-2 rounded-full ${theme.secondary}`} />
+            <div className={`w-2 h-2 rounded-full ${theme.secondary}`} />
+            <div className={`w-2 h-2 rounded-full ${theme.secondary}`} />
+          </div>
+
+          {/* Mock UI Content */}
+          <div className="space-y-3">
+            <div
+              className={`h-4 w-3/4 rounded ${theme.secondary} opacity-50`}
+            />
+            <div
+              className={`h-3 w-1/2 rounded ${theme.secondary} opacity-30`}
+            />
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div
+                className={`h-20 rounded-lg ${theme.secondary} opacity-20`}
+              />
+              <div
+                className={`h-20 rounded-lg ${theme.secondary} opacity-20`}
+              />
+            </div>
+          </div>
+
+          {/* Central Icon */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <Smartphone
+              size={64}
+              className={`opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-500 ${theme.text}`}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* External Link Icon Overlay */}
+      <div className="absolute top-6 right-6 z-20">
+        <ExternalLink
+          className="text-white/40 group-hover:text-white transition-colors duration-300"
+          size={20}
         />
       </div>
 
-      {/* Iframe Preview */}
-      <div className="absolute inset-0 opacity-90 transition-opacity duration-500">
-        <iframe
-          src={url}
-          title={`Preview of ${url}`}
-          className="w-[400%] h-[400%] transform scale-25 origin-top-left pointer-events-none border-0"
-          loading="lazy"
-          scrolling="no"
-          tabIndex={-1}
-        />
-      </div>
-
-      {/* Overlay for hover effect and click protection */}
-      <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors duration-300" />
-
-      {/* External Link Icon */}
-      <div className="absolute top-4 right-4 z-20">
-        <ExternalLink className="text-white drop-shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0" />
-      </div>
+      {/* Scanline Effect */}
+      <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-transparent via-white/5 to-transparent h-[200%] -translate-y-full group-hover:animate-scanline" />
     </div>
   );
 }
