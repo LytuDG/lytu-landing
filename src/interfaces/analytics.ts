@@ -1,7 +1,8 @@
-import { Json } from "./common";
-
 // ============================================
 // 7. ANALÍTICAS WEB
+
+import type { Json } from "./common";
+
 // ============================================
 export interface WebAnalytics {
   id: string; // UUID

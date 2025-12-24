@@ -9,6 +9,7 @@ import {
   ShoppingBag,
   PenTool,
   MessageCircle,
+  Bot,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { scrollToSection } from "../../../utils/scroll";
@@ -44,6 +45,13 @@ export default function ReadySolutionsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <SolutionCard
+            icon={<Bot className="text-emerald-400" size={32} />}
+            title={t("readySolutions.aiChatbot.title")}
+            description={t("readySolutions.aiChatbot.description")}
+            viewDemo={t("readySolutions.viewDemo")}
+            isNew={true}
+          />
           <SolutionCard
             icon={<CalendarCheck className="text-cyan-400" size={32} />}
             title={t("readySolutions.booking.title")}
@@ -136,13 +144,16 @@ function SolutionCard({
   description,
   viewDemo,
   link,
+  isNew,
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
   viewDemo: string;
   link?: string;
+  isNew?: boolean;
 }) {
+  const { t } = useTranslation();
   const Content = () => (
     <div className="flex items-center text-indigo-400 text-sm font-bold group-hover:text-cyan-300 transition-colors cursor-pointer mt-auto">
       {viewDemo}{" "}
@@ -154,8 +165,13 @@ function SolutionCard({
   );
 
   return (
-    <div className="group relative p-px rounded-2xl bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]">
+    <div className="group relative p-px rounded-2xl bg-linear-to-b from-slate-800 to-slate-900 hover:from-cyan-500 hover:to-indigo-600 transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)] overflow-hidden">
       <div className="bg-slate-950 rounded-2xl p-8 h-full relative overflow-hidden flex flex-col">
+        {isNew && (
+          <div className="absolute top-4 right-[-35px] bg-linear-to-r from-cyan-500 to-indigo-600 text-white text-[10px] font-bold py-1 px-10 rotate-45 shadow-lg z-10 uppercase tracking-widest">
+            {t("common.new")}
+          </div>
+        )}
         {/* Hover Glow */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all duration-500 -mr-10 -mt-10 pointer-events-none" />
 

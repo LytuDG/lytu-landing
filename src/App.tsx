@@ -5,9 +5,12 @@ import { AuthProvider } from "./contexts/AuthContext";
 import LoginPage from "./pages/Admin/LoginPage";
 import AdminLayout from "./components/layout/AdminLayout";
 import DashboardPage from "./pages/Admin/DashboardPage";
+import QuotesPage from "./pages/Admin/QuotesPage";
+import ClientsPage from "./pages/Admin/ClientsPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home/Home";
 import QuoteRequest from "./pages/QuoteRequest/QuoteRequest";
+import TrackingPage from "./pages/Tracking/TrackingPage";
 import NotFound from "./pages/NotFound/NotFound";
 import BookingDashboard from "./pages/Demos/Booking/BookingDashboard";
 import BookingCalendar from "./pages/Demos/Booking/BookingCalendar";
@@ -82,6 +85,8 @@ export default function App() {
           >
             <Route index element={<Navigate to="/admin/dashboard" replace />} />
             <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="quotes" element={<QuotesPage />} />
+            <Route path="clients" element={<ClientsPage />} />
             {/* Add more admin routes here */}
           </Route>
 
@@ -89,6 +94,7 @@ export default function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/quote-request" element={<QuoteRequest />} />
+            <Route path="/track/:trackingId" element={<TrackingPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
 

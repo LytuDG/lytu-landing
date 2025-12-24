@@ -31,6 +31,10 @@
       "title": "Desarrollo Web",
       "description": "Sitios web y aplicaciones web progresivas (PWA) ultrarrápidas, escalables y optimizadas para SEO. Usamos tecnologías modernas como React, Next.js y Node."
     },
+    "aiAutomations": {
+      "title": "Automatizaciones con IA",
+      "description": "Optimizamos tus procesos de negocio con inteligencia artificial y automatización inteligente. Chatbots avanzados, procesamiento de documentos y análisis predictivo."
+    },
     "mobileDev": {
       "title": "Apps Móviles",
       "description": "Desarrollo nativo e híbrido para iOS y Android. Creamos experiencias fluidas que tus usuarios amarán llevar en su bolsillo."
@@ -90,6 +94,10 @@
     "booking": {
       "title": "Sistema de Reservas",
       "description": "Motor de agendamiento completo con gestión de disponibilidad, notificaciones automáticas y sincronización de calendarios."
+    },
+    "aiChatbot": {
+      "title": "Chatbot con IA",
+      "description": "Asistente inteligente 24/7 entrenado con tus datos comerciales. Responde dudas, califica leads y automatiza el soporte al cliente de forma natural."
     },
     "quotes": {
       "title": "Sistema de Cotizaciones",
@@ -197,7 +205,20 @@
     "options": {
       "supportStandard": "Estándar (Horario Oficina)",
       "supportExtended": "Extendido (Incluye Fines de Semana)",
-      "supportPriority": "Prioritario (Respuesta Rápida)"
+      "supportPriority": "Prioritario (Respuesta Rápida)",
+      "timeline": {
+        "urgent": "Urgente (Lo antes posible)",
+        "next_month": "Próximo mes",
+        "2_3_months": "En 2-3 meses",
+        "just_looking": "Solo investigando"
+      },
+      "budget": {
+        "<1500": "Menos de $1,500",
+        "1500-4000": "$1,500 - $4,000",
+        "4000-8000": "$4,000 - $8,000",
+        "8000+": "Más de $8,000",
+        "need_advice": "Necesito asesoría"
+      }
     },
     "submit": "Enviar Solicitud"
   },
@@ -228,6 +249,38 @@
     "edit": "Editar",
     "close": "Cerrar",
     "select": "Seleccionar...",
-    "or": "o"
+    "or": "o",
+    "new": "Nuevo"
+  },
+  "tracking": {
+    "title": "Seguimiento de Proyecto",
+    "subtitle": "Sigue el progreso de tu solicitud de cotización en tiempo real.",
+    "notFound": "Cotización No Encontrada",
+    "notFoundDesc": "El código de seguimiento proporcionado no es válido o ha expirado.",
+    "status": {
+      "new": "Recibido",
+      "viewed": "En Revisión",
+      "analyzing": "Analizando Requerimientos",
+      "contacted": "Contactado",
+      "quoted": "Cotización Enviada",
+      "won": "Proyecto Iniciado",
+      "lost": "Cerrado"
+    },
+    "details": {
+      "company": "Empresa",
+      "systems": "Sistemas Seleccionados",
+      "budget": "Rango de Presupuesto",
+      "timeline": "Plazo Estimado",
+      "code": "Código de Seguimiento",
+      "createdAt": "Fecha de Solicitud",
+      "updatedAt": "Última Actualización"
+    },
+    "steps": {
+      "received": "Solicitud Recibida",
+      "review": "Revisión por el Equipo",
+      "analysis": "Análisis Técnico",
+      "proposal": "Propuesta Comercial",
+      "finalized": "Finalizado"
+    }
   }
 }

@@ -8,7 +8,6 @@ import {
   Building2,
   Mail,
   MessageSquare,
-  LifeBuoy,
   DollarSign,
   Send,
   Sparkles,
@@ -532,31 +531,31 @@ export default function QuoteRequest() {
                       className="w-full pl-12 pr-10 py-4 rounded-2xl bg-slate-950/50 border border-white/10 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer relative"
                     >
                       <option value="" className="bg-slate-900 text-slate-400">
-                        Select a range
+                        {t("common.select")}
                       </option>
                       <option value="<1500" className="bg-slate-900 text-white">
-                        &lt; $1,500
+                        {t("quoteRequest.options.budget.<1500")}
                       </option>
                       <option
                         value="1500-4000"
                         className="bg-slate-900 text-white"
                       >
-                        $1,500 - $4,000
+                        {t("quoteRequest.options.budget.1500-4000")}
                       </option>
                       <option
                         value="4000-8000"
                         className="bg-slate-900 text-white"
                       >
-                        $4,000 - $8,000
+                        {t("quoteRequest.options.budget.4000-8000")}
                       </option>
                       <option value="8000+" className="bg-slate-900 text-white">
-                        $8,000+
+                        {t("quoteRequest.options.budget.8000+")}
                       </option>
                       <option
                         value="need_advice"
                         className="bg-slate-900 text-white"
                       >
-                        I need advice
+                        {t("quoteRequest.options.budget.need_advice")}
                       </option>
                     </select>
                   </div>
@@ -582,25 +581,25 @@ export default function QuoteRequest() {
                         value="urgent"
                         className="bg-slate-900 text-white"
                       >
-                        Urgente (1-2 semanas)
+                        {t("quoteRequest.options.timeline.urgent")}
                       </option>
                       <option
                         value="next_month"
                         className="bg-slate-900 text-white"
                       >
-                        Próximo mes
+                        {t("quoteRequest.options.timeline.next_month")}
                       </option>
                       <option
                         value="2_3_months"
                         className="bg-slate-900 text-white"
                       >
-                        2-3 meses
+                        {t("quoteRequest.options.timeline.2_3_months")}
                       </option>
                       <option
                         value="just_looking"
                         className="bg-slate-900 text-white"
                       >
-                        Solo estoy explorando
+                        {t("quoteRequest.options.timeline.just_looking")}
                       </option>
                     </select>
                   </div>

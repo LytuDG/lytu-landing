@@ -139,3 +139,36 @@ export async function uploadLogo(
     };
   }
 }
+
+/**
+ * Obtiene la información pública de una cotización por su ID de seguimiento público
+ */
+export async function getQuoteByTrackingId(trackingId: string) {
+  try {
+    const { data, error } = await supabase
+      .from("quote_requests")
+      .select(
+        `
+        id,
+        company_name,
+        status,
+        created_at,
+        updated_at,
+        selected_systems,
+        budget_range,
+        timeline,
+        tracking_code
+      `
+      )
+      .eq("public_tracking_id", trackingId)
+      .single();
+
+    if (error) {
+      return { success: false, error: error.message };
+    }
+
+    return { success: true, data };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}

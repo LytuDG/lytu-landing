@@ -31,6 +31,10 @@
       "title": "Web Development",
       "description": "Ultra-fast, scalable, and SEO-optimized websites and progressive web apps (PWA). We use modern technologies like React, Next.js, and Node."
     },
+    "aiAutomations": {
+      "title": "AI Automations",
+      "description": "We optimize your business processes with artificial intelligence and smart automation. Advanced chatbots, document processing, and predictive analytics."
+    },
     "mobileDev": {
       "title": "Mobile Apps",
       "description": "Native and hybrid development for iOS and Android. We create smooth experiences that your users will love to carry in their pocket."
@@ -90,6 +94,10 @@
     "booking": {
       "title": "Booking System",
       "description": "Complete scheduling engine with availability management, automatic notifications and calendar synchronization."
+    },
+    "aiChatbot": {
+      "title": "AI Chatbot",
+      "description": "24/7 intelligent assistant trained with your business data. Answers questions, qualifies leads, and automates customer support naturally."
     },
     "quotes": {
       "title": "Quote System",
@@ -197,7 +205,20 @@
     "options": {
       "supportStandard": "Standard (Business Hours)",
       "supportExtended": "Extended (Includes Weekends)",
-      "supportPriority": "Priority (Fast Response)"
+      "supportPriority": "Priority (Fast Response)",
+      "timeline": {
+        "urgent": "Urgent (ASAP)",
+        "next_month": "Next month",
+        "2_3_months": "In 2-3 months",
+        "just_looking": "Just looking/Researching"
+      },
+      "budget": {
+        "<1500": "Under $1,500",
+        "1500-4000": "$1,500 - $4,000",
+        "4000-8000": "$4,000 - $8,000",
+        "8000+": "$8,000+",
+        "need_advice": "I need advice"
+      }
     },
     "submit": "Submit Request"
   },
@@ -228,6 +249,38 @@
     "edit": "Edit",
     "close": "Close",
     "select": "Select...",
-    "or": "or"
+    "or": "or",
+    "new": "New"
+  },
+  "tracking": {
+    "title": "Project Tracking",
+    "subtitle": "Track the progress of your quote request in real time.",
+    "notFound": "Quote Not Found",
+    "notFoundDesc": "The tracking code provided is invalid or has expired.",
+    "status": {
+      "new": "Received",
+      "viewed": "Under Review",
+      "analyzing": "Analyzing Requirements",
+      "contacted": "Contacted",
+      "quoted": "Quote Sent",
+      "won": "Project Started",
+      "lost": "Closed"
+    },
+    "details": {
+      "company": "Company",
+      "systems": "Selected Systems",
+      "budget": "Budget Range",
+      "timeline": "Timeline",
+      "code": "Tracking Code",
+      "createdAt": "Request Date",
+      "updatedAt": "Last Update"
+    },
+    "steps": {
+      "received": "Request Received",
+      "review": "Team Review",
+      "analysis": "Technical Analysis",
+      "proposal": "Commercial Proposal",
+      "finalized": "Finalized"
+    }
   }
 }
