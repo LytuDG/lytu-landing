@@ -51,6 +51,7 @@ export default function ReadySolutionsSection() {
             description={t("readySolutions.aiChatbot.description")}
             viewDemo={t("readySolutions.viewDemo")}
             isNew={true}
+            link="/demos/ai-chatbot"
           />
           <SolutionCard
             icon={<CalendarCheck className="text-cyan-400" size={32} />}

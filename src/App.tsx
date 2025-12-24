@@ -63,6 +63,7 @@ import BlogComments from "./pages/Demos/Blog/BlogComments";
 import BlogSettings from "./pages/Demos/Blog/BlogSettings";
 
 import { BlogProvider } from "./contexts/BlogContext";
+import AIChatbotDemo from "./pages/Demos/AIChatbot/AIChatbotDemo";
 
 // IMPORTANTE: Este componente usa clases de Tailwind CSS.
 // Para que los estilos funcionen, debes tener Tailwind CSS instalado y configurado
@@ -187,6 +188,9 @@ export default function App() {
               }
             />
           </Route>
+
+          {/* AI Chatbot System - Standalone */}
+          <Route path="/demos/ai-chatbot" element={<AIChatbotDemo />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
