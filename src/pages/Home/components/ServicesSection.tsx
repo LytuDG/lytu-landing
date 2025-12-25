@@ -13,6 +13,12 @@ export default function ServicesSection() {
   useEffect(() => {
     const handleIntent = (e: any) => {
       const { intent, target, message } = e.detail;
+      console.log(
+        "ServicesSection received intent:",
+        intent,
+        "target:",
+        target
+      );
       if (intent === "services") {
         setHighlighted({ target, message });
         setTimeout(() => setHighlighted(null), 10000);

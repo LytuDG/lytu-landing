@@ -11,6 +11,7 @@ import {
   PenTool,
   MessageCircle,
   Bot,
+  Sparkles,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { scrollToSection } from "../../../utils/scroll";
@@ -25,6 +26,12 @@ export default function ReadySolutionsSection() {
   useEffect(() => {
     const handleIntent = (e: any) => {
       const { intent, target, message } = e.detail;
+      console.log(
+        "ReadySolutionsSection received intent:",
+        intent,
+        "target:",
+        target
+      );
       if (intent === "solutions") {
         setHighlighted({ target, message });
         // Clear highlight after 10 seconds
@@ -222,22 +229,26 @@ function SolutionCard({
     >
       {/* Floating AI Message Bubble */}
       {isHighlighted && aiMessage && (
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-max max-w-[250px] z-50 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="relative bg-cyan-500 text-white p-3 rounded-2xl shadow-2xl shadow-cyan-500/50 border border-white/20">
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                <Bot size={12} className="text-white" />
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-max max-w-[250px] z-50 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="relative bg-linear-to-br from-cyan-400 to-indigo-600 text-white p-4 rounded-2xl shadow-[0_0_30px_rgba(34,211,238,0.4)] border border-white/20">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+                <Bot size={14} className="text-white animate-pulse" />
               </div>
-              <span className="text-[10px] font-black uppercase tracking-tighter opacity-80">
+              <span className="text-[10px] font-black uppercase tracking-widest text-white">
                 Lytus AI
               </span>
+              <Sparkles
+                size={10}
+                className="text-cyan-200 ml-auto animate-bounce"
+              />
             </div>
             <p
-              className="text-xs font-bold leading-tight"
+              className="text-xs font-extrabold leading-normal text-white drop-shadow-sm"
               dangerouslySetInnerHTML={{ __html: aiMessage }}
             />
             {/* Bubble Tail */}
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-cyan-500 rotate-45 border-r border-b border-white/10" />
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-indigo-600 rotate-45 border-r border-b border-white/10" />
           </div>
         </div>
       )}

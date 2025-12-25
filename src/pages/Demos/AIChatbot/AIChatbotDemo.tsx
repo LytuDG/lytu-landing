@@ -9,14 +9,17 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AIService, type ChatMessage } from "../../../services/ai.service";
 
 export default function AIChatbotDemo() {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language?.split("-")[0] || "es";
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
-      content:
-        "¡Hola! Soy Lytus, el cerebro digital de Lytu (forjado con mucho café y código premium). ¿En qué puedo ayudarte a conquistar el mundo tecnológico hoy? ☕🚀",
+      content: t("chatbot.welcome"),
     },
   ]);
   const [input, setInput] = useState("");
@@ -47,13 +50,16 @@ export default function AIChatbotDemo() {
     setIsLoading(true);
 
     try {
-      // Get history excluding the current message
       const history = messages.slice(-10); // Last 10 messages for context
-      const aiResponse = await AIService.sendMessage(userMessage, history);
+      const aiResponse = await AIService.sendMessage(
+        userMessage,
+        history,
+        currentLang
+      );
 
       setMessages([...newMessages, { role: "assistant", content: aiResponse }]);
     } catch (err: any) {
-      setError("Ups, parece que mis circuitos se cruzaron. ¿Reintentamos? 🛠️");
+      setError(t("chatbot.error"));
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -145,7 +151,10 @@ export default function AIChatbotDemo() {
                     msg.role === "user" ? "text-right" : "text-left"
                   }`}
                 >
-                  {msg.role === "assistant" ? "Lytus" : "Tú"} •{" "}
+                  {msg.role === "assistant"
+                    ? t("chatbot.assistantLabel")
+                    : t("chatbot.userLabel")}{" "}
+                  •{" "}
                   {new Date().toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
@@ -177,7 +186,7 @@ export default function AIChatbotDemo() {
                 onClick={handleRetry}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-bold transition-all shadow-lg"
               >
-                <RefreshCcw size={14} /> Reintentar
+                <RefreshCcw size={14} /> {t("chatbot.retry")}
               </button>
             </div>
           )}
@@ -194,7 +203,7 @@ export default function AIChatbotDemo() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Escribe un mensaje..."
+            placeholder={t("chatbot.inputPlaceholder")}
             className="w-full pl-6 pr-14 py-4 rounded-2xl bg-slate-900 border border-white/10 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all placeholder:text-slate-600 shadow-2xl shadow-cyan-500/5 group-hover:border-white/20"
             disabled={isLoading}
           />
@@ -236,32 +245,25 @@ function Typewriter({ text }: { text: string }) {
     }
   }, [index, text]);
 
-  // While typing, we show raw text to avoid flickering issues with partial markdown
-  // Once finished, we render the full formatted version
   return <FormattedText text={displayedText} />;
 }
 
 function FormattedText({ text }: { text: string }) {
-  // 1. Preserve line breaks
   const lines = text.split("\n");
 
   return (
     <div className="space-y-2">
       {lines.map((line, i) => (
         <p key={i} className="min-h-[1em]">
-          {processLine(line)}
+          <LineParser line={line} />
         </p>
       ))}
     </div>
   );
 }
 
-function processLine(line: string) {
-  // If we are typing, we might not want to parse complex things that would flicker
-  // But for simple bold/links, let's try.
-
-  // Regex for bold **text**
-  // Regex for links /path
+function LineParser({ line }: { line: string }) {
+  const { t } = useTranslation();
 
   let parts: (string | React.ReactNode)[] = [line];
 
@@ -307,7 +309,7 @@ function processLine(line: string) {
     return result;
   });
 
-  // Parse Links /path-name or /demos/something (must start with / and be followed by word chars, dashes, or more slashes)
+  // Parse Links
   parts = parts.flatMap((part) => {
     if (typeof part !== "string") return part;
     const regex = /(\/[a-zA-Z0-9\-\#\/]+)/g;
@@ -317,7 +319,6 @@ function processLine(line: string) {
 
     while ((match = regex.exec(part)) !== null) {
       const link = match[1];
-      // Basic validation: ignore symbols like /? or just /
       if (link.length > 1) {
         result.push(part.slice(lastIndex, match.index));
         result.push(
@@ -326,7 +327,7 @@ function processLine(line: string) {
             to={link}
             className="text-cyan-400 font-bold underline decoration-cyan-500/30 hover:decoration-cyan-400 transition-all px-1.5 py-0.5 rounded-md bg-cyan-400/10 inline-flex items-center gap-1 group"
           >
-            {link === "/quote-request" ? "Solicitar Cotización" : link}
+            {link === "/quote-request" ? t("chatbot.quoteLabel") : link}
             <Sparkles size={10} className="group-hover:animate-pulse" />
           </Link>
         );

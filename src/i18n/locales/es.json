@@ -282,5 +282,29 @@
       "proposal": "Propuesta Comercial",
       "finalized": "Finalizado"
     }
+  },
+  "aiNavigator": {
+    "placeholder": "¿Qué quieres construir hoy?",
+    "suggestions": {
+      "ecommerce": "Tienda Online",
+      "mobile": "App iOS/Android",
+      "ai": "Automatización con IA"
+    },
+    "botMessages": {
+      "nudge": "¿Tienes alguna duda? ¡Consúltame!",
+      "talkNow": "Hablar ya →",
+      "serviceOption": "¡Aquí tienes nuestras opciones de {{intent}}! ¿Te interesa alguna?",
+      "serviceTarget": "Tenemos el servicio de {{target}}. Puedes solicitar una cotización o contacto para empezar.",
+      "serviceSpecial": "Contamos con expertos en {{target}}. ¿Te gustaría solicitar una cotización o hablar con ventas?"
+    }
+  },
+  "chatbot": {
+    "welcome": "¡Hola! Soy Lytus, el cerebro digital de Lytu (forjado con mucho café y código premium). ¿En qué puedo ayudarte a conquistar el mundo tecnológico hoy? ☕🚀",
+    "inputPlaceholder": "Escribe un mensaje...",
+    "retry": "Reintentar",
+    "error": "Ups, parece que mis circuitos se cruzaron. ¿Reintentamos? 🛠️",
+    "userLabel": "Tú",
+    "assistantLabel": "Lytus",
+    "quoteLabel": "Solicitar Cotización"
   }
 }

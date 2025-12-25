@@ -282,5 +282,29 @@
       "proposal": "Commercial Proposal",
       "finalized": "Finalized"
     }
+  },
+  "aiNavigator": {
+    "placeholder": "What do you want to build today?",
+    "suggestions": {
+      "ecommerce": "Online Store",
+      "mobile": "iOS/Android App",
+      "ai": "AI Automation"
+    },
+    "botMessages": {
+      "nudge": "Have a question? Ask me!",
+      "talkNow": "Talk now →",
+      "serviceOption": "Here are our {{intent}} options! Are you interested in any?",
+      "serviceTarget": "We have the {{target}} service. You can request a quote or contact to start.",
+      "serviceSpecial": "We have experts in {{target}}. Would you like to request a quote or talk to sales?"
+    }
+  },
+  "chatbot": {
+    "welcome": "Hi! I'm Lytus, Lytu's digital brain (forged with lots of coffee and premium code). How can I help you conquer the tech world today? ☕🚀",
+    "inputPlaceholder": "Type a message...",
+    "retry": "Retry",
+    "error": "Oops, it seems my circuits got crossed. Shall we retry? 🛠️",
+    "userLabel": "You",
+    "assistantLabel": "Lytus",
+    "quoteLabel": "Request Quote"
   }
 }
