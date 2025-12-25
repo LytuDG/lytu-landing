@@ -19,7 +19,7 @@ import {
   Copy,
   ExternalLink,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   submitQuoteRequest,
   uploadLogo,
@@ -49,7 +49,6 @@ type QuoteFormData = {
 
 export default function QuoteRequest() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -71,7 +70,6 @@ export default function QuoteRequest() {
     "idle" | "success" | "error"
   >("idle");
   const [trackingCode, setTrackingCode] = useState<string | null>(null);
-  const [publicTrackingId, setPublicTrackingId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -146,7 +144,6 @@ export default function QuoteRequest() {
       }
 
       setTrackingCode(result.tracking_code || null);
-      setPublicTrackingId(result.public_tracking_id || null);
       setSubmitStatus("success");
       reset();
       setLogoPreview(null);
@@ -245,9 +242,9 @@ export default function QuoteRequest() {
           )}
 
           <div className="space-y-4">
-            {publicTrackingId && (
+            {trackingCode && (
               <Link
-                to={`/track/${publicTrackingId}`}
+                to={`/track-quote?code=${trackingCode}`}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-950 font-bold rounded-xl hover:bg-cyan-400 transition-all w-full shadow-lg"
               >
                 <ExternalLink size={18} />
@@ -431,12 +428,16 @@ export default function QuoteRequest() {
                   }`}
                 >
                   <input
+                    {...register("logoFile", {
+                      onChange: handleLogoChange,
+                    })}
+                    ref={(e) => {
+                      register("logoFile").ref(e);
+                      fileInputRef.current = e;
+                    }}
                     type="file"
-                    ref={fileInputRef}
                     className="hidden"
                     accept="image/*"
-                    {...register("logoFile")}
-                    onChange={handleLogoChange}
                   />
 
                   {logoPreview ? (

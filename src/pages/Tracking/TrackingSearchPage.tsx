@@ -22,17 +22,19 @@ export default function TrackingSearchPage() {
     const params = new URLSearchParams(location.search);
     const codeParam = params.get("code");
     if (codeParam) {
-      setCode(codeParam.toUpperCase());
+      const cleanCode = codeParam.toUpperCase();
+      setCode(cleanCode);
+      performTrack(cleanCode);
     }
   }, [location.search]);
-  const handleTrack = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!code.trim()) return;
+
+  const performTrack = async (trackingCode: string) => {
+    if (!trackingCode.trim()) return;
 
     setIsSearching(true);
     setError(null);
 
-    const result = await getPublicIdByTrackingCode(code.trim());
+    const result = await getPublicIdByTrackingCode(trackingCode.trim());
 
     if (result.success && result.publicId) {
       navigate(`/track/${result.publicId}`);
@@ -40,6 +42,11 @@ export default function TrackingSearchPage() {
       setError(result.error || t("trackingInput.error"));
     }
     setIsSearching(false);
+  };
+
+  const handleTrack = async (e: React.FormEvent) => {
+    e.preventDefault();
+    performTrack(code);
   };
 
   return (
