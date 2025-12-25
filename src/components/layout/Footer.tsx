@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-slate-950 pt-16 pb-8 border-t border-slate-900">
       <div className="container mx-auto px-6">
@@ -11,37 +15,40 @@ export default function Footer() {
               <span className="text-xl font-bold text-white">ytu</span>
             </div>
             <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
-              Desarrollo de software con pasión y precisión. Ayudamos a startups
-              y empresas a escalar sus productos digitales.
+              {t("footer.description")}
             </p>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-4">Servicios</h4>
+            <h4 className="text-white font-bold mb-4">
+              {t("footer.services.title")}
+            </h4>
             <ul className="space-y-2 text-sm text-slate-500">
               <li className="hover:text-cyan-400 cursor-pointer transition-colors">
-                Desarrollo Web
+                {t("footer.services.web")}
               </li>
               <li className="hover:text-cyan-400 cursor-pointer transition-colors">
-                Aplicaciones Móviles
+                {t("footer.services.mobile")}
               </li>
               <li className="hover:text-cyan-400 cursor-pointer transition-colors">
-                UI/UX Design
+                {t("footer.services.ai")}
               </li>
               <li className="hover:text-cyan-400 cursor-pointer transition-colors">
-                Consultoría Técnica
+                {t("footer.services.software")}
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-4">Legal</h4>
+            <h4 className="text-white font-bold mb-4">
+              {t("footer.legal.title")}
+            </h4>
             <ul className="space-y-2 text-sm text-slate-500">
               <li className="hover:text-cyan-400 cursor-pointer transition-colors">
-                Privacidad
+                {t("footer.legal.privacy")}
               </li>
               <li className="hover:text-cyan-400 cursor-pointer transition-colors">
-                Términos
+                {t("footer.legal.terms")}
               </li>
             </ul>
           </div>
@@ -49,8 +56,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-600">
           <p>
-            &copy; {new Date().getFullYear()} Lytu Software Development. Todos
-            los derechos reservados.
+            &copy; {new Date().getFullYear()} {t("footer.rights")}
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             {/* Social placeholders */}

@@ -141,6 +141,27 @@ export async function uploadLogo(
 }
 
 /**
+ * Obtiene el ID público de una cotización usando el código amigable (ej. QT-XXXX)
+ */
+export async function getPublicIdByTrackingCode(trackingCode: string) {
+  try {
+    const { data, error } = await supabase
+      .from("quote_requests")
+      .select("public_tracking_id")
+      .eq("tracking_code", trackingCode.toUpperCase())
+      .single();
+
+    if (error) {
+      return { success: false, error: "Código no encontrado" };
+    }
+
+    return { success: true, publicId: data.public_tracking_id };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+/**
  * Obtiene la información pública de una cotización por su ID de seguimiento público
  */
 export async function getQuoteByTrackingId(trackingId: string) {

@@ -1,5 +1,6 @@
 import HeroSection from "./components/HeroSection";
 import ServicesSection from "./components/ServicesSection";
+import AIServicesSection from "./components/AIServicesSection";
 import PhilosophySection from "./components/PhilosophySection";
 import ReadySolutionsSection from "./components/ReadySolutionsSection";
 import PortfolioSection from "./components/PortfolioSection";
@@ -10,6 +11,7 @@ export default function Home() {
     <main>
       <HeroSection />
       <ServicesSection />
+      <AIServicesSection />
       <PhilosophySection />
       <ReadySolutionsSection />
       <PortfolioSection />

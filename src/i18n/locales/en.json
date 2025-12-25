@@ -6,6 +6,7 @@
     "solutions": "Solutions",
     "portfolio": "Portfolio",
     "contact": "Contact",
+    "tracking": "Tracking",
     "login": "Login"
   },
   "hero": {
@@ -25,27 +26,27 @@
     "visionText": "Be leaders in digital innovation in Latin America."
   },
   "services": {
-    "title": "Comprehensive Digital Engineering",
-    "subtitle": "From conceptual idea to final deployment. We cover the entire lifecycle of modern software development.",
+    "title": "Pro Digital Engineering",
+    "subtitle": "We don't just write code; we build technological assets designed to scale. No bureaucracy, just high-level engineering focused on your growth.",
     "webDev": {
-      "title": "Web Development",
-      "description": "Ultra-fast, scalable, and SEO-optimized websites and progressive web apps (PWA). We use modern technologies like React, Next.js, and Node."
+      "title": "Web Platforms",
+      "description": "Ultra-fast websites and web apps with Next.js and React. Optimized for SEO, conversions, and a flawless user experience."
     },
     "aiAutomations": {
-      "title": "AI Automations",
-      "description": "We optimize your business processes with artificial intelligence and smart automation. Advanced chatbots, document processing, and predictive analytics."
+      "title": "AI Ecosystems",
+      "description": "We integrate artificial intelligence to automate critical processes. From autonomous agents to custom predictive analysis models."
     },
     "mobileDev": {
       "title": "Mobile Apps",
-      "description": "Native and hybrid development for iOS and Android. We create smooth experiences that your users will love to carry in their pocket."
+      "description": "Native and hybrid development for iOS and Android. We create smooth and powerful experiences that your users will carry in their pockets."
     },
     "customSoftware": {
       "title": "Custom Software",
-      "description": "Management systems, analytical dashboards, and internal tools designed specifically to solve your company's unique problems."
+      "description": "Management systems, dashboards, and internal tools that adapt 100% to your workflow, eliminating inefficiencies."
     },
     "design": {
-      "title": "Design & Branding",
-      "description": "Complete visual identity: logos, color palettes, typography and graphic assets. We create your brand image from scratch to make it stand out."
+      "title": "Design & UX",
+      "description": "Visual identity and interface design that not only dazzle but are designed to maximize usability and brand impact."
     }
   },
   "philosophy": {
@@ -159,6 +160,35 @@
     "cta": "Start Project",
     "or": "Or write to us at",
     "back": "Back to options",
+    "mainCTA": {
+      "title": "Start your Project",
+      "description": "Use our smart quote system to define your requirements and receive a detailed proposal in record time."
+    },
+    "directChannels": {
+      "title": "Direct Channels",
+      "description": "Looking for an immediate response? We are available on these channels."
+    },
+    "whatsapp": {
+      "title": "WhatsApp Business",
+      "description": "Fast support for technical and commercial inquiries.",
+      "cta": "Talk to an expert",
+      "status": "Immediate response via chat"
+    },
+    "email": {
+      "title": "Support Email",
+      "description": "Formal and technical inquiries."
+    },
+    "socials": {
+      "title": "Our Network",
+      "subtitle": "Follow us on our socials"
+    },
+    "form": {
+      "title": "Send us a message",
+      "namePlaceholder": "Full name",
+      "phonePlaceholder": "WhatsApp / Phone",
+      "messagePlaceholder": "Briefly describe your vision or requirements...",
+      "success": "Message sent successfully! We will get in touch soon."
+    },
     "simpleOption": {
       "title": "Quick Contact",
       "description": "For general inquiries, questions, or greetings. We will respond shortly."
@@ -223,12 +253,20 @@
     "submit": "Submit Request"
   },
   "footer": {
-    "description": "Digital solutions for modern businesses",
-    "quickLinks": "Quick Links",
-    "services": "Services",
-    "contact": "Contact",
-    "followUs": "Follow Us",
-    "rights": "All rights reserved"
+    "description": "Software engineering with passion and precision. We build the technological assets your business needs to scale without limits.",
+    "services": {
+      "title": "Services",
+      "web": "Web Platforms",
+      "mobile": "Mobile Apps",
+      "ai": "AI Ecosystems",
+      "software": "Custom Software"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms & Conditions"
+    },
+    "rights": "Lytu Software Development. All rights reserved."
   },
   "login": {
     "title": "Login",
@@ -283,6 +321,65 @@
       "finalized": "Finalized"
     }
   },
+  "aiServices": {
+    "badge": "Latest from Lytu",
+    "title": "Future powered by",
+    "titleHighlight": "AI",
+    "subtitle": "We implement practical artificial intelligence that works for your business. It's not science fiction, it's technology that optimizes your revenue right now.",
+    "salesChatbot": {
+      "title": "AI Sales Chatbot",
+      "badge": "Recommended",
+      "description": "Your web turned into an 24/7 expert salesperson. Capture, qualify, and schedule meetings automatically without lifting a finger.",
+      "quote": "Your web works for you while you rest.",
+      "features": [
+        "Instant and human-like responses",
+        "Real-time lead qualification",
+        "Detailed explanation of services",
+        "Integration with quotes",
+        "Automatic calendar scheduling"
+      ]
+    },
+    "leadQualification": {
+      "title": "Automatic Qualification",
+      "badge": "Efficiency",
+      "description": "AI that analyzes every interaction and alerts you to opportunities with the highest probability of closing.",
+      "quote": "This client is ready to buy — act now.",
+      "target": "Ideal for Agencies and B2B"
+    },
+    "smartQuotes": {
+      "title": "Smart Quotes",
+      "badge": "Conversion",
+      "description": "Reduce the sales cycle. AI analyzes complex requirements and proposes accurate price ranges instantly.",
+      "features": [
+        "Technical requirements analysis",
+        "Suggestion of tailored plans",
+        "Range calculation (Safe and accurate)",
+        "Acceleration of sales closing"
+      ]
+    },
+    "supportAuto": {
+      "title": "Support Resolution",
+      "badge": "Savings",
+      "description": "Reduce human ticket load. An AI that learns from your processes to resolve doubts in seconds.",
+      "target": "Perfect for E-commerce and SaaS"
+    },
+    "contentGen": {
+      "title": "Asset Generation",
+      "badge": "Add-on",
+      "description": "Save weeks of creative work. Assistant for descriptions, blogs, and ads with your brand's tone.",
+      "warning": "As strategic support"
+    },
+    "dataAnalysis": {
+      "title": "Business Insights",
+      "badge": "Strategy",
+      "description": "Forget confused dashboards. Receive clear answers to your business questions in natural language.",
+      "examples": [
+        "Your star product this month is X",
+        "Traffic peaks on Sundays",
+        "Optimization needed in the payment flow"
+      ]
+    }
+  },
   "aiNavigator": {
     "placeholder": "What do you want to build today?",
     "suggestions": {
@@ -306,5 +403,12 @@
     "userLabel": "You",
     "assistantLabel": "Lytus",
     "quoteLabel": "Request Quote"
+  },
+  "trackingInput": {
+    "title": "Already have a quote?",
+    "subtitle": "Enter your tracking code to see your project's progress.",
+    "placeholder": "Code (e.g. QT-XXXX)",
+    "cta": "Track",
+    "error": "Please enter a valid code"
   }
 }

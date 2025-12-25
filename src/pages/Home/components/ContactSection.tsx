@@ -1,116 +1,138 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { MessageCircle, FileText, ArrowRight, Mail, Send } from "lucide-react";
+import {
+  MessageCircle,
+  Mail,
+  ArrowRight,
+  Linkedin,
+  Instagram,
+  Rocket,
+} from "lucide-react";
 
 export default function ContactSection() {
   const { t } = useTranslation();
-  const [selectedOption, setSelectedOption] = useState<
-    "simple" | "quote" | null
-  >(null);
 
   return (
-    <section id="contacto" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-indigo-900/20"></div>
+    <section
+      id="contacto"
+      className="py-32 relative overflow-hidden bg-slate-950"
+    >
+      {/* Elementos Decorativos de Fondo */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-indigo-600/10 blur-[130px] rounded-full"></div>
+        <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-600/10 blur-[130px] rounded-full"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03]"></div>
+      </div>
+
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+          {/* Cabecera */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter">
               {t("contact.title")}
             </h2>
-            <p className="text-indigo-100 text-lg md:text-xl max-w-2xl mx-auto">
+            <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               {t("contact.subtitle")}
             </p>
           </div>
 
-          {/* Opciones de Contacto */}
-          {!selectedOption && (
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              {/* Opción 1: Contacto Simple */}
-              <button
-                onClick={() => setSelectedOption("simple")}
-                className="group bg-gradient-to-br from-indigo-600 to-violet-600 rounded-3xl p-8 text-left shadow-2xl border border-white/10 hover:border-white/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-white/10 rounded-2xl backdrop-blur-sm">
-                    <MessageCircle className="w-8 h-8 text-white" />
+          {/* Tarjeta Principal de Cotización */}
+          <div className="mb-12">
+            <Link
+              to="/quote-request"
+              className="group relative block p-10 md:p-16 bg-gradient-to-br from-indigo-600 to-violet-800 border border-white/20 rounded-[3rem] hover:scale-[1.01] transition-all duration-500 shadow-2xl shadow-indigo-500/30 overflow-hidden"
+            >
+              {/* Efecto de luz dinámico */}
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 blur-3xl rounded-full group-hover:bg-white/20 transition-colors duration-700"></div>
+
+              <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
+                <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-4xl flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                  <Rocket className="w-12 h-12 text-white" />
+                </div>
+
+                <div className="text-center md:text-left">
+                  <h3 className="text-3xl md:text-5xl font-black text-white mb-4">
+                    {t("contact.mainCTA.title")}
+                  </h3>
+                  <p className="text-indigo-100 text-lg md:text-xl leading-relaxed max-w-xl">
+                    {t("contact.mainCTA.description")}
+                  </p>
+                </div>
+
+                <div className="md:ml-auto">
+                  <div className="px-8 py-5 bg-white text-indigo-700 font-black rounded-2xl shadow-xl flex items-center gap-3 group-hover:bg-indigo-50 transition-all duration-300">
+                    {t("contact.quoteOption.cta")}
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                   </div>
-                  <ArrowRight className="w-6 h-6 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  {t("contact.simpleOption.title")}
-                </h3>
-                <p className="text-indigo-100 text-base">
-                  {t("contact.simpleOption.description")}
-                </p>
-              </button>
-
-              {/* Opción 2: Solicitar Cotización */}
-              <Link
-                to="/quote-request"
-                className="group bg-gradient-to-br from-violet-600 to-purple-600 rounded-3xl p-8 text-left shadow-2xl border border-white/10 hover:border-white/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-white/10 rounded-2xl backdrop-blur-sm">
-                    <FileText className="w-8 h-8 text-white" />
-                  </div>
-                  <ArrowRight className="w-6 h-6 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  {t("contact.quoteOption.title")}
-                </h3>
-                <p className="text-indigo-100 text-base">
-                  {t("contact.quoteOption.description")}
-                </p>
-                <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white/90">
-                  {t("contact.quoteOption.cta")}
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-              </Link>
-            </div>
-          )}
-
-          {/* Formulario Simple */}
-          {selectedOption === "simple" && (
-            <div className="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl p-10 md:p-16 shadow-2xl border border-white/10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <button
-                onClick={() => setSelectedOption(null)}
-                className="mb-6 text-white/80 hover:text-white text-sm flex items-center gap-2 transition-colors"
-              >
-                ← {t("contact.back")}
-              </button>
-
-              <div className="flex flex-col gap-4 max-w-lg mx-auto">
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-indigo-200" />
-                  <input
-                    type="email"
-                    placeholder={t("contact.emailPlaceholder")}
-                    className="pl-12 pr-6 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-indigo-200 focus:outline-none focus:bg-white/20 w-full backdrop-blur-sm transition-all focus:border-white/40"
-                  />
-                </div>
-                <textarea
-                  placeholder={t("contact.projectPlaceholder")}
-                  rows={4}
-                  className="px-6 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-indigo-200 focus:outline-none focus:bg-white/20 w-full backdrop-blur-sm transition-all focus:border-white/40 resize-none"
-                />
-                <button className="px-8 py-4 bg-white text-indigo-600 font-bold rounded-2xl hover:bg-cyan-50 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
-                  <Send className="w-5 h-5" />
-                  {t("contact.cta")}
-                </button>
               </div>
+            </Link>
+          </div>
 
-              <p className="mt-6 text-center text-sm text-indigo-200">
-                {t("contact.or")}{" "}
-                <a
-                  href="mailto:hola@lytu.tech"
-                  className="underline hover:text-white font-semibold"
-                >
-                  hola@lytu.tech
-                </a>
-              </p>
+          {/* Opciones Secundarias (Canales Directos) */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <a
+              href="https://wa.me/5354081085"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between p-8 bg-slate-900/40 backdrop-blur-xl border border-slate-800 rounded-[2.5rem] hover:border-green-500/30 hover:bg-slate-900 transition-all duration-500"
+            >
+              <div className="flex items-center gap-6">
+                <div className="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <MessageCircle className="w-7 h-7 text-green-500" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-lg">
+                    {t("contact.whatsapp.title")}
+                  </h4>
+                  <p className="text-slate-500 text-sm">
+                    {t("contact.whatsapp.status")}
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-6 h-6 text-slate-700 group-hover:text-green-500 group-hover:translate-x-2 transition-all" />
+            </a>
+
+            <a
+              href="mailto:soporte.lytu@gmail.com"
+              className="group flex items-center justify-between p-8 bg-slate-900/40 backdrop-blur-xl border border-slate-800 rounded-[2.5rem] hover:border-indigo-500/30 hover:bg-slate-900 transition-all duration-500"
+            >
+              <div className="flex items-center gap-6">
+                <div className="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Mail className="w-7 h-7 text-indigo-500" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-lg">
+                    {t("contact.email.title")}
+                  </h4>
+                  <p className="text-slate-500 text-sm">
+                    {t("contact.email.description")}
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-6 h-6 text-slate-700 group-hover:text-indigo-500 group-hover:translate-x-2 transition-all" />
+            </a>
+          </div>
+
+          <div className="mt-16 flex flex-col items-center gap-6">
+            <h4 className="text-slate-500 font-bold uppercase tracking-widest text-xs">
+              {t("contact.socials.subtitle")}
+            </h4>
+            <div className="flex gap-4">
+              <a
+                href="#"
+                className="w-12 h-12 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center text-slate-500 hover:text-white hover:border-indigo-500 transition-all"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="w-12 h-12 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center text-slate-500 hover:text-white hover:border-indigo-500 transition-all"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </section>

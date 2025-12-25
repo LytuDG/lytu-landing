@@ -16,6 +16,8 @@ import {
   Loader2,
   Clock,
   Phone,
+  Copy,
+  ExternalLink,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -69,7 +71,9 @@ export default function QuoteRequest() {
     "idle" | "success" | "error"
   >("idle");
   const [trackingCode, setTrackingCode] = useState<string | null>(null);
+  const [publicTrackingId, setPublicTrackingId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Watch values for conditional rendering
@@ -142,6 +146,7 @@ export default function QuoteRequest() {
       }
 
       setTrackingCode(result.tracking_code || null);
+      setPublicTrackingId(result.public_tracking_id || null);
       setSubmitStatus("success");
       reset();
       setLogoPreview(null);
@@ -206,19 +211,57 @@ export default function QuoteRequest() {
             details and contact you shortly.
           </p>
           {trackingCode && (
-            <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-xl p-4 mb-6">
-              <p className="text-sm text-slate-400 mb-2">Tracking code:</p>
-              <p className="text-xl font-mono font-bold text-cyan-400">
-                {trackingCode}
+            <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-2xl p-6 mb-8 relative group/code">
+              <p className="text-xs text-slate-500 uppercase tracking-widest mb-3 font-bold">
+                {t("tracking.details.code")}
               </p>
+              <div className="flex items-center justify-center gap-4">
+                <span className="text-2xl font-mono font-bold text-cyan-400 tracking-wider">
+                  {trackingCode}
+                </span>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(trackingCode);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:border-cyan-500/50 transition-all active:scale-90"
+                  title="Copy to clipboard"
+                >
+                  {copied ? (
+                    <Check size={18} className="text-green-400" />
+                  ) : (
+                    <Copy size={18} />
+                  )}
+                </button>
+              </div>
+
+              {copied && (
+                <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-green-400 font-bold uppercase animate-in fade-in slide-in-from-top-1">
+                  Copied!
+                </span>
+              )}
             </div>
           )}
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center px-8 py-4 bg-linear-to-r from-indigo-500 to-cyan-400 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-cyan-500/50 transition-all w-full"
-          >
-            {t("quoteRequest.backToHome")}
-          </Link>
+
+          <div className="space-y-4">
+            {publicTrackingId && (
+              <Link
+                to={`/track/${publicTrackingId}`}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-950 font-bold rounded-xl hover:bg-cyan-400 transition-all w-full shadow-lg"
+              >
+                <ExternalLink size={18} />
+                {t("tracking.title")}
+              </Link>
+            )}
+
+            <Link
+              to="/"
+              className="inline-flex items-center justify-center px-8 py-4 border border-white/10 text-white font-bold rounded-xl hover:bg-white/5 transition-all w-full"
+            >
+              {t("quoteRequest.backToHome")}
+            </Link>
+          </div>
         </div>
       </div>
     );

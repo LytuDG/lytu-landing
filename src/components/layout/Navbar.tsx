@@ -91,6 +91,12 @@ export default function Navbar({}: NavbarProps) {
           >
             {t("nav.portfolio")}
           </button>
+          <button
+            onClick={() => navigate("/track-quote")}
+            className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
+          >
+            {t("nav.tracking")}
+          </button>
           <LanguageSelector />
           {user ? (
             <button
@@ -133,11 +139,19 @@ export default function Navbar({}: NavbarProps) {
             { key: "filosofía", label: t("nav.philosophy") },
             { key: "soluciones", label: t("nav.solutions") },
             { key: "proyectos", label: t("nav.portfolio") },
+            { key: "/track-quote", label: t("nav.tracking"), isRoute: true },
             { key: "contacto", label: t("nav.contact") },
-          ].map((item) => (
+          ].map((item: any) => (
             <button
               key={item.key}
-              onClick={() => handleNavClick(item.key)}
+              onClick={() => {
+                if (item.isRoute) {
+                  setIsMobileMenuOpen(false);
+                  navigate(item.key);
+                } else {
+                  handleNavClick(item.key);
+                }
+              }}
               className="text-left text-slate-300 hover:text-cyan-400 text-lg font-medium"
             >
               {item.label}

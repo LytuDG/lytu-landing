@@ -10,8 +10,8 @@ export class AIService {
   private static ai = new GoogleGenAI({ apiKey: ENV.GOOGLE_AI_API_KEY });
   // Fallback models list
   private static MODELS = [
-    "gemini-2.0-flash",
     "gemini-2.5-flash",
+    "gemini-2.0-flash",
     "gemini-2.0-flash-lite",
   ];
   private static currentModelIndex = 0;

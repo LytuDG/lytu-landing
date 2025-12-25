@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home/Home";
 import QuoteRequest from "./pages/QuoteRequest/QuoteRequest";
 import TrackingPage from "./pages/Tracking/TrackingPage";
+import TrackingSearchPage from "./pages/Tracking/TrackingSearchPage";
 import NotFound from "./pages/NotFound/NotFound";
 import BookingDashboard from "./pages/Demos/Booking/BookingDashboard";
 import BookingCalendar from "./pages/Demos/Booking/BookingCalendar";
@@ -95,6 +96,7 @@ export default function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/quote-request" element={<QuoteRequest />} />
+            <Route path="/track-quote" element={<TrackingSearchPage />} />
             <Route path="/track/:trackingId" element={<TrackingPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>

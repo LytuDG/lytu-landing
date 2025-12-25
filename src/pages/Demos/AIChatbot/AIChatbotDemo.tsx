@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, type ReactNode } from "react";
 import {
   Send,
   Bot,
@@ -265,20 +265,24 @@ function FormattedText({ text }: { text: string }) {
 function LineParser({ line }: { line: string }) {
   const { t } = useTranslation();
 
-  let parts: (string | React.ReactNode)[] = [line];
+  // 1. Initial string split into parts by Formatting (Bold/Italic)
+  let parts: (string | ReactNode)[] = [line];
 
   // Parse Bold **...**
   parts = parts.flatMap((part) => {
     if (typeof part !== "string") return part;
     const regex = /\*\*(.*?)\*\*/g;
-    const result: (string | React.ReactNode)[] = [];
+    const result: (string | ReactNode)[] = [];
     let lastIndex = 0;
     let match;
 
     while ((match = regex.exec(part)) !== null) {
       result.push(part.slice(lastIndex, match.index));
       result.push(
-        <strong key={match.index} className="font-bold text-white text-base">
+        <strong
+          key={`bold-${match.index}`}
+          className="font-bold text-white text-base"
+        >
           {match[1]}
         </strong>
       );
@@ -292,14 +296,14 @@ function LineParser({ line }: { line: string }) {
   parts = parts.flatMap((part) => {
     if (typeof part !== "string") return part;
     const regex = /\*(.*?)\*/g;
-    const result: (string | React.ReactNode)[] = [];
+    const result: (string | ReactNode)[] = [];
     let lastIndex = 0;
     let match;
 
     while ((match = regex.exec(part)) !== null) {
       result.push(part.slice(lastIndex, match.index));
       result.push(
-        <em key={match.index} className="italic text-cyan-300">
+        <em key={`italic-${match.index}`} className="italic text-cyan-300">
           {match[1]}
         </em>
       );
@@ -309,34 +313,112 @@ function LineParser({ line }: { line: string }) {
     return result;
   });
 
-  // Parse Links
-  parts = parts.flatMap((part) => {
-    if (typeof part !== "string") return part;
-    const regex = /(\/[a-zA-Z0-9\-\#\/]+)/g;
-    const result: (string | React.ReactNode)[] = [];
-    let lastIndex = 0;
-    let match;
+  // 2. Deep Link Processing Function (Recursively processes strings inside React elements)
+  const processLinksDeeply = (nodes: (string | ReactNode)[]): ReactNode[] => {
+    return nodes.flatMap((node) => {
+      // If it's a string, apply link parsing
+      if (typeof node === "string") {
+        let stringParts: (string | ReactNode)[] = [node];
 
-    while ((match = regex.exec(part)) !== null) {
-      const link = match[1];
-      if (link.length > 1) {
-        result.push(part.slice(lastIndex, match.index));
-        result.push(
-          <Link
-            key={match.index}
-            to={link}
-            className="text-cyan-400 font-bold underline decoration-cyan-500/30 hover:decoration-cyan-400 transition-all px-1.5 py-0.5 rounded-md bg-cyan-400/10 inline-flex items-center gap-1 group"
-          >
-            {link === "/quote-request" ? t("chatbot.quoteLabel") : link}
-            <Sparkles size={10} className="group-hover:animate-pulse" />
-          </Link>
-        );
-        lastIndex = regex.lastIndex;
+        // A. Parse Markdown Links [text](url)
+        stringParts = stringParts.flatMap((part) => {
+          if (typeof part !== "string") return part;
+          const regex = /\[(.*?)\]\((.*?)\)/g;
+          const res: (string | ReactNode)[] = [];
+          let last = 0;
+          let m;
+          while ((m = regex.exec(part)) !== null) {
+            res.push(part.slice(last, m.index));
+            res.push(
+              <Link
+                key={`md-link-${m.index}`}
+                to={m[2]}
+                className="text-cyan-400 font-bold underline decoration-cyan-500/30 hover:decoration-cyan-400 transition-all px-1.5 py-0.5 rounded-md bg-cyan-400/10 inline-flex items-center gap-1 group"
+              >
+                {m[1]}
+                <Sparkles size={10} className="group-hover:animate-pulse" />
+              </Link>
+            );
+            last = regex.lastIndex;
+          }
+          res.push(part.slice(last));
+          return res;
+        });
+
+        // B. Parse URLs (http/https)
+        stringParts = stringParts.flatMap((part) => {
+          if (typeof part !== "string") return part;
+          const regex = /(https?:\/\/[^\s]+)/g;
+          const res: (string | ReactNode)[] = [];
+          let last = 0;
+          let m;
+          while ((m = regex.exec(part)) !== null) {
+            res.push(part.slice(last, m.index));
+            res.push(
+              <a
+                key={`url-${m.index}`}
+                href={m[1]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-400 font-bold underline decoration-cyan-500/30 hover:decoration-cyan-400 transition-all px-1.5 py-0.5 rounded-md bg-cyan-400/10 inline-flex items-center gap-1 group"
+              >
+                {m[1].replace(/^https?:\/\/(www\.)?/, "").split("/")[0]}
+                <Sparkles size={10} className="group-hover:animate-pulse" />
+              </a>
+            );
+            last = regex.lastIndex;
+          }
+          res.push(part.slice(last));
+          return res;
+        });
+
+        // C. Parse Bare Paths (e.g. /quote-request)
+        stringParts = stringParts.flatMap((part) => {
+          if (typeof part !== "string") return part;
+          // Updated regex to include common URL chars like ?, =, &, %, ., but excluding trailing dots
+          const regex = /(\/[a-zA-Z0-9\-\#\/_?=&%]+)/g;
+          const res: (string | ReactNode)[] = [];
+          let last = 0;
+          let m;
+          while ((m = regex.exec(part)) !== null) {
+            const link = m[1];
+            if (link.length > 1) {
+              res.push(part.slice(last, m.index));
+              res.push(
+                <Link
+                  key={`bare-link-${m.index}`}
+                  to={link}
+                  className="text-cyan-400 font-bold underline decoration-cyan-500/30 hover:decoration-cyan-400 transition-all px-1.5 py-0.5 rounded-md bg-cyan-400/10 inline-flex items-center gap-1 group"
+                >
+                  {link === "/quote-request" ? t("chatbot.quoteLabel") : link}
+                  <Sparkles size={10} className="group-hover:animate-pulse" />
+                </Link>
+              );
+              last = regex.lastIndex;
+            }
+          }
+          res.push(part.slice(last));
+          return res;
+        });
+
+        return stringParts;
       }
-    }
-    result.push(part.slice(lastIndex));
-    return result;
-  });
 
-  return <>{parts}</>;
+      // If it's a React element, recursively process its children
+      if (
+        React.isValidElement(node) &&
+        (node as React.ReactElement<any>).props.children
+      ) {
+        const element = node as React.ReactElement<any>;
+        const children = React.Children.toArray(element.props.children);
+        return React.cloneElement(element, {
+          children: processLinksDeeply(children as (string | ReactNode)[]),
+        } as any);
+      }
+
+      return [node];
+    });
+  };
+
+  return <>{processLinksDeeply(parts)}</>;
 }

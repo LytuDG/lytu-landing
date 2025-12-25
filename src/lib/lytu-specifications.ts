@@ -42,13 +42,13 @@ REGLAS:
   }
 - ${
     isEn
-      ? 'Natural links: "Request it here: /quote-request".'
-      : 'Enlaces naturales: "Pídela aquí: /quote-request".'
+      ? 'Natural links: "Request it here: /quote-request". ALWAYS use the leading / slash for internal links.'
+      : 'Enlaces naturales: "Pídela aquí: /quote-request". SIEMPRE usa la barra / inicial para enlaces internos.'
   }
 - ${
     isEn
-      ? "IMPORTANT: ALWAYS respond in " + (isEn ? "English" : "Spanish") + "."
-      : "IMPORTANTE: SIEMPRE responde en " + (isEn ? "Inglés" : "Español") + "."
+      ? "IMPORTANT: ALWAYS respond in English."
+      : "IMPORTANTE: SIEMPRE responde en Español."
   }
 `;
 };

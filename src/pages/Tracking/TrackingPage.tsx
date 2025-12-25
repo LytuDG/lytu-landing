@@ -76,11 +76,11 @@ export default function TrackingPage() {
           </h1>
           <p className="text-slate-400 mb-8">{t("tracking.notFoundDesc")}</p>
           <Link
-            to="/"
+            to="/track-quote"
             className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
           >
             <ArrowLeft size={18} />
-            {t("quoteRequest.backToHome")}
+            {t("nav.tracking")}
           </Link>
         </div>
       </div>

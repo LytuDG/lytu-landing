@@ -6,6 +6,7 @@
     "solutions": "Soluciones",
     "portfolio": "Portafolio",
     "contact": "Contacto",
+    "tracking": "Seguimiento",
     "login": "Iniciar Sesión"
   },
   "hero": {
@@ -25,27 +26,27 @@
     "visionText": "Ser líderes en innovación digital en América Latina."
   },
   "services": {
-    "title": "Ingeniería Digital Integral",
-    "subtitle": "Desde la idea conceptual hasta el despliegue final. Cubrimos todo el ciclo de vida del desarrollo de software moderno.",
+    "title": "Ingeniería Digital Pro",
+    "subtitle": "No solo escribimos código; construimos activos tecnológicos diseñados para escalar. Sin burocracia, solo ingeniería de alto nivel enfocada en tu crecimiento.",
     "webDev": {
-      "title": "Desarrollo Web",
-      "description": "Sitios web y aplicaciones web progresivas (PWA) ultrarrápidas, escalables y optimizadas para SEO. Usamos tecnologías modernas como React, Next.js y Node."
+      "title": "Plataformas Web",
+      "description": "Sitios y aplicaciones web ultrarrápidas con Next.js y React. Optimizadas para SEO, conversiones y una experiencia de usuario impecable."
     },
     "aiAutomations": {
-      "title": "Automatizaciones con IA",
-      "description": "Optimizamos tus procesos de negocio con inteligencia artificial y automatización inteligente. Chatbots avanzados, procesamiento de documentos y análisis predictivo."
+      "title": "Ecosistemas con IA",
+      "description": "Integramos inteligencia artificial para automatizar procesos críticos. Desde agentes autónomos hasta modelos de análisis predictivo a medida."
     },
     "mobileDev": {
       "title": "Apps Móviles",
-      "description": "Desarrollo nativo e híbrido para iOS y Android. Creamos experiencias fluidas que tus usuarios amarán llevar en su bolsillo."
+      "description": "Desarrollo nativo e híbrido para iOS y Android. Creamos experiencias fluidas y potentes que tus usuarios llevarán en su bolsillo."
     },
     "customSoftware": {
       "title": "Software a Medida",
-      "description": "Sistemas de gestión, dashboards analíticos y herramientas internas diseñadas específicamente para resolver los problemas únicos de tu empresa."
+      "description": "Sistemas de gestión, dashboards y herramientas internas que se adaptan al 100% a tu flujo de trabajo, eliminando ineficiencias."
     },
     "design": {
-      "title": "Diseño & Branding",
-      "description": "Identidad visual completa: logos, paletas de colores, tipografías y assets gráficos. Creamos la imagen de tu marca desde cero para que destaque."
+      "title": "Diseño & UX",
+      "description": "Identidad visual y diseño de interfaces que no solo deslumbran, sino que están pensadas para maximizar la usabilidad y el impacto de marca."
     }
   },
   "philosophy": {
@@ -159,6 +160,35 @@
     "cta": "Iniciar Proyecto",
     "or": "O escríbenos a",
     "back": "Volver a opciones",
+    "mainCTA": {
+      "title": "Comienza tu Proyecto",
+      "description": "Utiliza nuestro sistema de cotización inteligente para definir tus requerimientos y recibir una propuesta detallada en tiempo récord."
+    },
+    "directChannels": {
+      "title": "Canales Directos",
+      "description": "Looking for an immediate response? We are available on these channels."
+    },
+    "whatsapp": {
+      "title": "WhatsApp Business",
+      "description": "Atención rápida para consultas técnicas y comerciales.",
+      "cta": "Hablar con un experto",
+      "status": "Respuesta inmediata vía chat"
+    },
+    "email": {
+      "title": "Email de Soporte",
+      "description": "Consultas formales y soporte técnico."
+    },
+    "socials": {
+      "title": "Nuestra Red",
+      "subtitle": "Síguenos en nuestras redes"
+    },
+    "form": {
+      "title": "Envíanos un mensaje",
+      "namePlaceholder": "Nombre completo",
+      "phonePlaceholder": "WhatsApp / Teléfono",
+      "messagePlaceholder": "Describe brevemente tu visión o requerimientos...",
+      "success": "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto."
+    },
     "simpleOption": {
       "title": "Contacto Rápido",
       "description": "Para consultas generales, dudas o saludos. Te responderemos a la brevedad."
@@ -223,12 +253,20 @@
     "submit": "Enviar Solicitud"
   },
   "footer": {
-    "description": "Soluciones digitales para negocios modernos",
-    "quickLinks": "Enlaces Rápidos",
-    "services": "Servicios",
-    "contact": "Contacto",
-    "followUs": "Síguenos",
-    "rights": "Todos los derechos reservados"
+    "description": "Ingeniería de software con pasión y precisión. Construimos los activos tecnológicos que tu negocio necesita para escalar sin límites.",
+    "services": {
+      "title": "Servicios",
+      "web": "Plataformas Web",
+      "mobile": "Apps Móviles",
+      "ai": "Ecosistemas con IA",
+      "software": "Software a Medida"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacidad",
+      "terms": "Términos y Condiciones"
+    },
+    "rights": "Lytu Software Development. Todos los derechos reservados."
   },
   "login": {
     "title": "Iniciar Sesión",
@@ -283,6 +321,65 @@
       "finalized": "Finalizado"
     }
   },
+  "aiServices": {
+    "badge": "Lo último en Lytu",
+    "title": "Futuro impulsado por",
+    "titleHighlight": "IA",
+    "subtitle": "Implementamos inteligencia artificial práctica que trabaja para tu negocio. No es ciencia ficción, es tecnología que optimiza tus ingresos hoy mismo.",
+    "salesChatbot": {
+      "title": "AI Sales Chatbot",
+      "badge": "Recomendado",
+      "description": "Tu web convertida en un vendedor experto 24/7. Capta, califica y agenda reuniones automáticamente sin que muevas un dedo.",
+      "quote": "Tu web trabaja para ti mientras tú descansas.",
+      "features": [
+        "Respuestas instantáneas y humanas",
+        "Calificación de leads en tiempo real",
+        "Explicación detallada de servicios",
+        "Integración con cotizaciones",
+        "Agendamiento automático en calendario"
+      ]
+    },
+    "leadQualification": {
+      "title": "Calificación Automática",
+      "badge": "Eficiencia",
+      "description": "IA que analiza cada interacción y te alerta sobre las oportunidades con mayor probabilidad de cierre.",
+      "quote": "Este cliente está listo para comprar — actúa ahora.",
+      "target": "Ideal para Agencias y B2B"
+    },
+    "smartQuotes": {
+      "title": "Cotizaciones Inteligentes",
+      "badge": "Conversión",
+      "description": "Reduce el ciclo de venta. La IA analiza requerimientos complejos y propone rangos de precio precisos al instante.",
+      "features": [
+        "Análisis de requerimientos técnicos",
+        "Sugerencia de planes a medida",
+        "Cálculo de rangos (Seguro y preciso)",
+        "Aceleración del cierre de ventas"
+      ]
+    },
+    "supportAuto": {
+      "title": "Resolución de Soporte",
+      "badge": "Ahorro",
+      "description": "Reduce la carga de tickets humanos. Una IA que aprende de tus procesos para resolver dudas en segundos.",
+      "target": "Perfecto para E-commerce y SaaS"
+    },
+    "contentGen": {
+      "title": "Generación de Activos",
+      "badge": "Complemento",
+      "description": "Ahorra semanas de trabajo creativo. Asistente para descripciones, blogs y anuncios con el tono de tu marca.",
+      "warning": "Como apoyo estratégico"
+    },
+    "dataAnalysis": {
+      "title": "Insights de Negocio",
+      "badge": "Estrategia",
+      "description": "Olvida los dashboards confusos. Recibe respuestas claras a tus preguntas de negocio en lenguaje natural.",
+      "examples": [
+        "Tu producto estrella este mes es X",
+        "Picos de tráfico los domingos",
+        "Optimización necesaria en el flujo de pago"
+      ]
+    }
+  },
   "aiNavigator": {
     "placeholder": "¿Qué quieres construir hoy?",
     "suggestions": {
@@ -306,5 +403,12 @@
     "userLabel": "Tú",
     "assistantLabel": "Lytus",
     "quoteLabel": "Solicitar Cotización"
+  },
+  "trackingInput": {
+    "title": "¿Ya tienes una cotización?",
+    "subtitle": "Introduce tu código de seguimiento para ver el estado de tu proyecto.",
+    "placeholder": "Código (ej. QT-XXXX)",
+    "cta": "Rastrear",
+    "error": "Por favor, introduce un código válido"
   }
 }
