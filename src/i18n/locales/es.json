@@ -4,7 +4,7 @@
     "services": "Servicios",
     "philosophy": "Filosofía",
     "solutions": "Soluciones",
-    "portfolio": "Portafolio",
+    "clients": "Clientes",
     "contact": "Contacto",
     "tracking": "Seguimiento",
     "login": "Iniciar Sesión"
@@ -121,34 +121,31 @@
       "description": "CMS optimizado para SEO. Publica artículos, noticias y novedades con un editor intuitivo y estructura amigable."
     }
   },
-  "portfolio": {
-    "title": "Nuestro Trabajo",
-    "subtitle": "Proyectos que estamos desarrollando y casos que ya hemos lanzado.",
-    "viewGithub": "Ver Github",
-    "viewCaseStudy": "Ver caso de estudio",
-    "learnMore": "Conoce más",
-    "viewProject": "Ver proyecto",
+  "clients": {
+    "title": "Nuestros Clientes",
+    "subtitle": "Empresas que confían en nosotros para construir sus soluciones tecnológicas.",
+    "visitWebsite": "Visitar sitio web",
     "status": {
-      "launched": "Lanzado",
+      "launched": "En Producción",
       "upcomingLaunch": "Próximo Lanzamiento",
       "inDevelopment": "En Desarrollo"
     },
-    "projects": {
+    "companies": {
       "tuviaje": {
-        "title": "TuViaje",
-        "description": "Aplicación móvil para viajeros. Gestión de itinerarios, reservas y recomendaciones locales en una sola app."
+        "name": "TuViaje",
+        "description": "Plataforma de gestión de viajes y experiencias turísticas."
+      },
+      "ahorabaila": {
+        "name": "Ahora Baila",
+        "description": "Academia de baile con presencia digital moderna."
       },
       "novacorp": {
-        "title": "Nova Corp",
-        "description": "Plataforma de gestión financiera para empresas. Dashboard intuitivo con análisis de datos y reportes automatizados."
+        "name": "NovaCorp",
+        "description": "Soluciones financieras corporativas de nueva generación."
       },
-      "imago": {
-        "title": "Imago Creations",
-        "description": "Plataforma para solicitar y personalizar ropa corporativa. Diseño intuitivo, gestión de pedidos y seguimiento en tiempo real."
-      },
-      "baila": {
-        "title": "Baila Conmigo",
-        "description": "Sitio web moderno para academia de baile. Calendario de clases, galería de eventos y sistema de inscripción online."
+      "imagocreations": {
+        "name": "Imago Creations",
+        "description": "Plataforma de personalización de ropa corporativa."
       }
     }
   },

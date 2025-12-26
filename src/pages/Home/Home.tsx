@@ -3,7 +3,7 @@ import ServicesSection from "./components/ServicesSection";
 import AIServicesSection from "./components/AIServicesSection";
 import PhilosophySection from "./components/PhilosophySection";
 import ReadySolutionsSection from "./components/ReadySolutionsSection";
-import PortfolioSection from "./components/PortfolioSection";
+import ClientsSection from "./components/ClientsSection";
 import ContactSection from "./components/ContactSection";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       <AIServicesSection />
       <PhilosophySection />
       <ReadySolutionsSection />
-      <PortfolioSection />
+      <ClientsSection />
       <ContactSection />
     </main>
   );

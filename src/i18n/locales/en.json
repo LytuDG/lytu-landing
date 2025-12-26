@@ -4,7 +4,7 @@
     "services": "Services",
     "philosophy": "Philosophy",
     "solutions": "Solutions",
-    "portfolio": "Portfolio",
+    "clients": "Clients",
     "contact": "Contact",
     "tracking": "Tracking",
     "login": "Login"
@@ -121,34 +121,31 @@
       "description": "SEO-optimized CMS. Publish articles, news and updates with an intuitive editor and friendly structure."
     }
   },
-  "portfolio": {
-    "title": "Our Work",
-    "subtitle": "Projects we are developing and cases we have already launched.",
-    "viewGithub": "View Github",
-    "viewCaseStudy": "View case study",
-    "learnMore": "Learn more",
-    "viewProject": "View project",
+  "clients": {
+    "title": "Our Clients",
+    "subtitle": "Companies that trust us to build their technological solutions.",
+    "visitWebsite": "Visit website",
     "status": {
-      "launched": "Launched",
+      "launched": "In Production",
       "upcomingLaunch": "Upcoming Launch",
       "inDevelopment": "In Development"
     },
-    "projects": {
+    "companies": {
       "tuviaje": {
-        "title": "TuViaje",
-        "description": "Mobile application for travelers. Itinerary management, reservations and local recommendations in one app."
+        "name": "TuViaje",
+        "description": "Travel management and tourism experiences platform."
+      },
+      "ahorabaila": {
+        "name": "Ahora Baila",
+        "description": "Dance academy with modern digital presence."
       },
       "novacorp": {
-        "title": "Nova Corp",
-        "description": "Financial management platform for companies. Intuitive dashboard with data analysis and automated reports."
+        "name": "NovaCorp",
+        "description": "Next-generation corporate financial solutions."
       },
-      "imago": {
-        "title": "Imago Creations",
-        "description": "Platform to request and customize corporate clothing. Intuitive design, order management and real-time tracking."
-      },
-      "baila": {
-        "title": "Baila Conmigo",
-        "description": "Modern website for dance academy. Class calendar, event gallery and online registration system."
+      "imagocreations": {
+        "name": "Imago Creations",
+        "description": "Corporate clothing customization platform."
       }
     }
   },

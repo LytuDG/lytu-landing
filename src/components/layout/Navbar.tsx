@@ -86,10 +86,10 @@ export default function Navbar({}: NavbarProps) {
             {t("nav.solutions")}
           </button>
           <button
-            onClick={() => handleNavClick("proyectos")}
+            onClick={() => handleNavClick("clientes")}
             className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
           >
-            {t("nav.portfolio")}
+            {t("nav.clients")}
           </button>
           <button
             onClick={() => navigate("/track-quote")}
@@ -138,7 +138,7 @@ export default function Navbar({}: NavbarProps) {
             { key: "servicios", label: t("nav.services") },
             { key: "filosofía", label: t("nav.philosophy") },
             { key: "soluciones", label: t("nav.solutions") },
-            { key: "proyectos", label: t("nav.portfolio") },
+            { key: "clientes", label: t("nav.clients") },
             { key: "/track-quote", label: t("nav.tracking"), isRoute: true },
             { key: "contacto", label: t("nav.contact") },
           ].map((item: any) => (
