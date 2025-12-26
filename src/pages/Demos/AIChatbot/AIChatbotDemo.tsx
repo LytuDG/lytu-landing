@@ -6,6 +6,7 @@ import {
   RefreshCcw,
   Loader2,
   ArrowLeft,
+  ArrowRight,
   Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -329,16 +330,37 @@ function LineParser({ line }: { line: string }) {
           let m;
           while ((m = regex.exec(part)) !== null) {
             res.push(part.slice(last, m.index));
-            res.push(
-              <Link
-                key={`md-link-${m.index}`}
-                to={m[2]}
-                className="text-cyan-400 font-bold underline decoration-cyan-500/30 hover:decoration-cyan-400 transition-all px-1.5 py-0.5 rounded-md bg-cyan-400/10 inline-flex items-center gap-1 group"
-              >
-                {m[1]}
-                <Sparkles size={10} className="group-hover:animate-pulse" />
-              </Link>
-            );
+            const text = m[1];
+            const url = m[2];
+
+            if (url === "/quote-request") {
+              res.push(
+                <div key={`md-cta-${m.index}`} className="block my-3">
+                  <Link
+                    to={url}
+                    className="flex w-fit items-center gap-2 px-5 py-2.5 rounded-xl bg-linear-to-r from-cyan-500 to-indigo-600 text-white font-bold text-sm hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all group"
+                  >
+                    <Sparkles size={16} />
+                    {text}
+                    <ArrowRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </Link>
+                </div>
+              );
+            } else {
+              res.push(
+                <Link
+                  key={`md-link-${m.index}`}
+                  to={url}
+                  className="text-cyan-400 font-bold underline decoration-cyan-500/30 hover:decoration-cyan-400 transition-all px-1.5 py-0.5 rounded-md bg-cyan-400/10 inline-flex items-center gap-1 group"
+                >
+                  {text}
+                  <Sparkles size={10} className="group-hover:animate-pulse" />
+                </Link>
+              );
+            }
             last = regex.lastIndex;
           }
           res.push(part.slice(last));

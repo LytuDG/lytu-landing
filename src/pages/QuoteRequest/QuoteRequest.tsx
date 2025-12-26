@@ -19,7 +19,7 @@ import {
   Copy,
   ExternalLink,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   submitQuoteRequest,
   uploadLogo,
@@ -49,6 +49,7 @@ type QuoteFormData = {
 
 export default function QuoteRequest() {
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -79,11 +80,6 @@ export default function QuoteRequest() {
   const businessType = watch("business_type");
   const contactPreference = watch("contact_preference");
 
-  // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const availableSystems = [
     { id: "booking", label: "Booking System", icon: "📅" },
     { id: "quotes", label: "Quote System", icon: "💼" },
@@ -92,6 +88,18 @@ export default function QuoteRequest() {
     { id: "inventory", label: "Inventory", icon: "📦" },
     { id: "blog", label: "Blog & Content", icon: "📝" },
   ];
+
+  // Scroll to top on mount and check for URL params
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const serviceParam = searchParams.get("service");
+    if (serviceParam) {
+      const isValidSystem = availableSystems.some((s) => s.id === serviceParam);
+      if (isValidSystem) {
+        setValue("selected_systems", [serviceParam]);
+      }
+    }
+  }, [searchParams, setValue]);
 
   const businessTypes = [
     "retail",

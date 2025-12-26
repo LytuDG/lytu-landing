@@ -26,27 +26,27 @@
     "visionText": "Ser líderes en innovación digital en América Latina."
   },
   "services": {
-    "title": "Ingeniería Digital Pro",
-    "subtitle": "No solo escribimos código; construimos activos tecnológicos diseñados para escalar. Sin burocracia, solo ingeniería de alto nivel enfocada en tu crecimiento.",
+    "title": "Soluciones Tecnológicas Integrales",
+    "subtitle": "Transformamos requerimientos complejos en activos digitales escalables. Fusionamos excelencia técnica con estrategia de negocio para impulsar tu crecimiento.",
     "webDev": {
-      "title": "Plataformas Web",
-      "description": "Sitios y aplicaciones web ultrarrápidas con Next.js y React. Optimizadas para SEO, conversiones y una experiencia de usuario impecable."
+      "title": "Desarrollo Web Corporativo",
+      "description": "Arquitecturas modernas y escalables. Desarrollamos plataformas web de alto rendimiento optimizadas para conversión, seguridad y posicionamiento global."
     },
     "aiAutomations": {
-      "title": "Ecosistemas con IA",
-      "description": "Integramos inteligencia artificial para automatizar procesos críticos. Desde agentes autónomos hasta modelos de análisis predictivo a medida."
+      "title": "Inteligencia Artificial Aplicada",
+      "description": "Automatización inteligente de procesos de negocio. Implementamos agentes autónomos y modelos predictivos que optimizan la eficiencia operativa."
     },
     "mobileDev": {
-      "title": "Apps Móviles",
-      "description": "Desarrollo nativo e híbrido para iOS y Android. Creamos experiencias fluidas y potentes que tus usuarios llevarán en su bolsillo."
+      "title": "Aplicaciones Móviles Nativas",
+      "description": "Ingeniería móvil para iOS y Android. Creamos ecosistemas de aplicativos robustos que extienden el alcance de tu negocio al bolsillo del usuario."
     },
     "customSoftware": {
       "title": "Software a Medida",
-      "description": "Sistemas de gestión, dashboards y herramientas internas que se adaptan al 100% a tu flujo de trabajo, eliminando ineficiencias."
+      "description": "Sistemas de gestión empresarial (ERP/CRM) personalizados. Digitalizamos flujos de trabajo específicos para maximizar la productividad y el control."
     },
     "design": {
-      "title": "Diseño & UX",
-      "description": "Identidad visual y diseño de interfaces que no solo deslumbran, sino que están pensadas para maximizar la usabilidad y el impacto de marca."
+      "title": "Diseño de Producto Digital",
+      "description": "Interfaces de usuario (UI/UX) centradas en la funcionalidad y la marca. Diseñamos experiencias intuitivas que retienen usuarios y comunican valor."
     }
   },
   "philosophy": {
@@ -378,7 +378,7 @@
     }
   },
   "aiNavigator": {
-    "placeholder": "¿Qué quieres construir hoy?",
+    "placeholder": "Describe tu necesidad tecnológica o proyecto...",
     "suggestions": {
       "ecommerce": "Tienda Online",
       "mobile": "App iOS/Android",
@@ -399,7 +399,8 @@
     "error": "Ups, parece que mis circuitos se cruzaron. ¿Reintentamos? 🛠️",
     "userLabel": "Tú",
     "assistantLabel": "Lytus",
-    "quoteLabel": "Solicitar Cotización"
+    "quoteLabel": "Solicitar Cotización",
+    "requestQuoteButton": "Solicitar Cotización"
   },
   "trackingInput": {
     "title": "¿Ya tienes una cotización?",

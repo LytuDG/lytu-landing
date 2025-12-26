@@ -26,8 +26,8 @@
     "visionText": "Be leaders in digital innovation in Latin America."
   },
   "services": {
-    "title": "Pro Digital Engineering",
-    "subtitle": "We don't just write code; we build technological assets designed to scale. No bureaucracy, just high-level engineering focused on your growth.",
+    "title": "Integrated Technology Solutions",
+    "subtitle": "We transform complex requirements into scalable digital assets. We combine technical excellence with business strategy to drive your growth.",
     "webDev": {
       "title": "Web Platforms",
       "description": "Ultra-fast websites and web apps with Next.js and React. Optimized for SEO, conversions, and a flawless user experience."
@@ -399,7 +399,8 @@
     "error": "Oops, it seems my circuits got crossed. Shall we retry? 🛠️",
     "userLabel": "You",
     "assistantLabel": "Lytus",
-    "quoteLabel": "Request Quote"
+    "quoteLabel": "Request Quote",
+    "requestQuoteButton": "Request Quote"
   },
   "trackingInput": {
     "title": "Already have a quote?",
