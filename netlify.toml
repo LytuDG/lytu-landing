@@ -1,0 +1,85 @@
+# Configuración de Netlify para Lytu Landing con SSR
+
+[build]
+  command = "npm run build"
+  publish = "dist/client"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["dist/**", "index.html"]
+
+# Headers de seguridad y optimización
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Headers para archivos estáticos (cache largo)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Headers para imágenes
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Headers para fuentes
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# Redirects para SSR - todas las rutas van a la función serverless
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/ssr"
+  status = 200
+  force = false
+  conditions = {Role = []}
+
+# Redirect www to non-www (opcional, ajusta según tu preferencia)
+[[redirects]]
+  from = "https://www.lytu.tech/*"
+  to = "https://lytu.tech/:splat"
+  status = 301
+  force = true
+
+# Redirect http to https
+[[redirects]]
+  from = "http://lytu.tech/*"
+  to = "https://lytu.tech/:splat"
+  status = 301
+  force = true
+
+# Error pages personalizadas
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
+
+# Plugin de optimización de imágenes (opcional)
+# [[plugins]]
+#   package = "@netlify/plugin-nextjs"

@@ -1,0 +1,22 @@
+# Robots.txt para Lytu
+# https://lytu.tech/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://lytu.tech/sitemap.xml
+
+# Crawl-delay (opcional, ajusta según necesites)
+# Crawl-delay: 1
+
+# Bloquear archivos innecesarios
+Disallow: /admin/
+Disallow: /.vite/
+Disallow: /dist/
+Disallow: /node_modules/
+
+# Permitir crawling de recursos importantes
+Allow: /assets/
+Allow: /og-image.png
+Allow: /favicon.svg

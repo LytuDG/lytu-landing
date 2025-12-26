@@ -1,0 +1,10 @@
+# Redirects para Lytu Landing
+
+# Redirect www to non-www
+https://www.lytu.tech/* https://lytu.tech/:splat 301!
+
+# Redirect http to https  
+http://lytu.tech/* https://lytu.tech/:splat 301!
+
+# SPA fallback - todas las rutas van a la función SSR
+/*  /.netlify/functions/ssr  200
