@@ -18,13 +18,13 @@ export default defineConfig({
     },
   },
   ssr: {
-    noExternal: ["react-router-dom", "react-i18next", "i18next"],
+    noExternal: ["react-router-dom", "react-i18next", "i18next", "react-is"],
     resolve: {
       conditions: ["node", "import", "module", "default"],
       externalConditions: ["node"],
     },
   },
   optimizeDeps: {
-    include: ["react", "react-dom", "react-router-dom"],
+    include: ["react", "react-dom", "react-router-dom", "react-is"],
   },
 });
