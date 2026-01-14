@@ -26,3 +26,8 @@ bun.lockb
 
 # Netlify
 .netlify
+
+# Environment
+.env
+.env.local
+.env.*.local

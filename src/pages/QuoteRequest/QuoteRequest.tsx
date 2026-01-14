@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import {
   ArrowLeft,
-  Upload,
   Check,
   Building2,
   Mail,
@@ -12,7 +11,6 @@ import {
   Send,
   Sparkles,
   X,
-  Trash2,
   Loader2,
   Clock,
   Phone,
@@ -22,7 +20,6 @@ import {
 import { Link, useSearchParams } from "react-router-dom";
 import {
   submitQuoteRequest,
-  uploadLogo,
   type QuoteFormSubmission,
 } from "../../lib/quoteService";
 import type {
@@ -44,7 +41,7 @@ type QuoteFormData = {
   contact_preference: ContactPreference;
   whatsapp_number?: string;
   extra_details?: string;
-  logoFile?: FileList;
+  needs_logo?: boolean;
 };
 
 export default function QuoteRequest() {
@@ -65,7 +62,6 @@ export default function QuoteRequest() {
     },
   });
 
-  const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
@@ -73,7 +69,6 @@ export default function QuoteRequest() {
   const [trackingCode, setTrackingCode] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Watch values for conditional rendering
   const selectedSystems = watch("selected_systems");
@@ -137,6 +132,7 @@ export default function QuoteRequest() {
             ? data.whatsapp_number
             : undefined,
         extra_details: data.extra_details,
+        needs_logo: data.needs_logo,
       };
 
       // Enviar solicitud
@@ -146,15 +142,9 @@ export default function QuoteRequest() {
         throw new Error(result.error || "Error al enviar la solicitud");
       }
 
-      // Si hay logo, subirlo
-      if (data.logoFile && data.logoFile[0] && result.public_tracking_id) {
-        await uploadLogo(data.logoFile[0], result.public_tracking_id);
-      }
-
       setTrackingCode(result.tracking_code || null);
       setSubmitStatus("success");
       reset();
-      setLogoPreview(null);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error: any) {
       console.error("Error al enviar:", error);
@@ -171,28 +161,6 @@ export default function QuoteRequest() {
       ? current.filter((item) => item !== id)
       : [...current, id];
     setValue("selected_systems", updated);
-  };
-
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setLogoPreview(url);
-    }
-  };
-
-  const removeLogo = () => {
-    setLogoPreview(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-    setValue("logoFile", undefined);
-  };
-
-  const handleUploadClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
   };
 
   if (submitStatus === "success") {
@@ -352,7 +320,7 @@ export default function QuoteRequest() {
                   </div>
                   {errors.email && (
                     <p className="text-red-400 text-sm ml-1">
-                      This field is required
+                      {t("common.required")}
                     </p>
                   )}
                 </div>
@@ -373,7 +341,7 @@ export default function QuoteRequest() {
                   </div>
                   {errors.company_name && (
                     <p className="text-red-400 text-sm ml-1">
-                      This field is required
+                      {t("common.required")}
                     </p>
                   )}
                 </div>
@@ -381,14 +349,15 @@ export default function QuoteRequest() {
 
               <div className="space-y-3">
                 <label className="text-sm font-medium text-slate-300 ml-1">
-                  Business Type <span className="text-red-400">*</span>
+                  {t("quoteRequest.fields.businessType")}{" "}
+                  <span className="text-red-400">*</span>
                 </label>
                 <select
                   {...register("business_type", { required: true })}
                   className="w-full px-6 py-4 rounded-2xl bg-slate-950/50 border border-white/10 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all appearance-none cursor-pointer"
                 >
                   <option value="" className="bg-slate-900 text-slate-400">
-                    Select an option
+                    {t("common.select")}
                   </option>
                   {businessTypes.map((type) => (
                     <option
@@ -402,7 +371,7 @@ export default function QuoteRequest() {
                 </select>
                 {errors.business_type && (
                   <p className="text-red-400 text-sm ml-1">
-                    This field is required
+                    {t("common.required")}
                   </p>
                 )}
               </div>
@@ -410,7 +379,7 @@ export default function QuoteRequest() {
               {businessType === "other" && (
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-slate-300 ml-1">
-                    Specify your business type
+                    {t("quoteRequest.fields.customBusinessType")}
                   </label>
                   <input
                     {...register("custom_business_type")}
@@ -421,66 +390,30 @@ export default function QuoteRequest() {
                 </div>
               )}
 
-              {/* Logo Upload */}
+              {/* Needs Logo Checkbox */}
               <div className="space-y-4">
-                <label className="text-sm font-medium text-slate-300 ml-1 block">
-                  Company Logo (optional)
+                <label className="flex items-center gap-3 cursor-pointer group p-4 rounded-2xl border border-white/10 hover:border-indigo-500/50 hover:bg-indigo-500/5 transition-all">
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      {...register("needs_logo")}
+                      className="peer sr-only"
+                    />
+                    <div className="w-6 h-6 rounded-md border-2 border-slate-500 peer-checked:bg-indigo-500 peer-checked:border-indigo-500 transition-all" />
+                    <Check
+                      size={14}
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 transition-all font-bold"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-medium text-white group-hover:text-indigo-300 transition-colors">
+                      {t("quoteRequest.fields.needLogo")}
+                    </span>
+                    <span className="text-sm text-slate-400">
+                      {t("quoteRequest.fields.needLogoDesc")}
+                    </span>
+                  </div>
                 </label>
-
-                <div
-                  onClick={handleUploadClick}
-                  className={`w-full border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer group relative overflow-hidden ${
-                    logoPreview
-                      ? "border-indigo-500/50 bg-indigo-500/5"
-                      : "border-white/10 hover:border-indigo-500/50 hover:bg-indigo-500/5"
-                  }`}
-                >
-                  <input
-                    {...register("logoFile", {
-                      onChange: handleLogoChange,
-                    })}
-                    ref={(e) => {
-                      register("logoFile").ref(e);
-                      fileInputRef.current = e;
-                    }}
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                  />
-
-                  {logoPreview ? (
-                    <div className="relative z-10 flex flex-col items-center">
-                      <div className="w-24 h-24 mb-4 rounded-xl overflow-hidden border-2 border-white/10 bg-black/20">
-                        <img
-                          src={logoPreview}
-                          alt="Logo Preview"
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          removeLogo();
-                        }}
-                        className="flex items-center gap-2 text-red-400 hover:text-red-300 text-sm font-medium px-3 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 transition-colors"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                        Remove
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      <Upload className="w-8 h-8 text-slate-500 group-hover:text-indigo-400 mx-auto mb-3 transition-colors" />
-                      <p className="text-sm text-slate-400 mb-2 group-hover:text-slate-200 transition-colors">
-                        Drag your logo here or click to select
-                      </p>
-                      <p className="text-xs text-slate-600">
-                        PNG, JPG, SVG (Max 5MB)
-                      </p>
-                    </>
-                  )}
-                </div>
               </div>
             </section>
 
@@ -497,7 +430,7 @@ export default function QuoteRequest() {
 
               <div className="space-y-3">
                 <label className="text-sm font-medium text-slate-300 ml-1">
-                  What is the main problem you want to solve?{" "}
+                  {t("quoteRequest.fields.mainProblem")}{" "}
                   <span className="text-red-400">*</span>
                 </label>
                 <textarea
@@ -508,14 +441,14 @@ export default function QuoteRequest() {
                 />
                 {errors.main_problem && (
                   <p className="text-red-400 text-sm ml-1">
-                    This field is required
+                    {t("common.required")}
                   </p>
                 )}
               </div>
 
               <div className="space-y-4">
                 <label className="text-sm font-medium text-slate-300 ml-1 block">
-                  What systems do you need?{" "}
+                  {t("quoteRequest.fields.systems")}{" "}
                   <span className="text-red-400">*</span>
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -554,7 +487,7 @@ export default function QuoteRequest() {
                 </div>
                 {errors.selected_systems && (
                   <p className="text-red-400 text-sm ml-1">
-                    Select at least one system
+                    {t("common.required")}
                   </p>
                 )}
               </div>
@@ -567,7 +500,7 @@ export default function QuoteRequest() {
                   <DollarSign className="w-6 h-6 text-cyan-400" />
                 </div>
                 <h2 className="text-2xl font-bold text-white">
-                  Budget & Timeline
+                  {t("quoteRequest.sections.budgetTimeline")}
                 </h2>
               </div>
 
@@ -585,8 +518,14 @@ export default function QuoteRequest() {
                       <option value="" className="bg-slate-900 text-slate-400">
                         {t("common.select")}
                       </option>
-                      <option value="<1500" className="bg-slate-900 text-white">
-                        {t("quoteRequest.options.budget.<1500")}
+                      <option value="<650" className="bg-slate-900 text-white">
+                        {t("quoteRequest.options.budget.<650")}
+                      </option>
+                      <option
+                        value="650-1500"
+                        className="bg-slate-900 text-white"
+                      >
+                        {t("quoteRequest.options.budget.650-1500")}
                       </option>
                       <option
                         value="1500-4000"
@@ -594,14 +533,8 @@ export default function QuoteRequest() {
                       >
                         {t("quoteRequest.options.budget.1500-4000")}
                       </option>
-                      <option
-                        value="4000-8000"
-                        className="bg-slate-900 text-white"
-                      >
-                        {t("quoteRequest.options.budget.4000-8000")}
-                      </option>
-                      <option value="8000+" className="bg-slate-900 text-white">
-                        {t("quoteRequest.options.budget.8000+")}
+                      <option value="4000+" className="bg-slate-900 text-white">
+                        {t("quoteRequest.options.budget.4000+")}
                       </option>
                       <option
                         value="need_advice"
@@ -613,14 +546,14 @@ export default function QuoteRequest() {
                   </div>
                   {errors.budget_range && (
                     <p className="text-red-400 text-sm ml-1">
-                      This field is required
+                      {t("common.required")}
                     </p>
                   )}
                 </div>
 
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-slate-300 ml-1">
-                    When do you need the project?{" "}
+                    {t("quoteRequest.fields.timeline")}{" "}
                     <span className="text-red-400">*</span>
                   </label>
                   <div className="relative group">
@@ -657,7 +590,7 @@ export default function QuoteRequest() {
                   </div>
                   {errors.timeline && (
                     <p className="text-red-400 text-sm ml-1">
-                      This field is required
+                      {t("common.required")}
                     </p>
                   )}
                 </div>
@@ -671,20 +604,19 @@ export default function QuoteRequest() {
                   <Phone className="w-6 h-6 text-green-400" />
                 </div>
                 <h2 className="text-2xl font-bold text-white">
-                  Contact Preference
+                  {t("quoteRequest.sections.contactPreference")}
                 </h2>
               </div>
 
               <div className="space-y-4">
                 <label className="text-sm font-medium text-slate-300 ml-1 block">
-                  How do you prefer to be contacted?{" "}
+                  {t("quoteRequest.fields.contactPreference")}{" "}
                   <span className="text-red-400">*</span>
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
                     { value: "email", label: "Email", icon: Mail },
                     { value: "whatsapp", label: "WhatsApp", icon: Phone },
-                    { value: "call", label: "Phone Call", icon: Phone },
                   ].map((option) => (
                     <label
                       key={option.value}
@@ -723,7 +655,8 @@ export default function QuoteRequest() {
               {contactPreference === "whatsapp" && (
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-slate-300 ml-1">
-                    WhatsApp Number <span className="text-red-400">*</span>
+                    {t("quoteRequest.fields.whatsappNumber")}{" "}
+                    <span className="text-red-400">*</span>
                   </label>
                   <div className="relative group">
                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-green-400 transition-colors" />
@@ -738,7 +671,7 @@ export default function QuoteRequest() {
                   </div>
                   {errors.whatsapp_number && (
                     <p className="text-red-400 text-sm ml-1">
-                      This field is required
+                      {t("common.required")}
                     </p>
                   )}
                 </div>
@@ -761,12 +694,12 @@ export default function QuoteRequest() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group relative px-10 py-5 bg-linear-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right text-white font-bold rounded-2xl shadow-lg hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="group relative px-10 py-5 bg-linear-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-size-[200%_auto] hover:bg-right text-white font-bold rounded-2xl shadow-lg hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span className="relative z-10">Sending...</span>
+                    <span className="relative z-10">{t("common.sending")}</span>
                   </>
                 ) : (
                   <>

@@ -203,7 +203,9 @@
     "sections": {
       "company": "Company Information",
       "project": "Project Details",
-      "details": "Additional Details"
+      "details": "Additional Details",
+      "budgetTimeline": "Budget & Timeline",
+      "contactPreference": "Contact Preference"
     },
     "fields": {
       "email": "Email Address",
@@ -220,7 +222,14 @@
       "support": "Support Level",
       "budget": "Estimated Budget",
       "extraInfo": "Additional Information",
-      "extraInfoPlaceholder": "Any other relevant details, expected deadlines, competitors, etc..."
+      "extraInfoPlaceholder": "Any other relevant details, expected deadlines, competitors, etc...",
+      "businessType": "Business Type",
+      "customBusinessType": "Specify your business type",
+      "mainProblem": "What is the main problem you want to solve?",
+      "systems": "What systems do you need?",
+      "timeline": "When do you need the project?",
+      "contactPreference": "How do you prefer to be contacted?",
+      "whatsappNumber": "WhatsApp Number"
     },
     "extras": {
       "whatsapp": "WhatsApp",
@@ -240,14 +249,23 @@
         "just_looking": "Just looking/Researching"
       },
       "budget": {
-        "<1500": "Under $1,500",
+        "<650": "Under $650",
+        "650-1500": "$650 - $1,500",
         "1500-4000": "$1,500 - $4,000",
-        "4000-8000": "$4,000 - $8,000",
-        "8000+": "$8,000+",
+        "4000+": "$4,000+",
         "need_advice": "I need advice"
       }
     },
-    "submit": "Submit Request"
+    "submit": "Submit Request",
+    "businessTypes": {
+      "retail": "Retail",
+      "services": "Professional Services",
+      "restaurant": "Restaurant / Food",
+      "healthcare": "Healthcare",
+      "education": "Education",
+      "real_estate": "Real Estate",
+      "other": "Other"
+    }
   },
   "footer": {
     "description": "Software engineering with passion and precision. We build the technological assets your business needs to scale without limits.",
@@ -285,7 +303,9 @@
     "close": "Close",
     "select": "Select...",
     "or": "or",
-    "new": "New"
+    "new": "New",
+    "required": "This field is required",
+    "sending": "Sending..."
   },
   "tracking": {
     "title": "Project Tracking",

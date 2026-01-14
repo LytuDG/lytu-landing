@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import { ENV } from "../env/env";
 
 export interface ChatMessage {
@@ -7,12 +7,16 @@ export interface ChatMessage {
 }
 
 export class AIService {
-  private static ai = new GoogleGenAI({ apiKey: ENV.GOOGLE_AI_API_KEY });
-  // Fallback models list
+  private static ai = new Groq({
+    apiKey: ENV.GROQ_API_KEY,
+    dangerouslyAllowBrowser: true,
+  });
+
+  // Fallback models list available in Groq
   private static MODELS = [
-    "gemini-2.5-flash",
-    "gemini-2.0-flash",
-    "gemini-2.0-flash-lite",
+    "llama-3.3-70b-versatile",
+    "llama-3.1-70b-versatile",
+    "mixtral-8x7b-32768",
   ];
   private static currentModelIndex = 0;
 
@@ -36,33 +40,31 @@ export class AIService {
     );
     const specs = getLytuChatbotSpecifications(lang);
 
-    // Construct context-aware prompt
-    const fullPrompt = `
-${specs}
-
-Historial de conversación:
-${history
-  .map((m) => `${m.role === "assistant" ? "Lytus" : "Usuario"}: ${m.content}`)
-  .join("\n")}
-
-Usuario: ${message}
-Lytus:`;
+    // Prepare messages for Groq Chat Completion
+    const messages: any[] = [
+      { role: "system", content: specs },
+      ...history,
+      { role: "user", content: message },
+    ];
 
     for (let i = 0; i < retries; i++) {
       try {
-        const response = await this.ai.models.generateContent({
+        const completion = await this.ai.chat.completions.create({
+          messages: messages,
           model: this.getModel(),
-          contents: fullPrompt,
+          temperature: 0.7,
         });
 
-        if (!response || !response.text) {
-          throw new Error("No response text from Gemini");
+        const responseText = completion.choices[0]?.message?.content;
+
+        if (!responseText) {
+          throw new Error("No response text from Groq");
         }
 
-        return response.text;
+        return responseText;
       } catch (error) {
         console.error(
-          `Gemini Attempt ${i + 1} (${this.getModel()}) failed:`,
+          `Groq Attempt ${i + 1} (${this.getModel()}) failed:`,
           error
         );
         this.switchModel(); // Switch to next model for retry
@@ -79,16 +81,23 @@ Lytus:`;
 
   static async getIntent(input: string, lang: string = "es"): Promise<string> {
     const { getNavigatorPrompt } = await import("../lib/lytu-specifications");
-    const prompt = getNavigatorPrompt(lang);
+    const systemPrompt = getNavigatorPrompt(lang);
 
     // 2 retries for navigator since it's critical
     for (let i = 0; i < 2; i++) {
       try {
-        const response = await this.ai.models.generateContent({
+        const completion = await this.ai.chat.completions.create({
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: input },
+          ],
           model: this.getModel(),
-          contents: prompt + input,
+          temperature: 0.1, // Low temperature for deterministic output
         });
-        return response?.text?.trim().toUpperCase() || "HOME";
+        return (
+          completion.choices[0]?.message?.content?.trim().toUpperCase() ||
+          "HOME"
+        );
       } catch (error) {
         console.error(`Navigator Error (${this.getModel()}):`, error);
         this.switchModel();

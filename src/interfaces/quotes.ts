@@ -1,11 +1,11 @@
 export type BudgetRange =
-  | "<1500"
+  | "<650"
+  | "650-1500"
   | "1500-4000"
-  | "4000-8000"
-  | "8000+"
+  | "4000+"
   | "need_advice";
 export type Timeline = "urgent" | "next_month" | "2_3_months" | "just_looking";
-export type ContactPreference = "email" | "whatsapp" | "call";
+export type ContactPreference = "email" | "whatsapp";
 export type QuoteStatus =
   | "new"
   | "viewed"
@@ -25,6 +25,7 @@ export interface QuoteRequest {
   company_name: string;
   business_type: string;
   custom_business_type: string | null;
+  needs_logo?: boolean;
 
   // Sección 2: Necesidades
   main_problem: string;

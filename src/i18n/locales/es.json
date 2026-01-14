@@ -203,7 +203,9 @@
     "sections": {
       "company": "Información de la Empresa",
       "project": "Detalles del Proyecto",
-      "details": "Detalles Adicionales"
+      "details": "Detalles Adicionales",
+      "budgetTimeline": "Presupuesto y Tiempos",
+      "contactPreference": "Preferencia de Contacto"
     },
     "fields": {
       "email": "Correo Electrónico",
@@ -220,7 +222,14 @@
       "support": "Nivel de Soporte",
       "budget": "Presupuesto Estimado",
       "extraInfo": "Información Adicional",
-      "extraInfoPlaceholder": "Cualquier otro detalle relevante, plazos esperados, competidores, etc..."
+      "extraInfoPlaceholder": "Cualquier otro detalle relevante, plazos esperados, competidores, etc...",
+      "businessType": "Tipo de Negocio",
+      "customBusinessType": "Especifique su tipo de negocio",
+      "mainProblem": "¿Cuál es el problema principal que quieres resolver?",
+      "systems": "¿Qué sistemas necesitas?",
+      "timeline": "¿Para cuándo necesitas el proyecto?",
+      "contactPreference": "¿Cómo prefieres ser contactado?",
+      "whatsappNumber": "Número de WhatsApp"
     },
     "extras": {
       "whatsapp": "WhatsApp",
@@ -240,14 +249,23 @@
         "just_looking": "Solo investigando"
       },
       "budget": {
-        "<1500": "Menos de $1,500",
+        "<650": "Menos de $650",
+        "650-1500": "$650 - $1,500",
         "1500-4000": "$1,500 - $4,000",
-        "4000-8000": "$4,000 - $8,000",
-        "8000+": "Más de $8,000",
+        "4000+": "Más de $4,000",
         "need_advice": "Necesito asesoría"
       }
     },
-    "submit": "Enviar Solicitud"
+    "submit": "Enviar Solicitud",
+    "businessTypes": {
+      "retail": "Retail / Comercio",
+      "services": "Servicios Profesionales",
+      "restaurant": "Restaurante / Gastronomía",
+      "healthcare": "Salud / Medicina",
+      "education": "Educación",
+      "real_estate": "Bienes Raíces",
+      "other": "Otro"
+    }
   },
   "footer": {
     "description": "Ingeniería de software con pasión y precisión. Construimos los activos tecnológicos que tu negocio necesita para escalar sin límites.",
@@ -285,7 +303,9 @@
     "close": "Cerrar",
     "select": "Seleccionar...",
     "or": "o",
-    "new": "Nuevo"
+    "new": "Nuevo",
+    "required": "Este campo es obligatorio",
+    "sending": "Enviando..."
   },
   "tracking": {
     "title": "Seguimiento de Proyecto",

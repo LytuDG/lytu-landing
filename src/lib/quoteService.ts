@@ -12,6 +12,9 @@ export interface QuoteFormSubmission {
   business_type?: string;
   custom_business_type?: string;
 
+  // Nuevo campo para logo
+  needs_logo?: boolean;
+
   // Necesidades del proyecto
   main_problem: string;
   selected_systems: string[];
@@ -97,48 +100,7 @@ export async function submitQuoteRequest(
   }
 }
 
-/**
- * Sube un logo a Supabase Storage
- */
-export async function uploadLogo(
-  file: File,
-  quoteId: string
-): Promise<{ success: boolean; url?: string; error?: string }> {
-  try {
-    const fileExt = file.name.split(".").pop();
-    const fileName = `${quoteId}/logo.${fileExt}`;
-    const filePath = `quotes/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from("lytu-documents")
-      .upload(filePath, file, {
-        cacheControl: "3600",
-        upsert: true,
-      });
-
-    if (uploadError) {
-      return {
-        success: false,
-        error: uploadError.message,
-      };
-    }
-
-    // Obtener URL pública
-    const { data } = supabase.storage
-      .from("lytu-documents")
-      .getPublicUrl(filePath);
-
-    return {
-      success: true,
-      url: data.publicUrl,
-    };
-  } catch (error: any) {
-    return {
-      success: false,
-      error: error.message || "Error al subir el logo",
-    };
-  }
-}
+// uploadLogo function removed as per requirements
 
 /**
  * Obtiene el ID público de una cotización usando el código amigable (ej. QT-XXXX)
