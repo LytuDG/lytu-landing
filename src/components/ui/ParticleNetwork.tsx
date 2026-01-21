@@ -2,19 +2,37 @@ import { useEffect, useRef } from "react";
 
 const ParticleNetwork = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const requestRef = useRef<number | null>(null);
+  const isVisibleRef = useRef<boolean>(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false }); // Optimize for no alpha if background is solid
     if (!ctx) return;
+
+    // Use Intersection Observer to pause animation
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisibleRef.current = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(canvas);
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
 
-    // Type definition for Particle (optional in JS, good practice in TS)
+    const setSize = () => {
+      canvas.width = width;
+      canvas.height = height;
+    };
+    setSize();
+
+    // Type definition for Particle
     interface ParticleInterface {
       x: number;
       y: number;
@@ -27,7 +45,7 @@ const ParticleNetwork = () => {
     }
 
     const particles: ParticleInterface[] = [];
-    const particleCount = width < 768 ? 40 : 80;
+    const particleCount = width < 768 ? 20 : 50;
     const connectionDistance = 150;
     const mouseDistance = 200;
 
@@ -44,10 +62,10 @@ const ParticleNetwork = () => {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
         this.size = Math.random() * 2 + 1;
-        const colors = ["rgba(167, 139, 250, ", "rgba(34, 211, 238, "]; // Violet and Cyan
+        const colors = ["rgba(167, 139, 250, ", "rgba(34, 211, 238, "];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
@@ -91,6 +109,10 @@ const ParticleNetwork = () => {
     };
 
     const animate = () => {
+      if (!isVisibleRef.current) {
+        return;
+      }
+
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
 
@@ -101,9 +123,10 @@ const ParticleNetwork = () => {
         for (let j = i; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (distance < connectionDistance) {
+          if (distSq < connectionDistance * connectionDistance) {
+            const distance = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.strokeStyle = `rgba(167, 139, 250, ${
               1 - distance / connectionDistance
@@ -115,23 +138,56 @@ const ParticleNetwork = () => {
           }
         }
       });
-      requestAnimationFrame(animate);
+      requestRef.current = requestAnimationFrame(animate);
     };
 
     init();
-    animate();
+
+    const startAnimation = () => {
+      if (requestRef.current === null) {
+        // Check for null
+        requestRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    const stopAnimation = () => {
+      if (requestRef.current !== null) {
+        // Check for null
+        cancelAnimationFrame(requestRef.current);
+        requestRef.current = null;
+      }
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      });
+    };
+
+    // Create new observer for the visibility toggle
+    const intersectionObserver = new IntersectionObserver(observerCallback, {
+      threshold: 0.01,
+    });
+    intersectionObserver.observe(canvas);
 
     const handleResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      setSize();
       init();
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      if (isVisibleRef.current) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -140,13 +196,19 @@ const ParticleNetwork = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
+      stopAnimation();
+      observer.disconnect();
+      intersectionObserver.disconnect();
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 w-full h-full z-0 opacity-60"
+      className="absolute top-0 left-0 w-full h-full z-0 opacity-60 pointer-events-none" // pointer-events-none to let clicks pass through if needed,
+      // but wait, mouse interaction needs events?
+      // The original code used window.mousemove, so pointer-events-none is safe
+      // and good for scrolling perf.
     />
   );
 };

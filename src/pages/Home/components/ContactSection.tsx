@@ -17,11 +17,10 @@ export default function ContactSection() {
       id="contacto"
       className="py-32 relative overflow-hidden bg-slate-950"
     >
-      {/* Elementos Decorativos de Fondo */}
+      {/* Elementos Decorativos de Fondo - Optimized */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-indigo-600/10 blur-[130px] rounded-full"></div>
-        <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-600/10 blur-[130px] rounded-full"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03]"></div>
+        <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-[radial-gradient(ellipse,rgba(79,70,229,0.1)_0%,transparent_70%)] pointer-events-none"></div>
+        <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-[radial-gradient(ellipse,rgba(147,51,234,0.1)_0%,transparent_70%)] pointer-events-none"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">

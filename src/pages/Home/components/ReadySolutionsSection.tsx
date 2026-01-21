@@ -30,7 +30,7 @@ export default function ReadySolutionsSection() {
         "ReadySolutionsSection received intent:",
         intent,
         "target:",
-        target
+        target,
       );
       if (intent === "solutions") {
         setHighlighted({ target, message });
@@ -49,8 +49,9 @@ export default function ReadySolutionsSection() {
       className="py-24 bg-slate-950 relative overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay pointer-events-none"></div>
+      {/* Background Elements - Optimized */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
+      {/* Removed external noise texture */}
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-20">
