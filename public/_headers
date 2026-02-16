@@ -35,3 +35,6 @@
 /*.ttf
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
+
+/apps/positive2026-v0.3.0.apk
+  Content-Disposition: attachment; filename=positive2026-v0.3.0.apk
