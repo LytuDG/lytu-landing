@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
 import { Menu, X, LayoutDashboard } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { scrollToSection } from "../../utils/scroll";
-import LanguageSelector from "../features/LanguageSelector";
 import { useAuth } from "../../contexts/AuthContext";
 
-interface NavbarProps {}
-
-export default function Navbar({}: NavbarProps) {
-  const { t } = useTranslation();
+export default function Navbar() {
   const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,22 +23,21 @@ export default function Navbar({}: NavbarProps) {
     setIsMobileMenuOpen(false);
     if (location.pathname !== "/") {
       navigate("/");
-      // Small delay to allow navigation to complete before scrolling
       setTimeout(() => {
-        scrollToSection(id);
+        if (id) scrollToSection(id);
       }, 100);
     } else {
-      scrollToSection(id);
+      if (id) scrollToSection(id);
+      else window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  const handleLogoClick = () => {
-    if (location.pathname !== "/") {
-      navigate("/");
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+  const menuItems = [
+    { id: "", label: "Inicio" },
+    { id: "planes", label: "Planes" },
+    { id: "modulos", label: "Módulos" },
+    { id: "contacto", label: "Contacto" }
+  ];
 
   return (
     <nav
@@ -56,9 +50,9 @@ export default function Navbar({}: NavbarProps) {
       <div className="container mx-auto px-6 flex justify-between items-center">
         <div
           className="flex items-center space-x-2 cursor-pointer"
-          onClick={handleLogoClick}
+          onClick={() => handleNavClick("")}
         >
-          <div className="w-8 h-8 bg-gradient-to-tr from-indigo-500 to-cyan-400 rounded-lg flex items-center justify-center transform rotate-3">
+          <div className="w-8 h-8 bg-linear-to-tr from-indigo-500 to-cyan-400 rounded-lg flex items-center justify-center transform rotate-3">
             <span className="font-bold text-white text-lg">L</span>
           </div>
           <span className="text-2xl font-bold tracking-tighter text-white">
@@ -67,37 +61,16 @@ export default function Navbar({}: NavbarProps) {
         </div>
 
         <div className="hidden md:flex items-center space-x-8">
-          <button
-            onClick={() => handleNavClick("servicios")}
-            className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
-          >
-            {t("nav.services")}
-          </button>
-          <button
-            onClick={() => handleNavClick("filosofía")}
-            className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
-          >
-            {t("nav.philosophy")}
-          </button>
-          <button
-            onClick={() => handleNavClick("soluciones")}
-            className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
-          >
-            {t("nav.solutions")}
-          </button>
-          <button
-            onClick={() => handleNavClick("clientes")}
-            className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
-          >
-            {t("nav.clients")}
-          </button>
-          <button
-            onClick={() => navigate("/track-quote")}
-            className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
-          >
-            {t("nav.tracking")}
-          </button>
-          <LanguageSelector />
+          {menuItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleNavClick(item.id)}
+              className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
+            >
+              {item.label}
+            </button>
+          ))}
+          
           {user ? (
             <button
               onClick={() => navigate("/admin/dashboard")}
@@ -111,15 +84,9 @@ export default function Navbar({}: NavbarProps) {
               onClick={() => navigate("/admin/login")}
               className="px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-white hover:border-cyan-400 transition-colors"
             >
-              {t("nav.login")}
+              Login
             </button>
           )}
-          <button
-            onClick={() => handleNavClick("contacto")}
-            className="bg-white text-slate-950 px-5 py-2 rounded-full font-bold text-sm hover:bg-cyan-400 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-          >
-            {t("nav.contact")}
-          </button>
         </div>
 
         <div className="md:hidden">
@@ -134,39 +101,23 @@ export default function Navbar({}: NavbarProps) {
 
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 p-6 flex flex-col space-y-4 shadow-2xl">
-          {[
-            { key: "servicios", label: t("nav.services") },
-            { key: "filosofía", label: t("nav.philosophy") },
-            { key: "soluciones", label: t("nav.solutions") },
-            { key: "clientes", label: t("nav.clients") },
-            { key: "/track-quote", label: t("nav.tracking"), isRoute: true },
-            { key: "contacto", label: t("nav.contact") },
-          ].map((item: any) => (
+          {menuItems.map((item) => (
             <button
-              key={item.key}
-              onClick={() => {
-                if (item.isRoute) {
-                  setIsMobileMenuOpen(false);
-                  navigate(item.key);
-                } else {
-                  handleNavClick(item.key);
-                }
-              }}
+              key={item.label}
+              onClick={() => handleNavClick(item.id)}
               className="text-left text-slate-300 hover:text-cyan-400 text-lg font-medium"
             >
               {item.label}
             </button>
           ))}
-          <div className="pt-2">
-            <LanguageSelector />
-          </div>
+          
           {user ? (
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 navigate("/admin/dashboard");
               }}
-              className="flex items-center gap-2 text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full"
+              className="flex items-center gap-2 text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full mt-4"
             >
               <LayoutDashboard size={18} />
               Admin Dashboard
@@ -174,9 +125,9 @@ export default function Navbar({}: NavbarProps) {
           ) : (
             <button
               onClick={() => navigate("/admin/login")}
-              className="text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full"
+              className="text-left text-white font-bold bg-indigo-600/80 px-4 py-2 rounded-full mt-4"
             >
-              {t("nav.login")}
+              Login
             </button>
           )}
         </div>

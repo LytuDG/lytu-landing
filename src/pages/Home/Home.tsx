@@ -1,20 +1,20 @@
 import HeroSection from "./components/HeroSection";
-import ServicesSection from "./components/ServicesSection";
-import AIServicesSection from "./components/AIServicesSection";
-import PhilosophySection from "./components/PhilosophySection";
-import ReadySolutionsSection from "./components/ReadySolutionsSection";
-import ClientsSection from "./components/ClientsSection";
+import ProblemSection from "./components/ProblemSection";
+import SolutionSection from "./components/SolutionSection";
+import PricingSection from "./components/PricingSection";
+import ModulesSection from "./components/ModulesSection";
+import FAQSection from "./components/FAQSection";
 import ContactSection from "./components/ContactSection";
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
-      <ServicesSection />
-      <AIServicesSection />
-      <PhilosophySection />
-      <ReadySolutionsSection />
-      <ClientsSection />
+      <ProblemSection />
+      <SolutionSection />
+      <PricingSection />
+      <ModulesSection />
+      <FAQSection />
       <ContactSection />
     </main>
   );
