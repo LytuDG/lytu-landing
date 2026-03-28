@@ -4,4 +4,5 @@ export const ENV = {
   AIML_API_KEY: import.meta.env.VITE_AIML_API_KEY,
   GOOGLE_AI_API_KEY: import.meta.env.VITE_GOOGLE_AI_API_KEY,
   GROQ_API_KEY: import.meta.env.VITE_GROQ_API_KEY,
+  MAPTILER_API_KEY: import.meta.env.MAPTILER_API_KEY,
 };
