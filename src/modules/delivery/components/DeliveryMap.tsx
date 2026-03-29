@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Map, Marker } from "@maptiler/sdk";
 import "@maptiler/sdk/dist/maptiler-sdk.css";
-import { MapPin } from "lucide-react";
+import { MapPin, Truck, ChevronUp, Info } from "lucide-react";
 import { createRoot } from "react-dom/client";
 import type { Pedido, RepartidorLocation } from "../types";
 
@@ -29,6 +29,7 @@ export default function DeliveryMap({
   onMapReady,
 }: DeliveryMapProps) {
   const [mounted, setMounted] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<Map | null>(null);
   const destinyMarker = useRef<Marker | null>(null);
@@ -180,28 +181,7 @@ export default function DeliveryMap({
       driverContainer.className = "relative z-10 bg-blue-600 p-2 rounded-full shadow-xl border-2 border-white text-white transform transition-all duration-500 hover:scale-110";
       
       const root = createRoot(driverContainer);
-      root.render(
-        <svg 
-          width="24" 
-          height="24" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2.5" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          {/* Scooter Body */}
-          <path d="M19 17a2 2 0 1 1-4 0 2 2 0 1 1 4 0Z" />
-          <path d="M7 17a2 2 0 1 1-4 0 2 2 0 1 1 4 0Z" />
-          <path d="M5 17h12" />
-          <path d="M5 17l1-3h9" />
-          <path d="M15 14l2-8h2" />
-          <path d="M9 14l-1-4h3" />
-          {/* Delivery Box */}
-          <rect x="4" y="8" width="5" height="4" rx="1" />
-        </svg>
-      );
+      root.render(<Truck size={24} fill="currentColor" />);
       
       container.appendChild(driverContainer);
       el.appendChild(container);
@@ -241,57 +221,78 @@ export default function DeliveryMap({
           <div ref={mapContainer} className="w-full h-full" />
 
           {/* Compact Info Badges on Map */}
-          <div className="absolute top-4 right-4 flex flex-col gap-3 z-10">
-            {/* Status Badge - Now at the top of the stack */}
-            {estadoPedido && !isLoading && (() => {
-              const getStatusConfig = () => {
-                const s = estadoPedido.toLowerCase();
-                if (s.includes("cocinando")) return { label: "Cocinando", color: "bg-orange-500", icon: "🍳" };
-                if (s.includes("camino") || s.includes("ruta") || s.includes("recogido")) return { label: "En camino", color: "bg-blue-500", icon: "🛵" };
-                if (s.includes("entregado")) return { label: "Entregado", color: "bg-green-500", icon: "✅" };
-                return { label: s, color: "bg-slate-700", icon: "📦" };
-              };
-              const config = getStatusConfig();
-              return (
-                <div className={`${config.color} text-white backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 flex items-center gap-2 border border-white/20 animate-in fade-in slide-in-from-right-4`}>
-                  <span className="text-xl">{config.icon}</span>
+          <div className="absolute top-4 right-4 flex flex-col items-end gap-2 z-10 max-w-[200px]">
+            {/* Toggle Button */}
+            <button 
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="bg-slate-900/80 backdrop-blur-xl border border-white/10 p-2.5 rounded-2xl text-white shadow-2xl hover:bg-slate-800 transition-all group flex items-center gap-2"
+            >
+              {isExpanded ? (
+                <>
+                  <span className="text-[10px] font-bold uppercase tracking-wider pl-1 group-hover:text-cyan-400 transition-colors">Ocultar Info</span>
+                  <ChevronUp size={16} className="text-slate-400 group-hover:text-white transition-colors" />
+                </>
+              ) : (
+                <>
+                  <span className="text-[10px] font-bold uppercase tracking-wider pl-1 group-hover:text-cyan-400 transition-colors">Ver Detalles</span>
+                  <Info size={16} className="text-cyan-400 group-hover:text-white transition-colors animate-pulse" />
+                </>
+              )}
+            </button>
+
+            {/* Badges Container */}
+            <div className={`flex flex-col gap-2 transition-all duration-300 origin-top transform ${isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none absolute'}`}>
+              {/* Status Badge */}
+              {estadoPedido && !isLoading && (() => {
+                const getStatusConfig = () => {
+                  const s = estadoPedido.toLowerCase();
+                  if (s.includes("cocinando")) return { label: "Cocinando", color: "bg-orange-500", icon: "🍳" };
+                  if (s.includes("camino") || s.includes("ruta") || s.includes("recogido")) return { label: "En camino", color: "bg-blue-500", icon: "🛵" };
+                  if (s.includes("entregado")) return { label: "Entregado", color: "bg-green-500", icon: "✅" };
+                  return { label: s, color: "bg-slate-700", icon: "📦" };
+                };
+                const config = getStatusConfig();
+                return (
+                  <div className={`${config.color} text-white backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 flex items-center gap-2 border border-white/20`}>
+                    <span className="text-xl">{config.icon}</span>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] uppercase font-bold opacity-80 leading-none">Estado</span>
+                      <span className="text-sm font-bold leading-tight">{config.label}</span>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Distance Badge */}
+              {distancia !== null && !isLoading && (
+                <div className="bg-slate-950/80 backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 border border-white/10 flex items-center gap-3">
+                  <div className="p-2 bg-blue-500/20 rounded-xl text-blue-400">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 12 20 10-10-20L2 12Z"/></svg>
+                  </div>
                   <div className="flex flex-col">
-                    <span className="text-[10px] uppercase font-bold opacity-80 leading-none">Estado</span>
-                    <span className="text-sm font-bold leading-tight">{config.label}</span>
+                    <span className="text-[10px] text-slate-400 uppercase font-bold leading-none">Distancia</span>
+                    <span className="text-base font-bold text-white leading-tight">
+                      {distancia < 1000 ? `${Math.round(distancia)} m` : `${(distancia / 1000).toFixed(1)} km`}
+                    </span>
                   </div>
                 </div>
-              );
-            })()}
+              )}
 
-            {/* Distance Badge */}
-            {distancia !== null && !isLoading && (
-              <div className="bg-slate-950/80 backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 border border-white/10 flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-xl text-blue-400">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 12 20 10-10-20L2 12Z"/></svg>
+              {/* Time Badge */}
+              {estimatedTime !== null && estimatedTime !== undefined && !isLoading && (
+                <div className="bg-slate-950/80 backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 border border-white/10 flex items-center gap-3">
+                  <div className="p-2 bg-indigo-500/20 rounded-xl text-indigo-400">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] text-slate-400 uppercase font-bold leading-none">Tiempo est.</span>
+                    <span className="text-base font-bold text-white leading-tight">
+                      {estimatedTime < 1 ? "< 1" : estimatedTime} min
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold leading-none">Distancia</span>
-                  <span className="text-base font-bold text-white leading-tight">
-                    {distancia < 1000 ? `${Math.round(distancia)} m` : `${(distancia / 1000).toFixed(1)} km`}
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* Time Badge */}
-            {estimatedTime !== null && estimatedTime !== undefined && !isLoading && (
-              <div className="bg-slate-950/80 backdrop-blur-md rounded-2xl shadow-xl px-4 py-2 border border-white/10 flex items-center gap-3">
-                <div className="p-2 bg-indigo-500/20 rounded-xl text-indigo-400">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold leading-none">Tiempo est.</span>
-                  <span className="text-base font-bold text-white leading-tight">
-                    {estimatedTime < 1 ? "< 1" : estimatedTime} min
-                  </span>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           {/* Loading Indicator */}
