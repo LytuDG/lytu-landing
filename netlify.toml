@@ -9,10 +9,8 @@
   NODE_VERSION = "22"
   NPM_FLAGS = "--legacy-peer-deps"
 
-# Configuración para la función SSR
-[[functions]]
-  path = "netlify/functions/ssr.ts"
-  node_compat = true
+[functions]
+  node_bundler = "esbuild"
   included_files = ["dist/**", "index.html"]
 
 
