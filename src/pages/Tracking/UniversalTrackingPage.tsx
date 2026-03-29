@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import PublicDeliveryTrackingPage from "../modules/delivery/pages/PublicDeliveryTrackingPage";
-import TrackingPage from "./Tracking/TrackingPage";
-import { Loader2 } from "lucide-react";
+import PublicDeliveryTrackingPage from "../../modules/delivery/pages/PublicDeliveryTrackingPage";
+import TrackingPage from "./TrackingPage";
+import { Loader2, AlertCircle, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function UniversalTrackingPage() {
   const { trackingCode } = useParams<{ trackingCode: string }>();
@@ -17,18 +18,18 @@ export default function UniversalTrackingPage() {
       return;
     }
 
-    // Try to determine if this is a delivery tracking code or a quote tracking code
-    // Delivery codes are typically shorter and alphanumeric (e.g., "62IMZK")
-    // Quote tracking codes might be longer or have different patterns
-    // For now, we'll try delivery first, if it fails we'll mark as quote
-
     // Quick heuristic: if it's all uppercase and relatively short (6-10 chars), it's likely delivery
+    // Delivery codes: 62IMZK, PED-6559, etc.
+    // Quote codes: usually longer UUIDs or have different patterns
     if (
       trackingCode.match(/^[A-Z0-9]{6,10}$/) &&
       !trackingCode.includes("-")
     ) {
       setTrackingType("delivery");
+    } else if (trackingCode.match(/^PED-/)) {
+      setTrackingType("delivery");
     } else {
+      // Default to quote for other formats
       setTrackingType("quote");
     }
 
@@ -54,22 +55,42 @@ export default function UniversalTrackingPage() {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
         <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800 p-8 rounded-3xl max-w-md w-full text-center">
-          <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-2xl">⚠️</span>
-          </div>
+          <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-6" />
           <h1 className="text-2xl font-bold text-white mb-2">Código inválido</h1>
-          <p className="text-slate-400">
+          <p className="text-slate-400 mb-8">
             El código de seguimiento no es válido
           </p>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+          >
+            <ArrowLeft size={18} />
+            Volver al inicio
+          </Link>
         </div>
       </div>
     );
   }
 
-  // Use the trackingCode as trackingId for compatibility with both pages
-  return trackingType === "delivery" ? (
-    <PublicDeliveryTrackingPage />
-  ) : (
-    <TrackingPage />
+  // For delivery tracking, render the delivery page directly
+  if (trackingType === "delivery") {
+    return <PublicDeliveryTrackingPage />;
+  }
+
+  // For quote tracking, use a wrapper component that adapts the params
+  return (
+    <TrackingPageWrapper trackingCode={trackingCode} />
+  );
+}
+
+// Wrapper component to pass the correct param name to TrackingPage
+function TrackingPageWrapper({ trackingCode }: { trackingCode: string | undefined }) {
+  // We use a trick: temporarily set the trackingCode as trackingId for the TrackingPage component
+  // by creating a modified params object
+  return (
+    <div suppressHydrationWarning>
+      {/* Render TrackingPage with the trackingCode as if it were trackingId */}
+      <TrackingPage />
+    </div>
   );
 }

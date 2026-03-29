@@ -22,7 +22,8 @@ const statusSteps: { status: QuoteStatus; key: string }[] = [
 ];
 
 export default function TrackingPage() {
-  const { trackingId } = useParams<{ trackingId: string }>();
+  const params = useParams<{ trackingId?: string; trackingCode?: string }>();
+  const trackingId = params.trackingId || params.trackingCode;
   const { t } = useTranslation();
   const [quote, setQuote] = useState<any>(null);
   const [loading, setLoading] = useState(true);

@@ -63,3 +63,15 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #475569; /* slate-600 */
 }
+
+.maplibregl-ctrl-top-right {
+    display: none !important;
+}
+
+.maplibregl-ctrl-bottom-right {
+    display: none !important;
+}
+
+.maplibregl-ctrl-bottom-left {
+    display: none !important;
+}

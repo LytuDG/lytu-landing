@@ -1,19 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { ArrowLeft, AlertCircle, Loader2, MapPin, Clock } from "lucide-react";
-import { getPedidoByTrackingCode, getRepartidorUbicacionActual, subscribeToRepartidorUbicacion, getRouteAndDistance, calculateDistance } from "../services/pedidoService";
+import { ArrowLeft, AlertCircle, Loader2 } from "lucide-react";
+import {
+  getPedidoByTrackingCode,
+  getRepartidorUbicacionActual,
+  subscribeToRepartidorUbicacion,
+  getRouteAndDistance,
+  calculateDistance,
+} from "../services/pedidoService";
 import DeliveryMap from "../components/DeliveryMap";
 import type { Pedido, RepartidorLocation } from "../types";
 import { ENV } from "../../../env/env";
 import { Link } from "react-router-dom";
 
-const statusTranslations: Record<string, { label: string; color: string }> = {
-  cocinando: { label: "Preparando", color: "bg-yellow-500" },
-  listo: { label: "Listo para recoger", color: "bg-orange-500" },
-  recogido: { label: "Recogido", color: "bg-blue-500" },
-  en_ruta: { label: "En ruta", color: "bg-indigo-500" },
-  entregado: { label: "Entregado", color: "bg-green-500" },
-  cancelado: { label: "Cancelado", color: "bg-red-500" },
+const statusTranslations: Record<string, { label: string; color: string; icon: string }> = {
+  cocinando: { label: "Preparando", color: "bg-yellow-500", icon: "🍳" },
+  listo: { label: "Listo para recoger", color: "bg-orange-500", icon: "📦" },
+  recogido: { label: "Recogido", color: "bg-blue-500", icon: "🚗" },
+  en_ruta: { label: "En ruta", color: "bg-indigo-500", icon: "🗺️" },
+  entregado: { label: "Entregado", color: "bg-green-500", icon: "✅" },
+  cancelado: { label: "Cancelado", color: "bg-red-500", icon: "❌" },
 };
 
 export default function PublicDeliveryTrackingPage() {
@@ -24,6 +30,29 @@ export default function PublicDeliveryTrackingPage() {
   const [routeGeometry, setRouteGeometry] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [estimatedTime, setEstimatedTime] = useState<number | null>(null);
+
+  const fetchRouteData = useCallback(
+    async (ubicacion: RepartidorLocation, ped: Pedido) => {
+      if (!ENV.MAPTILER_API_KEY) return;
+
+      const routeResult = await getRouteAndDistance(
+        ubicacion.lat,
+        ubicacion.lng,
+        ped.destino_lat,
+        ped.destino_lng,
+        ENV.MAPTILER_API_KEY
+      );
+
+      if (routeResult.success && routeResult.route) {
+        setRouteGeometry(routeResult.route);
+        if (routeResult.duration) {
+          setEstimatedTime(Math.ceil(routeResult.duration / 60)); // Convert to minutes
+        }
+      }
+    },
+    []
+  );
 
   // Initial fetch
   useEffect(() => {
@@ -53,19 +82,7 @@ export default function PublicDeliveryTrackingPage() {
           setDistancia(dist);
 
           // Get route
-          if (ENV.MAPTILER_API_KEY) {
-            const routeResult = await getRouteAndDistance(
-              ubicacionResult.data.lat,
-              ubicacionResult.data.lng,
-              result.data.destino_lat,
-              result.data.destino_lng,
-              ENV.MAPTILER_API_KEY
-            );
-
-            if (routeResult.success && routeResult.route) {
-              setRouteGeometry(routeResult.route);
-            }
-          }
+          await fetchRouteData(ubicacionResult.data, result.data);
         }
       } else {
         setError(result.error || "Pedido no encontrado");
@@ -75,7 +92,7 @@ export default function PublicDeliveryTrackingPage() {
     };
 
     fetchPedido();
-  }, [trackingCode]);
+  }, [trackingCode, fetchRouteData]);
 
   // Subscribe to location updates
   useEffect(() => {
@@ -83,7 +100,7 @@ export default function PublicDeliveryTrackingPage() {
 
     const unsubscribe = subscribeToRepartidorUbicacion(
       pedido.repartidor_id,
-      (ubicacion: RepartidorLocation | null) => {
+      async (ubicacion: RepartidorLocation | null) => {
         if (ubicacion) {
           setRepartidorUbicacion(ubicacion);
 
@@ -97,25 +114,13 @@ export default function PublicDeliveryTrackingPage() {
           setDistancia(dist);
 
           // Get updated route
-          if (ENV.MAPTILER_API_KEY) {
-            getRouteAndDistance(
-              ubicacion.lat,
-              ubicacion.lng,
-              pedido.destino_lat,
-              pedido.destino_lng,
-              ENV.MAPTILER_API_KEY
-            ).then((routeResult) => {
-              if (routeResult.success && routeResult.route) {
-                setRouteGeometry(routeResult.route);
-              }
-            });
-          }
+          await fetchRouteData(ubicacion, pedido);
         }
       }
     );
 
     return unsubscribe;
-  }, [pedido]);
+  }, [pedido, fetchRouteData]);
 
   const status = pedido ? statusTranslations[pedido.estado] : null;
 
@@ -171,55 +176,29 @@ export default function PublicDeliveryTrackingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 p-4">
+    <div className="min-h-screen bg-slate-950 p-4 pb-12">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-6">
+        {/* Navigation */}
+        <div className="mb-8 flex items-center justify-between">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors mb-6"
+            className="group flex items-center space-x-2 transition-transform hover:scale-105"
           >
-            <ArrowLeft size={18} />
-            Volver
+            <div className="w-10 h-10 bg-linear-to-tr from-indigo-500 to-cyan-400 rounded-xl flex items-center justify-center transform rotate-3 shadow-lg group-hover:rotate-6 transition-transform">
+              <span className="font-bold text-white text-xl">L</span>
+            </div>
+            <span className="text-3xl font-bold tracking-tighter text-white">
+              ytu
+            </span>
           </Link>
-
-          <div className="bg-slate-900/40 backdrop-blur-3xl border border-white/10 p-6 rounded-2xl">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h1 className="text-3xl font-bold text-white mb-2">
-                  Seguimiento de Pedido
-                </h1>
-                <p className="text-slate-400">
-                  Código: <span className="font-mono text-cyan-400">{pedido.codigo_seguimiento}</span>
-                </p>
-              </div>
-              <div className={`${status?.color} px-4 py-2 rounded-lg text-white font-semibold`}>
-                {status?.label}
-              </div>
-            </div>
-
-            {/* Pedido Details */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div className="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
-                <div className="text-slate-400 mb-1">Referencia</div>
-                <div className="font-semibold text-white">{pedido.referencia || "-"}</div>
-              </div>
-              <div className="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
-                <div className="text-slate-400 mb-1">Código de Pedido</div>
-                <div className="font-semibold text-white font-mono">{pedido.codigo}</div>
-              </div>
-              <div className="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
-                <div className="text-slate-400 mb-1">Creado</div>
-                <div className="font-semibold text-white">
-                  {new Date(pedido.created_at).toLocaleString()}
-                </div>
-              </div>
-            </div>
+          <div className="bg-slate-900/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-2xl shadow-xl">
+            <span className="text-slate-400 text-xs uppercase font-bold tracking-widest mr-2">Código</span>
+            <span className="font-mono font-bold text-cyan-400 text-lg">{pedido.codigo_seguimiento}</span>
           </div>
         </div>
 
-        {/* Map Section */}
-        <div className="bg-slate-900/40 backdrop-blur-3xl border border-white/10 rounded-2xl overflow-hidden h-[600px] mb-6">
+        {/* Map Section - Now on Top and taller */}
+        <div className="bg-slate-900/40 backdrop-blur-3xl border border-white/10 rounded-3xl overflow-hidden h-[500px] md:h-[600px] mb-8 shadow-2xl relative">
           <DeliveryMap
             pedido={pedido}
             repartidorUbicacion={repartidorUbicacion}
@@ -227,48 +206,68 @@ export default function PublicDeliveryTrackingPage() {
             maptilerApiKey={ENV.MAPTILER_API_KEY || ""}
             routeGeometry={routeGeometry}
             isLoading={loading}
+            estimatedTime={estimatedTime}
+            estadoPedido={pedido.estado} 
           />
         </div>
 
-        {/* Status Timeline */}
-        <div className="bg-slate-900/40 backdrop-blur-3xl border border-white/10 p-6 rounded-2xl">
-          <h2 className="text-xl font-bold text-white mb-6">Información del Repartidor</h2>
-
-          {pedido.repartidores ? (
-            <div className="space-y-4">
-              <div className="flex items-start gap-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <MapPin className="text-blue-400 w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <div className="font-semibold text-white">{pedido.repartidores.nombre}</div>
-                  <div className="text-slate-400 text-sm mt-1">
-                    {pedido.repartidores.vehiculo_descripcion}
-                  </div>
-                </div>
+        {/* Info Section - Now below the Map */}
+        <div className="space-y-6">
+          <div className="bg-slate-900/40 backdrop-blur-3xl border border-white/10 p-8 rounded-3xl shadow-xl">
+            <div className="flex items-center justify-between gap-6 flex-wrap mb-8">
+              <div className="flex-1">
+                <h1 className="text-3xl font-bold text-white mb-2">
+                  Detalles del Envío
+                </h1>
+                <p className="text-slate-400">
+                  Sigue en tiempo real la ubicación de tu pedido
+                </p>
               </div>
-
-              {distancia !== null && (
-                <div className="flex items-start gap-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
-                  <div className="flex-shrink-0 w-12 h-12 bg-indigo-500/20 rounded-lg flex items-center justify-center">
-                    <Clock className="text-indigo-400 w-6 h-6" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-white">
-                      {distancia < 1000
-                        ? `${Math.round(distancia)} metros`
-                        : `${(distancia / 1000).toFixed(1)} km`}
-                    </div>
-                    <div className="text-slate-400 text-sm mt-1">
-                      Distancia restante hasta el destino
-                    </div>
-                  </div>
+              {status && (
+                <div className={`${status.color} px-6 py-3 rounded-2xl text-white font-bold flex items-center gap-3 text-lg shadow-lg`}>
+                  <span className="text-2xl">{status.icon}</span>
+                  {status.label}
                 </div>
               )}
             </div>
-          ) : (
-            <div className="text-slate-400 text-center py-8">
-              Información del repartidor no disponible
+
+            {/* Pedido Details Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-slate-800/40 p-4 rounded-2xl border border-white/5 transition-colors hover:bg-slate-800/60">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">Referencia</div>
+                <div className="font-semibold text-white">{pedido.referencia || "Sin referencia"}</div>
+              </div>
+              <div className="bg-slate-800/40 p-4 rounded-2xl border border-white/5 transition-colors hover:bg-slate-800/60">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">Código Interno</div>
+                <div className="font-mono font-semibold text-cyan-400">{pedido.codigo}</div>
+              </div>
+              <div className="bg-slate-800/40 p-4 rounded-2xl border border-white/5 transition-colors hover:bg-slate-800/60">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">Fecha de Pedido</div>
+                <div className="font-semibold text-white">
+                  {new Date(pedido.created_at).toLocaleDateString()} {new Date(pedido.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </div>
+              </div>
+              <div className="bg-slate-800/40 p-4 rounded-2xl border border-white/5 transition-colors hover:bg-slate-800/60">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">Agencia</div>
+                <div className="font-semibold text-white">{pedido.agencias?.nombre || "Lytu Delivery"}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Status Specific Messages */}
+          {pedido.estado === "entregado" && (
+            <div className="bg-green-500/10 border border-green-500/30 p-8 rounded-3xl text-center shadow-lg transform hover:scale-[1.01] transition-transform">
+              <div className="text-6xl mb-4">🎉</div>
+              <h2 className="text-2xl font-bold text-green-400 mb-2">¡Pedido Entregado!</h2>
+              <p className="text-slate-300">Tu pedido ha llegado a su destino. ¡Gracias por confiar en nosotros!</p>
+            </div>
+          )}
+
+          {pedido.estado === "cancelado" && (
+            <div className="bg-red-500/10 border border-red-500/30 p-8 rounded-3xl text-center shadow-lg">
+              <div className="text-6xl mb-4">❌</div>
+              <h2 className="text-2xl font-bold text-red-400 mb-2">Pedido Cancelado</h2>
+              <p className="text-slate-300">Lo sentimos, este pedido ha sido cancelado. Contacta a soporte para más detalles.</p>
             </div>
           )}
         </div>

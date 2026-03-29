@@ -45,34 +45,7 @@ export async function getRepartidorUbicacionActual(
   repartidorId: string
 ): Promise<{ success: boolean; data?: RepartidorLocation; error?: string }> {
   try {
-    // Primero intentamos obtener desde repartidor_ubicaciones table
-    const { data, error } = await supabase
-      .from("repartidor_ubicaciones")
-      .select("*")
-      .eq("repartidor_id", repartidorId)
-      .order("timestamp", { ascending: false })
-      .limit(1)
-      .single();
-
-    if (error && error.code !== "PGRST116") {
-      // PGRST116 es "no rows found"
-      return { success: false, error: error.message };
-    }
-
-    if (data) {
-      return {
-        success: true,
-        data: {
-          id: data.id,
-          repartidor_id: data.repartidor_id,
-          lat: data.lat,
-          lng: data.lng,
-          timestamp: data.timestamp,
-        },
-      };
-    }
-
-    // Si no hay ubicaciones en la tabla, obtener del repartidor directamente
+    // Obtener ubicación actual directamente de la tabla repartidores
     const { data: repartidor, error: repartidorError } = await supabase
       .from("repartidores")
       .select("id, ubicacion_actual_lat, ubicacion_actual_lng")
@@ -120,21 +93,24 @@ export function subscribeToRepartidorUbicacion(
       .on(
         "postgres_changes",
         {
-          event: "*",
+          event: "UPDATE",
           schema: "public",
-          table: "repartidor_ubicaciones",
-          filter: `repartidor_id=eq.${repartidorId}`,
+          table: "repartidores",
+          filter: `id=eq.${repartidorId}`,
         },
         (payload: any) => {
           if (payload.new) {
-            const ubicacion: RepartidorLocation = {
-              id: payload.new.id,
-              repartidor_id: payload.new.repartidor_id,
-              lat: payload.new.lat,
-              lng: payload.new.lng,
-              timestamp: payload.new.timestamp,
-            };
-            callback(ubicacion);
+            const { id, ubicacion_actual_lat, ubicacion_actual_lng } = payload.new;
+            if (ubicacion_actual_lat && ubicacion_actual_lng) {
+              const ubicacion: RepartidorLocation = {
+                id: id,
+                repartidor_id: id,
+                lat: ubicacion_actual_lat,
+                lng: ubicacion_actual_lng,
+                timestamp: new Date().toISOString(),
+              };
+              callback(ubicacion);
+            }
           }
         }
       )
@@ -163,8 +139,9 @@ export async function getRouteAndDistance(
   error?: string;
 }> {
   try {
+    // Usar OSRM (más simple y no requiere autenticación)
     const response = await fetch(
-      `https://api.maptiler.com/routing/v1/driving/${startLng},${startLat};${endLng},${endLat}?key=${maptilerApiKey}`
+      `https://router.project-osrm.org/route/v1/driving/${startLng},${startLat};${endLng},${endLat}?geometries=geojson`
     );
 
     if (!response.ok) {
@@ -173,11 +150,11 @@ export async function getRouteAndDistance(
 
     const data = await response.json();
 
-    if (data.routes && data.routes.length > 0) {
+    if (data.code === "Ok" && data.routes && data.routes.length > 0) {
       const route = data.routes[0];
       return {
         success: true,
-        route: route.geometry,
+        route: route.geometry, // GeoJSON LineString
         distance: route.distance, // en metros
         duration: route.duration, // en segundos
       };
