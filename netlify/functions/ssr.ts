@@ -1,14 +1,14 @@
 import { Handler } from "@netlify/functions";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// En Netlify, __dirname se proporciona automáticamente en CommonJS
+// La ruta relativa es desde la función: netlify/functions/ssr.js
+// Queremos: ../../dist/client/ y ../../dist/server/
+const functionDir = process.cwd(); // Raíz del proyecto en Netlify
 
-// Cargar el HTML template y el módulo SSR
-const templatePath = path.resolve(__dirname, "../../dist/client/index.html");
-const serverPath = path.resolve(__dirname, "../../dist/server/entry-server.js");
+const templatePath = path.join(functionDir, "dist/client/index.html");
+const serverPath = path.join(functionDir, "dist/server/entry-server.js");
 
 let template: string | null = null;
 let render: ((url: string, manifest?: string) => { html: string; head?: string }) | null = null;
@@ -23,7 +23,10 @@ async function initializeSSR() {
       // Usar import dinámico con ruta de archivo
       const serverModule = await import(serverPath);
       render = serverModule.render;
-      console.log("SSR modules loaded successfully");
+      console.log("SSR modules loaded successfully from:", {
+        template: templatePath,
+        server: serverPath,
+      });
     } catch (error) {
       console.error("Error loading SSR modules:", error);
       throw new Error(`Failed to initialize SSR: ${error}`);
