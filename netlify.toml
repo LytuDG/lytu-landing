@@ -9,14 +9,11 @@
   NODE_VERSION = "22"
   NPM_FLAGS = "--legacy-peer-deps"
 
-[functions]
-  node_bundler = "esbuild"
-  included_files = ["dist/**", "index.html"]
-  
 # Configuración para la función SSR
 [[functions]]
   path = "netlify/functions/ssr.ts"
   node_compat = true
+  included_files = ["dist/**", "index.html"]
 
 
 # Headers de seguridad y optimización
@@ -64,7 +61,6 @@
   to = "/.netlify/functions/ssr"
   status = 200
   force = false
-  conditions = {Role = []}
 
 # Redirect www to non-www (opcional, ajusta según tu preferencia)
 [[redirects]]
