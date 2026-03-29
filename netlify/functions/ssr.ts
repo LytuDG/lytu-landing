@@ -10,21 +10,36 @@ const __dirname = path.dirname(__filename);
 const templatePath = path.resolve(__dirname, "../../dist/client/index.html");
 const serverPath = path.resolve(__dirname, "../../dist/server/entry-server.js");
 
-let template: string;
-let render: (url: string, manifest?: string) => { html: string; head?: string };
+let template: string | null = null;
+let render: ((url: string, manifest?: string) => { html: string; head?: string }) | null = null;
+let renderPromise: Promise<void> | null = null;
 
-try {
-  template = fs.readFileSync(templatePath, "utf-8");
-  const serverModule = await import(serverPath);
-  render = serverModule.render;
-} catch (error) {
-  console.error("Error loading SSR modules:", error);
+async function initializeSSR() {
+  if (renderPromise) return renderPromise;
+  
+  renderPromise = (async () => {
+    try {
+      template = fs.readFileSync(templatePath, "utf-8");
+      // Usar import dinámico con ruta de archivo
+      const serverModule = await import(serverPath);
+      render = serverModule.render;
+      console.log("SSR modules loaded successfully");
+    } catch (error) {
+      console.error("Error loading SSR modules:", error);
+      throw new Error(`Failed to initialize SSR: ${error}`);
+    }
+  })();
+  
+  return renderPromise;
 }
 
 export const handler: Handler = async (event) => {
   const url = event.path || "/";
 
   try {
+    // Inicializar SSR si no está inicializado
+    await initializeSSR();
+
     // Servir archivos estáticos directamente
     if (
       url.startsWith("/assets/") ||
@@ -34,6 +49,11 @@ export const handler: Handler = async (event) => {
         statusCode: 404,
         body: "Static file - should be served by Netlify",
       };
+    }
+
+    // Validar que render está disponible
+    if (!render || !template) {
+      throw new Error("SSR modules not loaded");
     }
 
     // Renderizar SSR

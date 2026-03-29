@@ -12,6 +12,12 @@
 [functions]
   node_bundler = "esbuild"
   included_files = ["dist/**", "index.html"]
+  
+# Configuración para la función SSR
+[[functions]]
+  path = "netlify/functions/ssr.ts"
+  node_compat = true
+
 
 # Headers de seguridad y optimización
 [[headers]]
