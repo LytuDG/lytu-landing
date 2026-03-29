@@ -32,7 +32,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchAdminProfile(session.user.id);
+        // Skip fetchAdminProfile - using DeliveryAuthContext for new tracking system
+        setLoading(false);
       } else {
         setLoading(false);
       }
@@ -45,7 +46,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchAdminProfile(session.user.id);
+        // Skip fetchAdminProfile - using DeliveryAuthContext for new tracking system
+        setLoading(false);
       } else {
         setAdminProfile(null);
         setLoading(false);
@@ -54,26 +56,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return () => subscription.unsubscribe();
   }, []);
-
-  const fetchAdminProfile = async (userId: string) => {
-    try {
-      const { data, error } = await supabase
-        .from("admin_users")
-        .select("*")
-        .eq("id", userId)
-        .single();
-
-      if (error) {
-        console.error("Error fetching admin profile:", error);
-      } else {
-        setAdminProfile(data as AdminUser);
-      }
-    } catch (err) {
-      console.error("Unexpected error fetching profile:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const signInWithOtp = async (email: string) => {
     return supabase.auth.signInWithOtp({ email });

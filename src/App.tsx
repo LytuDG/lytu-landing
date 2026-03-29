@@ -2,16 +2,24 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import { AuthProvider } from "./contexts/AuthContext";
+import { DeliveryAuthProvider } from "./modules/delivery/context/DeliveryAuthContext";
 import LoginPage from "./pages/Admin/LoginPage";
 import AdminLayout from "./components/layout/AdminLayout";
 import DashboardPage from "./pages/Admin/DashboardPage";
 import QuotesPage from "./pages/Admin/QuotesPage";
 import ClientsPage from "./pages/Admin/ClientsPage";
+import TrackingAdminLayout from "./components/layout/TrackingAdminLayout";
+import TrackingDashboardPage from "./pages/Admin/TrackingDashboardPage";
+import AgenciesPage from "./modules/delivery/pages/AgenciesPage";
+import CouriersPage from "./modules/delivery/pages/CouriersPage";
+import UsersPage from "./modules/delivery/pages/UsersPage";
+import OpsLoginPage from "./modules/delivery/pages/OpsLoginPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home/Home";
 import QuoteRequest from "./pages/QuoteRequest/QuoteRequest";
-import TrackingPage from "./pages/Tracking/TrackingPage";
 import TrackingSearchPage from "./pages/Tracking/TrackingSearchPage";
+import UniversalTrackingPage from "./pages/Tracking/UniversalTrackingPage";
+import PublicDeliveryTrackingPage from "./modules/delivery/pages/PublicDeliveryTrackingPage";
 import NotFound from "./pages/NotFound/NotFound";
 import BookingDashboard from "./pages/Demos/Booking/BookingDashboard";
 import BookingCalendar from "./pages/Demos/Booking/BookingCalendar";
@@ -74,21 +82,24 @@ export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        {/* Admin Routes */}
-        <Route path="/admin/login" element={<LoginPage />} />
+        {/* Admin Routes - Tracking/Delivery Management */}
+        <Route path="/admin/login" element={<DeliveryAuthProvider><OpsLoginPage /></DeliveryAuthProvider>} />
         <Route
           path="/admin"
           element={
-            <ProtectedRoute>
-              <AdminLayout />
-            </ProtectedRoute>
+            <DeliveryAuthProvider>
+              <TrackingAdminLayout />
+            </DeliveryAuthProvider>
           }
         >
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="quotes" element={<QuotesPage />} />
-          <Route path="clients" element={<ClientsPage />} />
-          {/* Add more admin routes here */}
+          <Route path="dashboard" element={<TrackingDashboardPage />} />
+          <Route path="agencias" element={<AgenciesPage />} />
+          <Route path="repartidores" element={<CouriersPage />} />
+          <Route path="usuarios" element={<UsersPage />} />
+          {/* Legacy admin routes kept for reference */}
+          {/* <Route path="quotes" element={<QuotesPage />} />
+          <Route path="clients" element={<ClientsPage />} /> */}
         </Route>
 
         {/* Main Landing Page Routes */}
@@ -96,7 +107,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/quote-request" element={<QuoteRequest />} />
           <Route path="/track-quote" element={<TrackingSearchPage />} />
-          <Route path="/track/:trackingId" element={<TrackingPage />} />
+          <Route path="/track/:trackingCode" element={<UniversalTrackingPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

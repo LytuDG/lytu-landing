@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 
 export function render(url: string) {
-  // Shell vacío - la hidratación del cliente será casi instantánea
-  // Esto evita el flash de "Loading..." sin estilo
+  // Shell vacío con el ID correcto para que coincida con el cliente
+  // El cliente busca #root, no #app-shell
   const html = renderToString(
     <StrictMode>
       <div
-        id="app-shell"
+        id="root"
         style={{
           minHeight: "100vh",
           background: "linear-gradient(to bottom, #0f172a, #1e293b)",
