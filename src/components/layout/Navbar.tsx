@@ -19,9 +19,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (id: string) => {
+  const handleNavClick = (id: string, path?: string) => {
     setIsMobileMenuOpen(false);
-    if (location.pathname !== "/") {
+    if (path) {
+      // Si hay un path especificado, navegar a ese path
+      navigate(path);
+    } else if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
         if (id) scrollToSection(id);
@@ -36,6 +39,7 @@ export default function Navbar() {
     { id: "", label: "Inicio" },
     { id: "planes", label: "Planes" },
     { id: "modulos", label: "Módulos" },
+    { id: "sopd-teaser", label: "SOPD", path: "/sopd" },
     { id: "contacto", label: "Contacto" }
   ];
 
@@ -61,10 +65,10 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center space-x-8">
-          {menuItems.map((item) => (
+          {menuItems.map((item: any) => (
             <button
               key={item.label}
-              onClick={() => handleNavClick(item.id)}
+              onClick={() => handleNavClick(item.id, item.path)}
               className="text-slate-300 hover:text-cyan-400 transition-colors font-medium"
             >
               {item.label}
@@ -101,10 +105,10 @@ export default function Navbar() {
 
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 p-6 flex flex-col space-y-4 shadow-2xl">
-          {menuItems.map((item) => (
+          {menuItems.map((item: any) => (
             <button
               key={item.label}
-              onClick={() => handleNavClick(item.id)}
+              onClick={() => handleNavClick(item.id, item.path)}
               className="text-left text-slate-300 hover:text-cyan-400 text-lg font-medium"
             >
               {item.label}

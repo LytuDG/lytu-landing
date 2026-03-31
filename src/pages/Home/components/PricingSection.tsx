@@ -10,11 +10,16 @@ export default function PricingSection() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-            Planes hechos para tu negocio. Elige el que mejor se ajuste.
+            Tiendas Online: Planes que Crecen Contigo
           </h2>
-          <p className="text-xl text-slate-400">
-            Todos incluyen diseño profesional, hosting y soporte. Sin letra chica.
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+            Elige tu base. Luego añade SOPD o Tracking según necesites. Todo integrado en una plataforma.
           </p>
+          <div className="mt-8 inline-block px-4 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full">
+            <p className="text-indigo-300 text-sm font-semibold">
+              💡 Todos los planes incluyen: hosting, dominio, SSL, soporte & actualizaciones
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">

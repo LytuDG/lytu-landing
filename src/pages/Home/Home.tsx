@@ -1,8 +1,8 @@
 import HeroSection from "./components/HeroSection";
-import ProblemSection from "./components/ProblemSection";
-import SolutionSection from "./components/SolutionSection";
-import PricingSection from "./components/PricingSection";
-import ModulesSection from "./components/ModulesSection";
+import TiendaOnlineSection from "./components/TiendaOnlineSection";
+import SOPDTeaserSection from "./components/SOPDTeaserSection";
+import TrackingTeaserSection from "./components/TrackingTeaserSection";
+import SistemasNavigationSection from "./components/SistemasNavigationSection";
 import FAQSection from "./components/FAQSection";
 import ContactSection from "./components/ContactSection";
 
@@ -10,10 +10,10 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
-      <ProblemSection />
-      <SolutionSection />
-      <PricingSection />
-      <ModulesSection />
+      <TiendaOnlineSection />
+      <SOPDTeaserSection />
+      <TrackingTeaserSection />
+      <SistemasNavigationSection />
       <FAQSection />
       <ContactSection />
     </main>

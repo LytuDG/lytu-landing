@@ -16,6 +16,8 @@ import UsersPage from "./modules/delivery/pages/UsersPage";
 import OpsLoginPage from "./modules/delivery/pages/OpsLoginPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home/Home";
+import SOPDPage from "./pages/SOPD/SOPDPage";
+import TiendaOnlinePage from "./pages/TiendaOnline/TiendaOnlinePage";
 import QuoteRequest from "./pages/QuoteRequest/QuoteRequest";
 import TrackingSearchPage from "./pages/Tracking/TrackingSearchPage";
 import UniversalTrackingPage from "./pages/Tracking/UniversalTrackingPage";
@@ -105,6 +107,8 @@ export default function App() {
         {/* Main Landing Page Routes */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/sopd" element={<SOPDPage />} />
+          <Route path="/tienda-online" element={<TiendaOnlinePage />} />
           <Route path="/quote-request" element={<QuoteRequest />} />
           <Route path="/track-quote" element={<TrackingSearchPage />} />
           <Route path="/track/:trackingCode" element={<UniversalTrackingPage />} />
