@@ -48,7 +48,10 @@ if (!isProduction) {
   console.log("✓ Vite dev server middleware loaded");
 } else {
   app.use(compression());
-  app.use(base, serveStatic("./dist/client", { index: false }));
+  app.use(base, serveStatic("./dist/client", { 
+    index: false,
+    redirect: false 
+  }));
   console.log("✓ Production static files middleware loaded");
 }
 

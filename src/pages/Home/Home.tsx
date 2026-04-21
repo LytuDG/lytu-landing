@@ -1,4 +1,5 @@
 import HeroSection from "./components/HeroSection";
+import JourneyPedidoSection from "./components/JourneyPedidoSection";
 import TiendaOnlineSection from "./components/TiendaOnlineSection";
 import SOPDTeaserSection from "./components/SOPDTeaserSection";
 import TrackingTeaserSection from "./components/TrackingTeaserSection";
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
+      <JourneyPedidoSection />
       <TiendaOnlineSection />
       <SOPDTeaserSection />
       <TrackingTeaserSection />

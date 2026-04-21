@@ -2,7 +2,7 @@ import { Eye, Heart, Phone, ArrowRight } from "lucide-react";
 
 export default function TrackingTeaserSection() {
   return (
-    <section id="tracking" className="py-24 bg-slate-950 border-b border-indigo-900/30">
+    <section className="py-24 bg-slate-950 border-b border-indigo-900/30">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Imagen: tracking-app */}
@@ -33,7 +33,7 @@ export default function TrackingTeaserSection() {
 
             <div className="space-y-4 mb-10">
               <div className="flex items-start gap-4 group">
-                <div className="shrink-0 w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
                   <Eye className="w-6 h-6 text-emerald-400" />
                 </div>
                 <div>
@@ -43,7 +43,7 @@ export default function TrackingTeaserSection() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="shrink-0 w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
                   <Heart className="w-6 h-6 text-emerald-400" />
                 </div>
                 <div>
@@ -53,7 +53,7 @@ export default function TrackingTeaserSection() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="shrink-0 w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
                   <Phone className="w-6 h-6 text-emerald-400" />
                 </div>
                 <div>
